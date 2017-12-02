@@ -5,8 +5,6 @@ import model.UserModel;
 public class DBConfig {
 	
 	public boolean saveUserDetail(UserModel userModel){
-		return false;
-	}
-
-	
+		return true;
+	}	
 }
