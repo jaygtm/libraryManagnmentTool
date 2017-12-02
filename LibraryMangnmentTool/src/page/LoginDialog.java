@@ -16,8 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import service.DialogService;
-import service.LoginService;
+import common.service.DialogService;
+import common.service.LoginService;
 
 
 public class LoginDialog extends JDialog implements ActionListener {

@@ -1,4 +1,4 @@
-package service;
+package common.service;
 
 import java.awt.Component;
 
