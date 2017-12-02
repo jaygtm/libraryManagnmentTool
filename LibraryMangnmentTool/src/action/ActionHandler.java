@@ -7,7 +7,7 @@ public class ActionHandler {
 		System.out.println("Command for Action----"+command);
 	
 		switch (command) {
-			case "AddNew/Create"://AddNewAction();
+			case "AddNew/Create":
 				break;
 			case "Edit":
 				
