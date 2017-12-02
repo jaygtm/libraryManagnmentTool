@@ -3,6 +3,7 @@ package dao.impl;
 import java.io.Serializable;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import dao.CustomerDao;
 import db.DBConfig;
@@ -29,4 +30,15 @@ public class CustomerDaoImpl implements CustomerDao {
 		return null;
 	}
 
+	@Override
+	public boolean deleteCustomerDetail(int customerId) {
+		Session session = DBConfig.sessionfactory.openSession();
+		CustomerModel deletcustomerId=(CustomerModel) session.load(CustomerModel.class,new Integer(customerId));
+		Transaction tx = session.beginTransaction();
+		session.delete(deletcustomerId);
+        System.out.println("Object Deleted successfully.....!!");
+        tx.commit();
+        session.close();
+		return true;
+	}
 }

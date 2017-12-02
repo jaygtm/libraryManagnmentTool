@@ -18,5 +18,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean saveCustomerDetail(CustomerModel customerModel){
 		return  customerDaoImpl.saveCustomerDetail(customerModel);
 	}
+	
+	@Override
+	public boolean deleteCustomerDetail(int customerId){
+		return  customerDaoImpl.deleteCustomerDetail(customerId);
+	}
 
 }
