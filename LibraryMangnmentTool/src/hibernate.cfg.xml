@@ -13,13 +13,8 @@
         <property name="connection.password">root</property>  
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property> 
         <property name="show_sql">true</property>
-        <mapping class="beans.Customer"/>
-        <mapping class="beans.BhamashahCard"/>
-        <mapping class="beans.AccountInfo"/>
-        <mapping class="beans.SamityInfo"/>
-        <mapping class="beans.ContactInfo"/>
-        <mapping class="beans.AdharCard"/>
-        <mapping class="beans.SecurityBean"/>
+        <mapping class="model.LoginModel"/>
+        
     </session-factory>  
   
 </hibernate-configuration>  

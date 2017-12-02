@@ -11,7 +11,7 @@ public class DBConfig {
 	
 	static{
 		try{
-		sessionfactory = new AnnotationConfiguration().configure().buildSessionFactory();
+		sessionfactory = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory();
 			
 		}
 		catch(Exception e){
