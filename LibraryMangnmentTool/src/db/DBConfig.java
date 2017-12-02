@@ -1,5 +1,12 @@
 package db;
 
-public class DBConfig {
+import model.UserModel;
 
+public class DBConfig {
+	
+	public boolean saveUserDetail(UserModel userModel){
+		return false;
+	}
+
+	
 }
