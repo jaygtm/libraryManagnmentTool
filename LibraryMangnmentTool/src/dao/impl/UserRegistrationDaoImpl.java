@@ -1,9 +1,9 @@
 package dao.impl;
 
-import dao.UserRegistration;
+import dao.UserRegistrationDao;
 import model.UserModel;
 
-public class UserRegistrationImpl implements UserRegistration {
+public class UserRegistrationDaoImpl implements UserRegistrationDao {
 
 	@Override
 	public boolean saveUserDetail(UserModel userModel) {

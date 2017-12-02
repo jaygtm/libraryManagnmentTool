@@ -1,9 +1,9 @@
 package dao.impl;
 
-import dao.UserLogin;
+import dao.UserLoginDao;
 import model.LoginModel;
 
-public class UserLoginImpl implements UserLogin {
+public class UserLoginDaoImpl implements UserLoginDao {
 
 	@Override
 	public LoginModel getUserDetail(String userName) {

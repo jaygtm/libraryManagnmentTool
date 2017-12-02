@@ -2,7 +2,7 @@ package dao;
 
 import model.LoginModel;
 
-public interface UserLogin {
+public interface UserLoginDao {
 
 	
 	public LoginModel getUserDetail(String userName);

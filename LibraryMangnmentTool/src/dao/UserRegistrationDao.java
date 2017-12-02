@@ -2,7 +2,7 @@ package dao;
 
 import model.UserModel;
 
-public interface UserRegistration {
+public interface UserRegistrationDao {
 	
 	
 	public boolean saveUserDetail(UserModel userModel);
