@@ -15,6 +15,7 @@
         <property name="show_sql">true</property>
         <mapping class="model.LoginModel"/>
          <mapping class="model.CustomerModel"/>
+         <mapping class="model.BookModel"/>
         
     </session-factory>  
   
