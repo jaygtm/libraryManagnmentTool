@@ -10,6 +10,12 @@
 	<bean name="MainFrame" class="page.DashboardPage" >  
 		<constructor-arg value="LibraryManagnmentTool"></constructor-arg>
 	</bean> 
+	<bean name="customerService" class="service.impl.CustomerServiceImpl" >  
+		<property name="customerDaoImpl" ref="customerDao"></property>
+	</bean> 
+	<bean name="customerDao" class="dao.impl.CustomerDaoImpl" >  
+		
+	</bean> 
 	
 <context:annotation-config />
 </beans>

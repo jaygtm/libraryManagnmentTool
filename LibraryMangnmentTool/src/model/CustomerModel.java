@@ -17,7 +17,7 @@ public class CustomerModel {
 	@Column
 	private String customer_name;
 	@Column
-	private int customer_mobile;
+	private String customer_mobile;
 	@Column
 	private String customer_email;
 	@Column
@@ -36,10 +36,10 @@ public class CustomerModel {
 	public void setCustomer_name(String customer_name) {
 		this.customer_name = customer_name;
 	}
-	public int getCustomer_mobile() {
+	public String getCustomer_mobile() {
 		return customer_mobile;
 	}
-	public void setCustomer_mobile(int customer_mobile) {
+	public void setCustomer_mobile(String customer_mobile) {
 		this.customer_mobile = customer_mobile;
 	}
 	public String getCustomer_email() {
