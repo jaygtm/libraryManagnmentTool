@@ -10,7 +10,7 @@ import page.DashboardPage;
 public class Run {
 
 	public static void main(String[] args) {
-		new UseFactory();
+		UseFactory factory =  new UseFactory();
 		new DBConfig();
 		
 		EventQueue.invokeLater(new Runnable() {

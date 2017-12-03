@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newobject.UseFactory;
+
 public class NevigationMenueBar implements ActionListener {
 	private JPanel panel;
 	private JPanel bodyPanel ;
@@ -114,6 +116,7 @@ public class NevigationMenueBar implements ActionListener {
 		default:
 			break;
 		}
+		UseFactory.refresh();
 	}
 	
 	

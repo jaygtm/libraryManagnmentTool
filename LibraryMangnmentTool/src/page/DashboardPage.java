@@ -1,6 +1,5 @@
 package page;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -8,6 +7,11 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import newobject.UseFactory;
 
 public class DashboardPage implements ActionListener {
 	final JFrame MainFrame;
@@ -27,8 +31,10 @@ public class DashboardPage implements ActionListener {
 			}
 			LoginDialog loginDialog = new LoginDialog(MainFrame);
 			MainFrame.getContentPane().setLayout(null);
+			MainFrame.setJMenuBar(getMenuBar());
 			MainFrame.setVisible(true);
 			loginDialog.setVisible(true);
+			UseFactory.setMainFrame(MainFrame);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -39,6 +45,33 @@ public class DashboardPage implements ActionListener {
 		//btnLogin.addActionListener(this);
 		
 	}
+	private JMenuBar getMenuBar() {
+		String menu[] = {"Books Menu","Student","User","Action","Security","More","AboutUs"};
+		String menuItemArray[][] = {{"Add Book","Edit Book Details","Delete Book","View Books","View Issue Book","View Available Book","View Book History"},
+									{"Add Student","Edit Student Details","Delete Student","ShowAll Student","View Student Books History"},
+									{"User Creation","User Delete","User Right Asgin","User Modify","View All User"},
+									{"Issue Book","Submit Book"},
+									{"Add Privacy","Remove Privacy"},
+									{"Add Memo","View Memo","Delte Memo"},
+									{"About Company"}
+								   } ;
+		
+		JMenuBar menubar = new JMenuBar();
+		for (int i = 0; i < menu.length; i++) {
+			JMenu jmenu = new JMenu(menu[i]);
+			for (int j = 0; j < menuItemArray[i].length; j++) {
+				JMenuItem item = new JMenuItem(menuItemArray[i][j]);
+				item.addActionListener(this);
+				
+				jmenu.add(item);
+			}
+			menubar.add(jmenu);
+		}
+		return menubar;
+	}
+	
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
