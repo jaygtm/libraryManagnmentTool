@@ -11,4 +11,10 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		
 	}
 
+	@Override
+	public boolean validateUserName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
