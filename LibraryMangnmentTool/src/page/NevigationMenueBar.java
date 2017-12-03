@@ -72,6 +72,8 @@ public class NevigationMenueBar implements ActionListener {
 		
 		bodyPanel = new JPanel();
 		bodyPanel.setBounds(208, 63, 1149, 593);
+		//bodyPanel.setBackground(new Color(213, 134, 145, 100));
+		bodyPanel.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.5f));
 		mainframe.getContentPane().add(bodyPanel);
 		bodyPanel.setLayout(null);
 		////////////////////////////////////////////////////////////////

@@ -1,5 +1,6 @@
 package page;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class RegistrationPage implements ActionListener {
 		this.parent = panel_1;
 		JPanel Reg_panel = new JPanel();
 		Reg_panel.setBounds(177, 25, 867, 538);
+		Reg_panel.setBackground(new Color(0,0,0,0));
 		Reg_panel.setBorder(BorderFactory.createTitledBorder(""));
 		Reg_panel.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
 		panel_1.add(Reg_panel);
