@@ -1,9 +1,11 @@
 package dao;
 
-import model.LoginModel;
+import java.util.List;
+
+import model.UserModel;
 
 public interface UserLoginDao {
-
-	public boolean validateUserName();
-	public LoginModel getUserDetail(String userName);
+	public boolean validateUserName(String username ,String password);
+	public UserModel getUserDetail(String userName);
+	public List<UserModel> getAllUser();
 }

@@ -2,6 +2,7 @@ package page;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import common.service.DialogService;
-import common.service.LoginService;
+import newobject.UseFactory;
+import service.UserLoginService;
 
 
 public class LoginDialog extends JDialog implements ActionListener {
@@ -29,10 +31,12 @@ public class LoginDialog extends JDialog implements ActionListener {
     private JButton btnLogin;
     private JButton btnCancel;
     private boolean succeeded;
+    private JFrame parent;
  
     public LoginDialog(JFrame parent) {
         super(parent, "Login", true);
         //
+        this.parent = parent; 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
  
@@ -96,12 +100,31 @@ public class LoginDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		System.out.println("Action for "+cmd);
+		LoginDialog d= this;
 		switch(cmd){
-			case "Login":boolean result = LoginService.validateUserNamePassword(getUsername(), getPassword());
-							if(result)
-								dispose();
-							else
-								DialogService.showErrorMgs(this, "Please Enter valid Username and password .!", "Invaild User");
+			case "Login":	EventQueue.invokeLater( new Runnable() {
+				public void run() {
+					String uname = getUsername();
+					String pass = getPassword();
+					if(uname.trim().equals("") || pass.trim().equals("")){
+						DialogService.showErrorMgs(d, "Username and Password can't be blank..!", "Invaild User");
+					}else{
+						UserLoginService userLoginService = (UserLoginService) UseFactory.getContext().getBean("loginService");
+						boolean result = userLoginService.validateUserName(uname,pass);
+						if(result){
+							NevigationMenueBar n =new NevigationMenueBar();
+							n.manueBar(parent);
+							parent.revalidate();
+							parent.repaint();
+							dispose();
+						}else
+							DialogService.showErrorMgs(d, "Please Enter valid Username and password .!", "Invaild User");
+					}
+					
+				}
+			});
+				
+							
 				break;
 			case "Cancel":dispose();
 				break;

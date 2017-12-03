@@ -23,4 +23,9 @@ public class DBConfig {
 	public boolean saveUserDetail(UserModel userModel){
 		return true;
 	}	
+	
+	public DBConfig(){
+		System.out.println("HB Config Done..!");
+	}
+	
 }

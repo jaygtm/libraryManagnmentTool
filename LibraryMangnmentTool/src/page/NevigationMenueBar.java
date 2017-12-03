@@ -1,6 +1,7 @@
 package page;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -11,22 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class NevigationMenueBar {
+public class NevigationMenueBar implements ActionListener {
+	private JPanel panel;
+	private JPanel bodyPanel ;
 	public void manueBar(JFrame mainframe){
 
-		/*frame = new JFrame();
-		frame.getContentPane().setEnabled(false);
-		frame.setBounds(208, 63, 1400, 748);;
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		URL fileUrl = getClass().getResource("..//img//books_vintage_paper_cards_notebook_retro_74362_2560x1600.jpg");
-		if(fileUrl != null){
-			ImageIcon img = new ImageIcon(fileUrl);
-			frame.setContentPane(new JLabel(img));
-		}
-		*/
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(SystemColor.textHighlight);
 		panel.setForeground(Color.WHITE);
 		panel.setBounds(10, 63, 188, 593);
@@ -47,6 +38,8 @@ public class NevigationMenueBar {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		//btnNewButton.setBorder(null);
+		btnNewButton.addActionListener(this);
+		
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_4 = new JButton("User Creation                            ");
@@ -77,17 +70,17 @@ public class NevigationMenueBar {
 		});
 		panel.add(btnNewButton_5);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(208, 63, 1149, 593);
-		mainframe.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		bodyPanel = new JPanel();
+		bodyPanel.setBounds(208, 63, 1149, 593);
+		mainframe.getContentPane().add(bodyPanel);
+		bodyPanel.setLayout(null);
 		////////////////////////////////////////////////////////////////
 		/*AddBookPage addBookPage = new AddBookPage();
 		addBookPage.addBookPage(panel_1);*/
 		//////////////////////////////////////////
 		//////////////////////////////////////////////
-		RegistrationPage registrationPage=new RegistrationPage();
-		registrationPage.registrationPage(panel_1);
+		/*RegistrationPage registrationPage=new RegistrationPage();
+		registrationPage.registrationPage(panel_1);*/
 		
 		
 		//////////////////////////////////////////////
@@ -98,11 +91,29 @@ public class NevigationMenueBar {
 		lblTilakPublicSenior.setBounds(432, 11, 925, 41);
 		mainframe.getContentPane().add(lblTilakPublicSenior);
 		
-		/*JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(10, 24, 46, 14);
-		lblNewLabel_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("../img/java_jar.gif")));
-		frame.getContentPane().add(lblNewLabel_1);*/
 	
 	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand().trim();
+		System.out.println(""+action);
+		
+		switch (action) {
+		case "Add Student":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				RegistrationPage registrationPage=new RegistrationPage();
+				registrationPage.registrationPage(bodyPanel);
+			}
+		});
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	
 
 }

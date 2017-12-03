@@ -2,38 +2,42 @@ package model;
 
 import java.util.Date;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import db.DBConfig;
-import newobject.UseFactory;
-import service.BookService;
-import service.impl.BookServiceImp;
-
+@Entity
+@Table(name="txn_usr_login")
 public class UserModel {
-
-	public static void main(String[] args) {
-		
-		/*BookService bookService = new BookServiceImp();
-		BookModel book 	= new BookModel();*/
-		BookService bookService = (BookService) UseFactory.getContext().getBean("bookService");
-		BookModel book 	= (BookModel)UseFactory.getContext().getBean("bookModel");
-		
-		book.setBook_name("modren physics");
-		book.setBook_aurthor("Jai Ram");
-		book.setBook_mrp(350);
-		book.setBook_publication("N.k");
-		book.setBook_rent(30);
-		book.setBook_rentPerDay(30);
-		book.setBook_Total(1);
-		book.setBook_aval(1);
-		book.setBook_typeId(1);
-		
-		bookService.addBook(book);
-		
-		
-		
-		
+	@Id
+	private int user_id;
+	private String user_name;
+	private String user_passwprd;
+	private Date user_lastLogin;
+	public int getUser_id() {
+		return user_id;
 	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getUser_passwprd() {
+		return user_passwprd;
+	}
+	public void setUser_passwprd(String user_passwprd) {
+		this.user_passwprd = user_passwprd;
+	}
+	public Date getUser_lastLogin() {
+		return user_lastLogin;
+	}
+	public void setUser_lastLogin(Date user_lastLogin) {
+		this.user_lastLogin = user_lastLogin;
+	}
+	
+	
 }

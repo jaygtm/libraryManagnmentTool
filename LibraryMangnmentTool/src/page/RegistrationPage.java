@@ -1,6 +1,9 @@
 package page;
 
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -8,15 +11,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class RegistrationPage {
+import common.service.DialogService;
+import model.CustomerModel;
+import newobject.UseFactory;
+import service.CustomerService;
+
+public class RegistrationPage implements ActionListener {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JPanel parent;
 
 	public void registrationPage(JPanel panel_1) {
 		/////////////////////////////////////////////////////////////////
+		this.parent = panel_1;
 		JPanel Reg_panel = new JPanel();
 		Reg_panel.setBounds(177, 25, 867, 538);
 		Reg_panel.setBorder(BorderFactory.createTitledBorder(""));
@@ -82,6 +92,8 @@ public class RegistrationPage {
 		JButton btnNewButton_6 = new JButton("Save");
 		btnNewButton_6.setBounds(175, 428, 89, 23);
 		Reg_panel.add(btnNewButton_6);
+		btnNewButton_6.addActionListener(this);
+		
 
 		JButton btnNewButton_7 = new JButton("Cancel");
 		btnNewButton_7.setBounds(394, 428, 89, 23);
@@ -89,4 +101,61 @@ public class RegistrationPage {
 		/////////////////////////////////////////////////
 
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand().trim();
+		System.out.println(""+action);
+		switch (action) {
+		case "Save":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				CustomerModel model =validateAndGetData();
+				if(model != null){
+					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+					boolean status = customerService.saveCustomerDetail(model);
+					System.out.println("Status of Save");
+					if(status)
+						DialogService.showMgs(parent, "Save Successfully..!", "Success");
+					else
+						DialogService.showErrorMgs(parent, "Error to Save ..!", "Error");
+				}
+			}
+		});
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+	public CustomerModel validateAndGetData(){
+		String name 	= textField.getText();
+		String mobileNo = textField_1.getText();
+		String email 	= textField_2.getText();
+		String studentId = textField_3.getText();
+		String amount 	= textField_4.getText();
+		
+		if(name.trim().equals("") || mobileNo.trim().equals("") || email.trim().equals("") || studentId.trim().equals("") ){
+			DialogService.showErrorMgs(parent, "Field Can't be Blank..!", "Invaild User");
+		}else{
+			CustomerModel model = (CustomerModel) UseFactory.getContext().getBean("customerModel");
+			model.setCustomer_name(name);
+			model.setCustomer_mobile(mobileNo);
+			model.setCustomer_email(email);
+			model.setCustomer_cId(studentId);
+			if(!amount.trim().equals(""))
+				model.setCustomer_balance(Integer.parseInt(amount));
+			return model;
+		}
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
 }
