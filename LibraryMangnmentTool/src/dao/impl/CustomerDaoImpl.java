@@ -1,7 +1,10 @@
 package dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -40,5 +43,29 @@ public class CustomerDaoImpl implements CustomerDao {
         tx.commit();
         session.close();
 		return true;
+	}
+
+	@SuppressWarnings({ "unchecked",  "null" })
+	@Override
+	public List<CustomerModel> getAllCustomerDetail() {
+		Session session = DBConfig.sessionfactory.openSession();
+		Transaction tx = null;
+		List<CustomerModel> list=new ArrayList<CustomerModel>();
+		
+		
+	     try {
+	         tx = session.beginTransaction();        
+	         list = session.createCriteria(CustomerModel.class).list();
+	         tx.commit();
+
+	     } catch (HibernateException ex) {
+	         if (tx != null) {
+	             tx.rollback();
+	         }            
+	         ex.printStackTrace(System.err);
+	     } finally {
+	    	 session.close(); 
+	     }
+		return list;
 	}
 }

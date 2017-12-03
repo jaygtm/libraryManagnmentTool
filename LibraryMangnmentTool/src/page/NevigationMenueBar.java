@@ -6,13 +6,17 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
+import model.CustomerModel;
 import newobject.UseFactory;
+import service.CustomerService;
 
 public class NevigationMenueBar implements ActionListener {
 	private JPanel panel;
@@ -41,8 +45,13 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		//btnNewButton.setBorder(null);
 		btnNewButton.addActionListener(this);
-		
 		panel.add(btnNewButton);
+		
+		JButton StudentlistButton = new JButton("Student List                             ");
+		StudentlistButton.setForeground(Color.WHITE);
+		StudentlistButton.setBackground(SystemColor.textHighlight);
+		StudentlistButton.addActionListener(this);
+		panel.add(StudentlistButton);
 		
 		JButton btnNewButton_4 = new JButton("User Creation                            ");
 		btnNewButton_4.setForeground(Color.WHITE);
@@ -109,6 +118,32 @@ public class NevigationMenueBar implements ActionListener {
 			public void run() {
 				RegistrationPage registrationPage=new RegistrationPage();
 				registrationPage.registrationPage(bodyPanel);
+			}
+		});
+			break;
+			
+		case "Student List":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				String[] columns = new String[] {
+						 "Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"
+			        };
+				CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+				List<CustomerModel> status = customerService.getAllCustomerDetail();
+				System.out.println("list of Student"+status.toString());
+				//actual data for the table in a 2d array
+		        Object[][] data = new Object[][] {
+		            {1, "John", 40.0, false,500 },
+		            {2, "Rambo", 70.0, false,6000 },
+		            {3, "Zorro", 60.0, true,900 },
+		        };
+				
+				 //create table with data
+		        JTable table = new JTable(data, columns);
+		        
+		        CustomerList customerList=new CustomerList();
+		        customerList.customerList(bodyPanel,table);
 			}
 		});
 			break;

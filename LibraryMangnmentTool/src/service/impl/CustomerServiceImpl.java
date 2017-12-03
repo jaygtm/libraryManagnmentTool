@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.util.List;
+
 import dao.impl.CustomerDaoImpl;
 import model.CustomerModel;
 import service.CustomerService;
@@ -22,6 +24,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean deleteCustomerDetail(int customerId){
 		return  customerDaoImpl.deleteCustomerDetail(customerId);
+	}
+	@Override
+	public List<CustomerModel> getAllCustomerDetail() {
+		return customerDaoImpl.getAllCustomerDetail();
 	}
 
 }
