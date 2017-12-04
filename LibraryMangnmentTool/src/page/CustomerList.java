@@ -85,11 +85,33 @@ public class CustomerList  implements ActionListener{
 		System.out.println(""+action);
 		switch (action) {
 		case "Modify Detail":EventQueue.invokeLater(new Runnable() {
-			
+			JPanel d= parent;
 			@Override
 			public void run() {
-				
-					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+					
+					int row = table.getSelectedRow();
+					if(row==-1){
+						DialogService.showErrorMgs(d, "Please select one row", "Alert");
+					}else{
+						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+						String name = table.getModel().getValueAt(row, 1).toString();
+						String mobile = table.getModel().getValueAt(row, 2).toString();
+						String email = table.getModel().getValueAt(row, 3).toString();
+						String student_id = table.getModel().getValueAt(row, 4).toString();
+						String Balence = table.getModel().getValueAt(row, 5).toString();
+						parent.removeAll();
+						ModifyPage modifyPage=new ModifyPage();
+						modifyPage.modifyPage(parent);
+						modifyPage.getTextField_5().setText(""+value);
+						modifyPage.getTextField().setText(name);
+						modifyPage.getTextField_1().setText(mobile);
+						modifyPage.getTextField_2().setText(email);
+						modifyPage.getTextField_3().setText(student_id);
+						modifyPage.getTextField_4().setText(Balence);
+						modifyPage.getTextField_5().enable(false);
+						
+					}
+					
 			}
 		});
 			break;
