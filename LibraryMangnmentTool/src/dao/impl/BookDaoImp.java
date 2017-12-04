@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import dao.BookDao;
 import db.DBConfig;
 import model.BookModel;
+import model.BookTypeModel;
+import model.UserModel;
 
 public class BookDaoImp implements BookDao {
 
@@ -40,6 +42,34 @@ public class BookDaoImp implements BookDao {
 
 	@Override
 	public boolean delteBook(BookModel bookModel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookTypeModel> getAllBookType() {
+		Session seession = DBConfig.sessionfactory.openSession();
+		seession.beginTransaction();
+		List<BookTypeModel> list = seession.createCriteria(BookTypeModel.class).list();
+		seession.close();
+		return list;
+	}
+
+	@Override
+	public BookTypeModel getBookType(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteBookType(BookTypeModel model) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addBookType(BookTypeModel model) {
 		// TODO Auto-generated method stub
 		return false;
 	}

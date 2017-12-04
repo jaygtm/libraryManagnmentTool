@@ -1,7 +1,11 @@
 package page;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,17 +15,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class AddBookPage {
+import common.service.DialogService;
+import model.BookModel;
+import model.BookTypeModel;
+import newobject.UseFactory;
+import service.BookService;
+
+public class AddBookPage implements ActionListener {
+	private BookService bookService;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private JComboBox comboBox;
 	public void addBookPage(JPanel panel_1) {
 		JPanel add_Book = new JPanel();
 		add_Book.setBounds(177, 25, 867, 538);
-		add_Book.setBackground(new Color(0,0,0,0));
+		//add_Book.setBackground(new Color(0,0,0,0));
 		add_Book.setBorder(BorderFactory.createTitledBorder(""));
 		add_Book.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
 		panel_1.add(add_Book);
@@ -75,8 +87,9 @@ public class AddBookPage {
 		add_Book.add(textField);
 		textField.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox<String>(getBookType());
 		comboBox.setBounds(432, 160, 261, 20);
+		//comboBox.setBackground(new Color(0,0,0,0));
 		add_Book.add(comboBox);
 		
 		textField_1 = new JTextField();
@@ -104,14 +117,101 @@ public class AddBookPage {
 		add_Book.add(textField_5);
 		textField_5.setColumns(10);
 		
-		JButton btnNewButton_6 = new JButton("Cancel");
-		btnNewButton_6.setBounds(246, 448, 89, 23);
+		JButton btnNewButton_6 = new JButton("Save");
+		btnNewButton_6.setBounds(630, 448, 100, 35);
+		btnNewButton_6.addActionListener(this);
 		add_Book.add(btnNewButton_6);
 		
-		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(508, 448, 89, 23);
+		JButton btnSave = new JButton("Cancel");
+		btnSave.setBounds(750, 448, 100, 35);
+		btnSave.addActionListener(this);
 		add_Book.add(btnSave);
 		
 	}
+	public AddBookPage(){
+		bookService = (BookService) UseFactory.getContext().getBean("bookService");
+	}
+	
+	private String[] getBookType(){
+		List<BookTypeModel> list = bookService.getAllBookType();
+		String arr[] = new String[list.size()+1];
+		arr[0] = "-Select-";
+		for (int i = 0; i < list.size(); i++) {
+			arr[i+1] = list.get(i).getBookType_code(); 
+		}
+		return arr;
+	}
+	private Integer getBookId(String bookCode){
+		List<BookTypeModel> list = bookService.getAllBookType();
+		for(BookTypeModel m : list)
+			if(m.getBookType_code().equals(bookCode))
+				return m.getBookType_id();
+		return null;
+	}
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand();
+		System.out.println("Action in Add Book"+action);
+		
+		switch (action) {
+		case "Save":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+					String bookName = textField.getText();
+					String mrp = textField_1.getText();
+					String rent = textField_2.getText();
+					String rentprdat = textField_3.getText();
+					String authour = textField_4.getText();
+					String publication = textField_5.getText();
+					String type = comboBox.getSelectedItem().toString();
+					
+					if(checkBlank(new String[]{bookName,mrp,rent,rentprdat,authour,publication,type})){
+						DialogService.showErrorMgs(textField, "Please Fill All Field", "Error");
+						
+					}else{
+						BookModel m = new BookModel();
+						m.setBook_name(bookName);
+						m.setBook_aurthor(authour);
+						m.setBook_publication(publication);
+						m.setBook_mrp(Integer.parseInt(mrp));
+						m.setBook_rent(Integer.parseInt(rent));
+						m.setBook_rentPerDay(Integer.parseInt(rentprdat));
+						m.setBook_typeId(getBookId(type));
+						m.setBook_Total(1);
+						m.setBook_aval(1);
+						
+						
+						boolean status = bookService.addBook(m);
+						
+						DialogService.showMgs(comboBox, "Book Add Successfully", "Success");
+						
+					}
+					
+					
+					
+			}
+		});
+			
+			
+			break;
+		default:
+			break;
+		}
+		
+		
+		
+	}
+	private boolean checkBlank(String[] arr){
+		for(String s :arr){
+			if(s.trim().equals(""))
+				return true;
+		}
+		
+		return false;
+	}
+	
 
 }

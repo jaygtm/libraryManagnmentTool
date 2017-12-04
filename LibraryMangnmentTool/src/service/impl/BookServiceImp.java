@@ -5,6 +5,7 @@ import java.util.List;
 import dao.BookDao;
 import dao.impl.BookDaoImp;
 import model.BookModel;
+import model.BookTypeModel;
 import service.BookService;
 
 public class BookServiceImp implements BookService {
@@ -39,6 +40,29 @@ public class BookServiceImp implements BookService {
 
 	@Override
 	public boolean delteBook(BookModel bookModel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<BookTypeModel> getAllBookType() {
+		return bookDao.getAllBookType();
+	}
+
+	@Override
+	public BookTypeModel getBookType(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteBookType(BookTypeModel model) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addBookType(BookTypeModel model) {
 		// TODO Auto-generated method stub
 		return false;
 	}
