@@ -35,10 +35,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(SystemColor.textHighlight);
 		//btnNewButton_1.setBorder(null);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnNewButton_1.addActionListener(this);
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Add Student                              ");
