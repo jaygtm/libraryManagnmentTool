@@ -148,7 +148,7 @@ public class RegistrationPage implements ActionListener {
 			model.setCustomer_email(email);
 			model.setCustomer_cId(studentId);
 			if(!amount.trim().equals(""))
-				model.setCustomer_balance(Integer.parseInt(amount));
+				model.setCustomer_balance(Double.parseDouble(amount));
 			return model;
 		}
 		

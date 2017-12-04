@@ -215,6 +215,7 @@ public class ModifyPage implements ActionListener {
 		String email 	= textField_2.getText();
 		String studentId = textField_3.getText();
 		String amount 	= textField_4.getText();
+		int id 	    	= Integer.parseInt(textField_5.getText());
 		
 		if(name.trim().equals("") || mobileNo.trim().equals("") || email.trim().equals("") || studentId.trim().equals("") ){
 			DialogService.showErrorMgs(parent, "Field Can't be Blank..!", "Invaild User");
@@ -224,8 +225,9 @@ public class ModifyPage implements ActionListener {
 			model.setCustomer_mobile(mobileNo);
 			model.setCustomer_email(email);
 			model.setCustomer_cId(studentId);
+			model.setCustomer_id(id);
 			if(!amount.trim().equals(""))
-				model.setCustomer_balance(Integer.parseInt(amount));
+				model.setCustomer_balance(Double.parseDouble(amount));
 			return model;
 		}
 		

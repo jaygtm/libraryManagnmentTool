@@ -18,13 +18,13 @@ public class CustomerDaoImpl implements CustomerDao {
 	public boolean saveCustomerDetail(CustomerModel customerModel) {
 		Session session = DBConfig.sessionfactory.openSession();
 		session.beginTransaction();
-		Serializable id=session.save(customerModel);
+		session.saveOrUpdate(customerModel);
 		session.beginTransaction().commit();
 		System.out.println("done..!");
-		if(id!=null)
+		//if(id!=null)
 			return true;
-		else
-			return true;
+		/*else
+			return true;*/
 	}
 
 	@Override
