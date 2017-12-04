@@ -116,6 +116,7 @@ public class NevigationMenueBar implements ActionListener {
 			
 			@Override
 			public void run() {
+				bodyPanel.removeAll();
 				RegistrationPage registrationPage=new RegistrationPage();
 				registrationPage.registrationPage(bodyPanel);
 			}
@@ -126,6 +127,7 @@ public class NevigationMenueBar implements ActionListener {
 			
 			@Override
 			public void run() {
+				bodyPanel.removeAll();
 				String[] columns = new String[] {
 						 "Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"
 			        };
