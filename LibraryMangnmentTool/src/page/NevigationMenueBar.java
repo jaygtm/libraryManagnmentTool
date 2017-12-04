@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
 
 import model.CustomerModel;
 import newobject.UseFactory;
@@ -128,24 +129,21 @@ public class NevigationMenueBar implements ActionListener {
 			@Override
 			public void run() {
 				bodyPanel.removeAll();
-				String[] columns = new String[] {
-						 "Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"
-			        };
 				CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
 				List<CustomerModel> status = customerService.getAllCustomerDetail();
-				System.out.println("list of Student"+status.toString());
-				//actual data for the table in a 2d array
-		        Object[][] data = new Object[][] {
-		            {1, "John", 40.0, false,500 },
-		            {2, "Rambo", 70.0, false,6000 },
-		            {3, "Zorro", 60.0, true,900 },
-		        };
-				
-				 //create table with data
-		        JTable table = new JTable(data, columns);
-		        
-		        CustomerList customerList=new CustomerList();
-		        customerList.customerList(bodyPanel,table);
+			     CustomerList customerList=new CustomerList();
+		        customerList.customerList(bodyPanel,status);
+			}
+		});
+			break;
+			
+		case "Add Book":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				bodyPanel.removeAll();
+				AddBookPage addbook=new AddBookPage();
+				addbook.addBookPage(bodyPanel);
 			}
 		});
 			break;

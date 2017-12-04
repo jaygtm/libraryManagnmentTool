@@ -6,13 +6,18 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
 
+import model.CustomerModel;
 import newobject.UseFactory;
 import service.CustomerService;
 
@@ -20,7 +25,8 @@ public class CustomerList  implements ActionListener{
 	
 	private JPanel gridpanel;
 	private JPanel parent;
-	public void customerList(JPanel panel_1,JTable table){
+	private JTable table;
+	public void customerList(JPanel panel_1,List<CustomerModel> status){
 
 		this.parent = panel_1;
 		JPanel List_panel = new JPanel();
@@ -37,12 +43,30 @@ public class CustomerList  implements ActionListener{
 		List_panel.add(lblStudentList);
 		
 		JScrollPane gridpanel = new JScrollPane();
-		gridpanel.setBounds(30, 73, 810, 435);
+		gridpanel.setBounds(30, 73, 810, 390);
 		gridpanel.setBackground(new Color(0,0,0,10));
 			    
+		table = new JTable(getRowData(status),columnName());
+        table.setRowSelectionAllowed(true);
+        table.setColumnSelectionAllowed(false);
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(Color.LIGHT_GRAY);
+        
 		gridpanel.getViewport ().add(table);
 		List_panel.add(gridpanel);
 		List_panel.setVisible(true);
+		
+		JButton btnModifyDetail = new JButton("Modify Detail");
+		btnModifyDetail.setBackground(new Color(0, 204, 0));
+		btnModifyDetail.setBounds(227, 481, 138, 32);
+		btnModifyDetail.addActionListener(this);
+		List_panel.add(btnModifyDetail);
+		
+		JButton btnDeleteDetail = new JButton("Delete Detail");
+		btnDeleteDetail.setBackground(new Color(204, 51, 51));
+		btnDeleteDetail.setBounds(611, 481, 125, 32);
+		btnDeleteDetail.addActionListener(this);
+		List_panel.add(btnDeleteDetail);
 		gridpanel.repaint();
 
 		
@@ -52,14 +76,28 @@ public class CustomerList  implements ActionListener{
 		String action = e.getActionCommand().trim();
 		System.out.println(""+action);
 		switch (action) {
-		case "Save":EventQueue.invokeLater(new Runnable() {
+		case "Modify Detail":EventQueue.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
 				
 					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
-					
+			}
+		});
+			break;
 			
+		case "Delete Detail":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+					int row = table.getSelectedRow();
+					int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+					customerService.deleteCustomerDetail(value);
+					parent.removeAll();
+					List<CustomerModel> status = customerService.getAllCustomerDetail();
+					customerList(parent,status);
 			}
 		});
 			break;
@@ -69,4 +107,26 @@ public class CustomerList  implements ActionListener{
 		}
 		
 	}
+	public String[] columnName() {
+		String columnName[] = { "Library Id No","Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"};
+		return columnName;
+	}
+	
+	public String[][] getRowData(List<CustomerModel> list){
+		String rowData[][] =new String[list.size()][8]; ;
+		Iterator<CustomerModel> itr =  list.iterator();
+		int i=0;
+		while (itr.hasNext()) {
+			CustomerModel customer = (CustomerModel) itr.next();
+			rowData[i][0] = ""+customer.getCustomer_id();
+			rowData[i][1] = customer.getCustomer_name();
+			rowData[i][2] = customer.getCustomer_mobile();
+			rowData[i][3] = customer.getCustomer_email();
+			rowData[i][4] = customer.getCustomer_cId();
+			rowData[i][5] = ""+customer.getCustomer_balance();
+			i++;
+		}
+		return rowData;
+	}
+
 }
