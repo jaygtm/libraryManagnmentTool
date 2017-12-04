@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import common.service.DialogService;
 import model.CustomerModel;
 import newobject.UseFactory;
 import service.CustomerService;
@@ -55,18 +56,25 @@ public class CustomerList  implements ActionListener{
 		gridpanel.getViewport ().add(table);
 		List_panel.add(gridpanel);
 		List_panel.setVisible(true);
-		
+				
 		JButton btnModifyDetail = new JButton("Modify Detail");
 		btnModifyDetail.setBackground(new Color(0, 204, 0));
-		btnModifyDetail.setBounds(227, 481, 138, 32);
+		btnModifyDetail.setBounds(449, 495, 138, 32);
 		btnModifyDetail.addActionListener(this);
 		List_panel.add(btnModifyDetail);
 		
 		JButton btnDeleteDetail = new JButton("Delete Detail");
 		btnDeleteDetail.setBackground(new Color(204, 51, 51));
-		btnDeleteDetail.setBounds(611, 481, 125, 32);
+		btnDeleteDetail.setBounds(589, 495, 125, 32);
 		btnDeleteDetail.addActionListener(this);
 		List_panel.add(btnDeleteDetail);
+		
+		JButton btnNewButton_6 = new JButton("Cancel");
+		btnNewButton_6.setBackground(new Color(204, 51, 51));
+		btnNewButton_6.setBounds(716, 495, 124, 32);
+		btnNewButton_6.addActionListener(this);
+		List_panel.add(btnNewButton_6);
+		
 		gridpanel.repaint();
 
 		
@@ -87,17 +95,30 @@ public class CustomerList  implements ActionListener{
 			break;
 			
 		case "Delete Detail":EventQueue.invokeLater(new Runnable() {
-			
+			JPanel d= parent;
 			@Override
 			public void run() {
 				
 					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
 					int row = table.getSelectedRow();
-					int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-					customerService.deleteCustomerDetail(value);
+					
+					if(row==-1){
+						DialogService.showErrorMgs(d, "Please select one row", "Alert");
+					}else{
+						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+						customerService.deleteCustomerDetail(value);
+						parent.removeAll();
+						List<CustomerModel> status = customerService.getAllCustomerDetail();
+						customerList(parent,status);
+					}
+			}
+		});
+			break;
+		case "Cancel":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
 					parent.removeAll();
-					List<CustomerModel> status = customerService.getAllCustomerDetail();
-					customerList(parent,status);
 			}
 		});
 			break;
@@ -105,7 +126,7 @@ public class CustomerList  implements ActionListener{
 		default:
 			break;
 		}
-		
+		UseFactory.refresh();
 	}
 	public String[] columnName() {
 		String columnName[] = { "Library Id No","Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"};
