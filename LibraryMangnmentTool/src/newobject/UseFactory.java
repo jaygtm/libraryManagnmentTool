@@ -4,6 +4,7 @@ package newobject;
 
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,6 +12,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class UseFactory {
 	private static  ApplicationContext context;
 	private static JFrame mainFrame;
+	private static JPanel bodyPanal;
+	
 	public UseFactory(){
 		System.out.println("use factory constructor");
 	}
@@ -34,6 +37,13 @@ public class UseFactory {
 	
 	public static JFrame getMainFrame(){
 		return mainFrame;
+	}
+
+	public static JPanel getBodyPanal() {
+		return bodyPanal;
+	}
+	public static void setBodyPanal(JPanel bodyPanal) {
+		UseFactory.bodyPanal = bodyPanal;
 	}
 	
 	
