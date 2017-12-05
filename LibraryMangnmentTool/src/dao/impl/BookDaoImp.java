@@ -9,14 +9,17 @@ import common.service.Factory;
 import dao.BookDao;
 import model.BookModel;
 import model.BookTypeModel;
-import model.UserModel;
 
 public class BookDaoImp implements BookDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookModel> getBookaList() {
-		// TODO Auto-generated method stub
-		return null;
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		List<BookModel> list = seession.createCriteria(BookModel.class).list();
+		seession.close();
+		return list;
 	}
 
 	@Override
