@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import common.service.DialogService;
+import common.service.Factory;
 import model.CustomerModel;
-import newobject.UseFactory;
 import service.CustomerService;
 
 public class ModifyPage implements ActionListener {
@@ -179,7 +179,7 @@ public class ModifyPage implements ActionListener {
 			public void run() {
 				CustomerModel model =validateAndGetData();
 				if(model != null){
-					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+					CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
 					boolean status = customerService.saveCustomerDetail(model);
 					System.out.println("Status of Save");
 					if(status)
@@ -196,7 +196,7 @@ public class ModifyPage implements ActionListener {
 			@Override
 			public void run() {
 				parent.removeAll();
-				CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+				CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
 				List<CustomerModel> status = customerService.getAllCustomerDetail();
 			     CustomerList customerList=new CustomerList();
 		        customerList.customerList(parent,status);
@@ -207,7 +207,7 @@ public class ModifyPage implements ActionListener {
 		default:
 			break;
 		}
-		UseFactory.refresh();
+		Factory.refresh();
 	}
 	public CustomerModel validateAndGetData(){
 		String name 	= textField.getText();
@@ -219,7 +219,7 @@ public class ModifyPage implements ActionListener {
 		if(name.trim().equals("") || mobileNo.trim().equals("") || email.trim().equals("") || studentId.trim().equals("") ){
 			DialogService.showErrorMgs(parent, "Field Can't be Blank..!", "Invaild User");
 		}else{
-			CustomerModel model = (CustomerModel) UseFactory.getContext().getBean("customerModel");
+			CustomerModel model = (CustomerModel) Factory.getContext().getBean("customerModel");
 			model.setCustomer_name(name);
 			model.setCustomer_mobile(mobileNo);
 			model.setCustomer_email(email);

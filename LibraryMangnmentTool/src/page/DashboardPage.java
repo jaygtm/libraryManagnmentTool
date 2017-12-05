@@ -11,7 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import newobject.UseFactory;
+import common.service.Factory;
+
 
 public class DashboardPage implements ActionListener {
 	final JFrame MainFrame;
@@ -34,7 +35,7 @@ public class DashboardPage implements ActionListener {
 			MainFrame.setJMenuBar(getMenuBar());
 			MainFrame.setVisible(true);
 			loginDialog.setVisible(true);
-			UseFactory.setMainFrame(MainFrame);
+			Factory.setMainFrame(MainFrame);
 			
 		}catch(Exception e){
 			e.printStackTrace();

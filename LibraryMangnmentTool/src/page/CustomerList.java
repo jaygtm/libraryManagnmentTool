@@ -18,8 +18,8 @@ import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
 import common.service.DialogService;
+import common.service.Factory;
 import model.CustomerModel;
-import newobject.UseFactory;
 import service.CustomerService;
 
 public class CustomerList  implements ActionListener{
@@ -121,7 +121,7 @@ public class CustomerList  implements ActionListener{
 			@Override
 			public void run() {
 				
-					CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+					CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
 					int row = table.getSelectedRow();
 					
 					if(row==-1){
@@ -148,7 +148,7 @@ public class CustomerList  implements ActionListener{
 		default:
 			break;
 		}
-		UseFactory.refresh();
+		Factory.refresh();
 	}
 	public String[] columnName() {
 		String columnName[] = { "Library Id No","Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"};

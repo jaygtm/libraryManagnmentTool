@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import common.service.DialogService;
+import common.service.Factory;
 import model.BookModel;
 import model.BookTypeModel;
-import newobject.UseFactory;
 import service.BookService;
 
 public class AddBookPage implements ActionListener {
@@ -129,7 +129,7 @@ public class AddBookPage implements ActionListener {
 		
 	}
 	public AddBookPage(){
-		bookService = (BookService) UseFactory.getContext().getBean("bookService");
+		bookService = (BookService) Factory.getContext().getBean("bookService");
 	}
 	
 	private String[] getBookType(){

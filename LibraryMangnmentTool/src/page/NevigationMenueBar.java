@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import common.service.Factory;
 import model.CustomerModel;
-import newobject.UseFactory;
 import service.CustomerService;
 
 public class NevigationMenueBar implements ActionListener {
@@ -126,7 +126,7 @@ public class NevigationMenueBar implements ActionListener {
 			@Override
 			public void run() {
 				bodyPanel.removeAll();
-				CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
+				CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
 				List<CustomerModel> status = customerService.getAllCustomerDetail();
 			     CustomerList customerList=new CustomerList();
 		        customerList.customerList(bodyPanel,status);
@@ -148,7 +148,7 @@ public class NevigationMenueBar implements ActionListener {
 		default:
 			break;
 		}
-		UseFactory.refresh();
+		Factory.refresh();
 	}
 	
 	

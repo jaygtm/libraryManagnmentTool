@@ -8,15 +8,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import common.service.Factory;
 import dao.CustomerDao;
-import db.DBConfig;
 import model.CustomerModel;
 
 public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public boolean saveCustomerDetail(CustomerModel customerModel) {
-		Session session = DBConfig.sessionfactory.openSession();
+		Session session = Factory.sessionfactory.openSession();
 		session.beginTransaction();
 		Serializable id=session.save(customerModel);
 		session.beginTransaction().commit();
@@ -35,7 +35,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public boolean deleteCustomerDetail(int customerId) {
-		Session session = DBConfig.sessionfactory.openSession();
+		Session session = Factory.sessionfactory.openSession();
 		CustomerModel deletcustomerId=(CustomerModel) session.load(CustomerModel.class,new Integer(customerId));
 		Transaction tx = session.beginTransaction();
 		session.delete(deletcustomerId);
@@ -48,7 +48,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@SuppressWarnings({ "unchecked",  "null" })
 	@Override
 	public List<CustomerModel> getAllCustomerDetail() {
-		Session session = DBConfig.sessionfactory.openSession();
+		Session session = Factory.sessionfactory.openSession();
 		Transaction tx = null;
 		List<CustomerModel> list=new ArrayList<CustomerModel>();
 		
