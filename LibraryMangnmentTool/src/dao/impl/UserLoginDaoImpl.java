@@ -39,6 +39,7 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		Session seession = DBConfig.sessionfactory.openSession();
 		seession.beginTransaction();
 		List<UserModel> list = seession.createCriteria(UserModel.class).list();
+		seession.close();
 		return list;
 	}
 	
