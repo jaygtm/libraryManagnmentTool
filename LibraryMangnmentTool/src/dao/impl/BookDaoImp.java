@@ -5,23 +5,26 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import common.service.Factory;
 import dao.BookDao;
-import db.DBConfig;
 import model.BookModel;
 import model.BookTypeModel;
-import model.UserModel;
 
 public class BookDaoImp implements BookDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookModel> getBookaList() {
-		// TODO Auto-generated method stub
-		return null;
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		List<BookModel> list = seession.createCriteria(BookModel.class).list();
+		seession.close();
+		return list;
 	}
 
 	@Override
 	public boolean addBook(BookModel bookModel) {
-		Session session = DBConfig.sessionfactory.openSession();
+		Session session = Factory.sessionfactory.openSession();
 		session.beginTransaction();
 		Serializable id= session.save(bookModel);
 		session.beginTransaction().commit();
@@ -49,7 +52,7 @@ public class BookDaoImp implements BookDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookTypeModel> getAllBookType() {
-		Session seession = DBConfig.sessionfactory.openSession();
+		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		List<BookTypeModel> list = seession.createCriteria(BookTypeModel.class).list();
 		seession.close();

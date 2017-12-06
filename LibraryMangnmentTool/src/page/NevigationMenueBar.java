@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import common.service.Factory;
 import model.CustomerModel;
-import newobject.UseFactory;
 import service.CustomerService;
 
 public class NevigationMenueBar implements ActionListener {
@@ -37,6 +37,15 @@ public class NevigationMenueBar implements ActionListener {
 		//btnNewButton_1.setBorder(null);
 		btnNewButton_1.addActionListener(this);
 		panel.add(btnNewButton_1);
+		
+		JButton viewBookBtn = new JButton("Book List                            ");
+		viewBookBtn.setForeground(Color.WHITE);
+		viewBookBtn.setBackground(SystemColor.textHighlight);
+		//btnNewButton_1.setBorder(null);
+		viewBookBtn.addActionListener(this);
+		panel.add(viewBookBtn);
+		
+		
 		
 		JButton btnNewButton = new JButton("Add Student                              ");
 		btnNewButton.setForeground(Color.WHITE);
@@ -85,16 +94,8 @@ public class NevigationMenueBar implements ActionListener {
 		bodyPanel.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.5f));
 		mainframe.getContentPane().add(bodyPanel);
 		bodyPanel.setLayout(null);
-		////////////////////////////////////////////////////////////////
-		/*AddBookPage addBookPage = new AddBookPage();
-		addBookPage.addBookPage(panel_1);*/
-		//////////////////////////////////////////
-		//////////////////////////////////////////////
-		/*RegistrationPage registrationPage=new RegistrationPage();
-		registrationPage.registrationPage(panel_1);*/
+		Factory.setBodyPanal(bodyPanel);
 		
-		
-		//////////////////////////////////////////////
 		
 		JLabel lblTilakPublicSenior = new JLabel("TILAK PUBLIC SENIOR SECONDARY SCHOOL ");
 		lblTilakPublicSenior.setForeground(new Color(204, 0, 0));
@@ -104,6 +105,7 @@ public class NevigationMenueBar implements ActionListener {
 		
 	
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand().trim();
@@ -111,44 +113,53 @@ public class NevigationMenueBar implements ActionListener {
 		
 		switch (action) {
 		case "Add Student":EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				bodyPanel.removeAll();
-				RegistrationPage registrationPage=new RegistrationPage();
-				registrationPage.registrationPage(bodyPanel);
-			}
-		});
+														
+														@Override
+														public void run() {
+															bodyPanel.removeAll();
+															RegistrationPage registrationPage=new RegistrationPage();
+															registrationPage.registrationPage(bodyPanel);
+														}
+													});
 			break;
 			
 		case "Student List":EventQueue.invokeLater(new Runnable() {
 			
-			@Override
-			public void run() {
-				bodyPanel.removeAll();
-				CustomerService customerService = (CustomerService) UseFactory.getContext().getBean("customerService");
-				List<CustomerModel> status = customerService.getAllCustomerDetail();
-			     CustomerList customerList=new CustomerList();
-		        customerList.customerList(bodyPanel,status);
-			}
-		});
+														@Override
+														public void run() {
+															bodyPanel.removeAll();
+															CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
+															List<CustomerModel> status = customerService.getAllCustomerDetail();
+														     CustomerList customerList=new CustomerList();
+													        customerList.customerList(bodyPanel,status);
+														}
+													});
 			break;
 			
 		case "Add Book":EventQueue.invokeLater(new Runnable() {
 			
-			@Override
-			public void run() {
-				bodyPanel.removeAll();
-				AddBookPage addbook=new AddBookPage();
-				addbook.addBookPage(bodyPanel);
-			}
-		});
+													@Override
+													public void run() {
+														bodyPanel.removeAll();
+														AddBookPage addbook=new AddBookPage();
+														addbook.addBookPage(bodyPanel);
+													}
+												});
 			break;
+		case "Book List" :EventQueue.invokeLater(new Runnable() {
+													
+													@Override
+													public void run() {
+														bodyPanel.removeAll();
+														bodyPanel.add(new BookListPage());
+													}
+												});
+		break; 
 
-		default:
+		default: bodyPanel.removeAll();
 			break;
 		}
-		UseFactory.refresh();
+		Factory.refresh();
 	}
 	
 	

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import common.service.Factory;
 import dao.UserLoginDao;
-import db.DBConfig;
 import model.UserModel;
 
 public class UserLoginDaoImpl implements UserLoginDao {
@@ -36,7 +36,7 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<UserModel> getAllUser() {
-		Session seession = DBConfig.sessionfactory.openSession();
+		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		List<UserModel> list = seession.createCriteria(UserModel.class).list();
 		seession.close();

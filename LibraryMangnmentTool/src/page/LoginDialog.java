@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import common.service.DialogService;
-import newobject.UseFactory;
+import common.service.Factory;
 import service.UserLoginService;
 
 
@@ -109,7 +109,7 @@ public class LoginDialog extends JDialog implements ActionListener {
 					if(uname.trim().equals("") || pass.trim().equals("")){
 						DialogService.showErrorMgs(d, "Username and Password can't be blank..!", "Invaild User");
 					}else{
-						UserLoginService userLoginService = (UserLoginService) UseFactory.getContext().getBean("loginService");
+						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
 						boolean result = userLoginService.validateUserName(uname,pass);
 						if(result){
 							NevigationMenueBar n =new NevigationMenueBar();

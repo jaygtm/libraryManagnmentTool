@@ -23,8 +23,7 @@ public class BookServiceImp implements BookService {
 
 	@Override
 	public List<BookModel> getBookaList() {
-		// TODO Auto-generated method stub
-		return null;
+		return bookDao.getBookaList();
 	}
 
 	@Override
