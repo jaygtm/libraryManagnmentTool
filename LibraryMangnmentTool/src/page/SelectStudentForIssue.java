@@ -1,6 +1,7 @@
 package page;
 
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -20,8 +20,7 @@ import common.service.Factory;
 import model.BookModel;
 import service.BookService;
 
-@SuppressWarnings("serial")
-public class BookListPage extends JPanel implements ActionListener {
+public class SelectStudentForIssue extends JPanel implements ActionListener {
 	
 	
 	JTable table;
@@ -30,14 +29,14 @@ public class BookListPage extends JPanel implements ActionListener {
 	JComboBox comboBox;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public BookListPage() {
+	public SelectStudentForIssue() {
 		
 		setBounds(93, 28, 1020, 529);
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Book List");
+		JLabel lblNewLabel = new JLabel("Select Student ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel.setBounds(469, 11, 89, 14);
+		lblNewLabel.setBounds(469, 21, 189, 14);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Search By");
@@ -74,16 +73,9 @@ public class BookListPage extends JPanel implements ActionListener {
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
-		JButton btnNewButton_8 = new JButton("New button");
-		btnNewButton_8.setBounds(10, 475, 107, 43);
-		add(btnNewButton_8);
-		
-		JButton btnNewButton_9 = new JButton("Modify");
-		btnNewButton_9.setBounds(664, 475, 114, 43);
-		add(btnNewButton_9);
-		
-		JButton btnNewButton_10 = new JButton("Delete");
+		JButton btnNewButton_10 = new JButton("Issue");
 		btnNewButton_10.setBounds(788, 475, 101, 43);
+		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
@@ -94,6 +86,25 @@ public class BookListPage extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand().trim();
+		System.out.println(""+action);
+		 switch (action) {
+		case "Issue":EventQueue.invokeLater(new Runnable() {
+			
+											@Override
+											public void run() {
+												Factory.getBodyPanal().removeAll();
+												Factory.getBodyPanal().add(new IssueBookPage());
+												Factory.refresh();
+											}
+										});
+			
+			break;
+
+		default:
+			break;
+		}
+		
 		
 	}
 	public String[] columnName() {
