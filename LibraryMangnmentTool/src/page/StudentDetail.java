@@ -1,5 +1,6 @@
 package page;
 
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,13 +11,19 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import common.service.Factory;
+
+@SuppressWarnings("serial")
 public class StudentDetail extends JPanel implements ActionListener  {
 	
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
 	public StudentDetail() {
+		setBounds(10, 11, 1129, 571);
+		setLayout(null);
+		
 		JLabel lblNewLabel = new JLabel("Student Name:-");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setBounds(20, 11, 122, 23);
@@ -68,12 +75,31 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		JButton btnViewHistory = new JButton("View History");
 		btnViewHistory.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnViewHistory.setBounds(285, 45, 111, 29);
+		btnViewHistory.addActionListener(this);
 		add(btnViewHistory);
 	
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand().trim();
+		System.out.println(""+action);
 		
+		switch (action) {
+		case "View History" :EventQueue.invokeLater(new Runnable() {
+													
+					@Override
+					public void run() {
+						//Factory.getMainFrame().removeAll();
+						add(new StudentHistoryPage());
+						Factory.refresh();
+						}
+					});
+		break;
+
+		default: removeAll();
+			break;
+		}
+		Factory.refresh();
 	}
 
 }
