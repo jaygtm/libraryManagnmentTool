@@ -31,7 +31,7 @@ public class NevigationMenueBar implements ActionListener {
 		mainframe.getContentPane().add(panel);
 		
 		JButton btnNewButton_1 = new JButton("Add Book                            ");
-		btnNewButton_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("../img/java_jar.gif")));
+		//btnNewButton_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("../img/java_jar.gif")));
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(SystemColor.textHighlight);
 		//btnNewButton_1.setBorder(null);
@@ -70,6 +70,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_3.setForeground(Color.WHITE);
 		btnNewButton_3.setBackground(SystemColor.textHighlight);
 		//btnNewButton_3.setBorder(null);
+		btnNewButton_3.addActionListener(this);
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_2 = new JButton("View Issue Detail                       ");
@@ -155,6 +156,15 @@ public class NevigationMenueBar implements ActionListener {
 													}
 												});
 		break; 
+		case "Issue Books" :EventQueue.invokeLater(new Runnable() {
+					
+														@Override
+														public void run() {
+															bodyPanel.removeAll();
+															bodyPanel.add(new SelectStudentForIssue());
+														}
+													});
+		break;
 
 		default: bodyPanel.removeAll();
 			break;
