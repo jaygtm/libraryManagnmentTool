@@ -120,6 +120,7 @@ public class NevigationMenueBar implements ActionListener {
 															bodyPanel.removeAll();
 															RegistrationPage registrationPage=new RegistrationPage();
 															registrationPage.registrationPage(bodyPanel);
+															Factory.refresh();
 														}
 													});
 			break;
@@ -129,10 +130,8 @@ public class NevigationMenueBar implements ActionListener {
 														@Override
 														public void run() {
 															bodyPanel.removeAll();
-															CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
-															List<CustomerModel> status = customerService.getAllCustomerDetail();
-														     CustomerList customerList=new CustomerList();
-													        customerList.customerList(bodyPanel,status);
+															bodyPanel.add(new StudentList());
+															Factory.refresh();
 														}
 													});
 			break;
@@ -144,6 +143,7 @@ public class NevigationMenueBar implements ActionListener {
 														bodyPanel.removeAll();
 														AddBookPage addbook=new AddBookPage();
 														addbook.addBookPage(bodyPanel);
+														Factory.refresh();
 													}
 												});
 			break;
@@ -153,6 +153,7 @@ public class NevigationMenueBar implements ActionListener {
 													public void run() {
 														bodyPanel.removeAll();
 														bodyPanel.add(new BookListPage());
+														Factory.refresh();
 													}
 												});
 		break; 
@@ -162,6 +163,7 @@ public class NevigationMenueBar implements ActionListener {
 														public void run() {
 															bodyPanel.removeAll();
 															bodyPanel.add(new SelectStudentForIssue());
+															Factory.refresh();
 														}
 													});
 		break;
@@ -169,7 +171,7 @@ public class NevigationMenueBar implements ActionListener {
 		default: bodyPanel.removeAll();
 			break;
 		}
-		Factory.refresh();
+		
 	}
 	
 	
