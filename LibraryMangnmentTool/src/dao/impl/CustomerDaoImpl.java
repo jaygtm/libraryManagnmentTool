@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import common.service.Factory;
 import dao.CustomerDao;
 import model.CustomerModel;
+import model.StudentHistoryModel;
 
 public class CustomerDaoImpl implements CustomerDao {
 
@@ -67,5 +70,19 @@ public class CustomerDaoImpl implements CustomerDao {
 	    	 session.close(); 
 	     }
 		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StudentHistoryModel> viewHistory(String id){
+		Session session = Factory.sessionfactory.openSession();
+		List<StudentHistoryModel> list=new ArrayList<>();
+		session.beginTransaction();
+		Criteria criteria  = session.createCriteria(StudentHistoryModel.class);
+		list=criteria.add(Restrictions.eq("customer_id", 8)).list();
+	    session.close(); 
+	   
+		return list;
+		
 	}
 }

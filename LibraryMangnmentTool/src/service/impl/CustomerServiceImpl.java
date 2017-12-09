@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.impl.CustomerDaoImpl;
 import model.CustomerModel;
+import model.StudentHistoryModel;
 import service.CustomerService;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -28,6 +29,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerModel> getAllCustomerDetail() {
 		return customerDaoImpl.getAllCustomerDetail();
+	}
+	
+	@Override
+	public List<StudentHistoryModel> viewHistory(String id) {
+		return customerDaoImpl.viewHistory(id);
 	}
 
 }
