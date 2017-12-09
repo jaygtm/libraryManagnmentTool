@@ -94,6 +94,7 @@ public class Factory {
 			bodyPanal.removeAll();
 		else
 			System.err.println("Body Panel Is null");
+		refresh();
 	}
 	public static Date addNextDay(String noOfDay) throws Exception{
 		DateFormat sysDate= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
