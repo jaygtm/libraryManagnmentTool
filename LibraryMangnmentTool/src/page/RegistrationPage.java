@@ -29,8 +29,9 @@ public class RegistrationPage implements ActionListener {
 		/////////////////////////////////////////////////////////////////
 		this.parent = panel_1;
 		JPanel Reg_panel = new JPanel();
-		Reg_panel.setBounds(177, 25, 867, 538);
-		Reg_panel.setBackground(new Color(0,0,0,0));
+		//Reg_panel.setBounds(177, 25, 867, 538);
+		Reg_panel.setBounds(10, 11, 1129, 571);
+		//Reg_panel.setBackground(new Color(0,0,0,0));
 		Reg_panel.setBorder(BorderFactory.createTitledBorder(""));
 		Reg_panel.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
 		panel_1.add(Reg_panel);
@@ -99,6 +100,7 @@ public class RegistrationPage implements ActionListener {
 
 		JButton btnNewButton_7 = new JButton("Cancel");
 		btnNewButton_7.setBounds(394, 428, 89, 23);
+		btnNewButton_7.addActionListener(this);
 		Reg_panel.add(btnNewButton_7);
 		/////////////////////////////////////////////////
 
@@ -123,6 +125,15 @@ public class RegistrationPage implements ActionListener {
 					else
 						DialogService.showErrorMgs(parent, "Error to Save ..!", "Error");
 				}
+			}
+		});
+			break;
+		case "Cancel":EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				Factory.homePage();
+				
 			}
 		});
 			break;

@@ -39,7 +39,7 @@ public class StudentList extends JPanel implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel("Student List");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel.setBounds(469, 21, 89, 14);
+		lblNewLabel.setBounds(469, 21, 100, 14);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Search By");

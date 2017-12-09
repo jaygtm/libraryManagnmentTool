@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.JTableHeader;
 
 import common.service.Factory;
@@ -97,13 +98,39 @@ public class NevigationMenueBar implements ActionListener {
 		bodyPanel.setLayout(null);
 		Factory.setBodyPanal(bodyPanel);
 		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(10, 11, 1342, 41);
+		mainframe.getContentPane().add(panel_3);
+		panel_3.setLayout(null);
 		
-		JLabel lblTilakPublicSenior = new JLabel("TILAK PUBLIC SENIOR SECONDARY SCHOOL ");
-		lblTilakPublicSenior.setForeground(new Color(204, 0, 0));
-		lblTilakPublicSenior.setFont(new Font("Viner Hand ITC", Font.BOLD | Font.ITALIC, 22));
-		lblTilakPublicSenior.setBounds(432, 11, 925, 41);
-		mainframe.getContentPane().add(lblTilakPublicSenior);
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.setBounds(1229, 11, 103, 23);
+		panel_3.add(btnLogout);
 		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(1086, 15, 133, 14);
+		panel_3.add(lblNewLabel_1);
+		
+		JLabel lblPatnaCentralSchool = new JLabel("Patna Central School");
+		lblPatnaCentralSchool.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		lblPatnaCentralSchool.setBounds(543, 11, 318, 18);
+		panel_3.add(lblPatnaCentralSchool);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(10, 667, 1347, 27);
+		mainframe.getContentPane().add(panel_4);
+		panel_4.setLayout(null);
+		
+		JLabel lblDate = new JLabel("Date :");
+		lblDate.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		lblDate.setBounds(963, 0, 101, 25);
+		panel_4.add(lblDate);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setBounds(1090, 7, 213, 14);
+		panel_4.add(lblNewLabel_2);
 	
 	}
 	

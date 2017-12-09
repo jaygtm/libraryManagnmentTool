@@ -32,7 +32,7 @@ public class BookListPage extends JPanel implements ActionListener {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public BookListPage() {
 		
-		setBounds(93, 28, 1020, 529);
+		setBounds(10, 11, 1129, 571);
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Book List");
@@ -67,7 +67,7 @@ public class BookListPage extends JPanel implements ActionListener {
 		add(btnNewButton_7);
 		
 		JScrollPane scrollBar = new JScrollPane();
-		scrollBar.setBounds(10, 75, 989, 377);
+		scrollBar.setBounds(10, 75, 1109, 377);
 		add(scrollBar);
 		
 		table = new JTable(getRowData(),columnName());

@@ -32,7 +32,7 @@ public class AddBookPage implements ActionListener {
 	private JComboBox comboBox;
 	public void addBookPage(JPanel panel_1) {
 		JPanel add_Book = new JPanel();
-		add_Book.setBounds(177, 25, 867, 538);
+		add_Book.setBounds(10, 11, 1129, 571);
 		//add_Book.setBackground(new Color(0,0,0,0));
 		add_Book.setBorder(BorderFactory.createTitledBorder(""));
 		add_Book.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
