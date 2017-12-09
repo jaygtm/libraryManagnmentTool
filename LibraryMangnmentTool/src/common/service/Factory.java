@@ -8,6 +8,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -90,6 +95,17 @@ public class Factory {
 		else
 			System.err.println("Body Panel Is null");
 	}
-	
-	
+	public static Date addNextDay(String noOfDay) throws ParseException{
+		DateFormat sysDate= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		 Date date = new Date();
+	    String strsysDate=sysDate.format(date);
+		
+		SimpleDateFormat addedDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar c = Calendar.getInstance();
+		c.setTime(addedDate.parse(strsysDate));
+		c.add(Calendar.DATE,Integer.parseInt(noOfDay));
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date startDate = df.parse(addedDate.format(c.getTime()));
+		return startDate;
+	}
 }
