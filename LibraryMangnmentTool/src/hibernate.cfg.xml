@@ -17,6 +17,7 @@
          <mapping class="model.CustomerModel"/>
          <mapping class="model.BookModel"/>
          <mapping class="model.UserModel"/>
+         <mapping class="model.StudentHistoryModel"/>
           <mapping class="model.BookTypeModel"/>
         
     </session-factory>  

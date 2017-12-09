@@ -6,6 +6,7 @@ import dao.BookDao;
 import dao.impl.BookDaoImp;
 import model.BookModel;
 import model.BookTypeModel;
+import model.StudentHistoryModel;
 import service.BookService;
 
 public class BookServiceImp implements BookService {
@@ -64,6 +65,11 @@ public class BookServiceImp implements BookService {
 	public boolean addBookType(BookTypeModel model) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean issueBook(StudentHistoryModel model) {
+		return bookDao.issueBook(model);
 	}
 
 }

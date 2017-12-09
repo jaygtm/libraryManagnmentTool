@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.BookModel;
 import model.BookTypeModel;
+import model.StudentHistoryModel;
 
 public interface BookDao {
 	public List<BookModel> getBookaList();
@@ -15,5 +16,7 @@ public interface BookDao {
 	public BookTypeModel getBookType(String name);
 	public boolean deleteBookType(BookTypeModel model);
 	public boolean addBookType(BookTypeModel model);
+	
+	public boolean issueBook(StudentHistoryModel model);
 
 }

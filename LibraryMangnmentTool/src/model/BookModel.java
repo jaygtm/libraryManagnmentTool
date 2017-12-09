@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Comparator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="mst_book")
-public class BookModel {
+public class BookModel implements Comparable<BookModel> {
 
 	@Id@GeneratedValue
 	private int book_id; 
@@ -80,6 +82,11 @@ public class BookModel {
 	}
 	private int book_Total; 
 	private int book_aval;
+		
+	@Override
+	public int compareTo(BookModel o) {
+		return this.getBook_name().compareTo(o.getBook_name());
+	}
 	
 	
 }

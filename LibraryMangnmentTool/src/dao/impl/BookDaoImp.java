@@ -9,6 +9,7 @@ import common.service.Factory;
 import dao.BookDao;
 import model.BookModel;
 import model.BookTypeModel;
+import model.StudentHistoryModel;
 
 public class BookDaoImp implements BookDao {
 
@@ -75,6 +76,21 @@ public class BookDaoImp implements BookDao {
 	public boolean addBookType(BookTypeModel model) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean issueBook(StudentHistoryModel model) {
+		Session session = Factory.sessionfactory.openSession();
+		session.beginTransaction();
+		Serializable id= session.save(model);
+		session.beginTransaction().commit();
+		session.close();
+		
+		System.out.println("Issue Book Commit is done");
+		if(id !=null)
+			return true;
+		else
+			return false;
 	}
 
 }

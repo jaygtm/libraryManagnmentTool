@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,8 +18,8 @@ public class StudentHistoryModel {
 	private int itm_his_id;
 	private int  book_id;
 	private int customer_id;
-	private String itm_isu_dt;
-	private String itm_sub_dt;
+	private Date itm_isu_dt;
+	private Date itm_sub_dt;
 	private String itm_status_flag;
 	private Double txn_charge;
 		
@@ -39,16 +41,16 @@ public class StudentHistoryModel {
 	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
 	}
-	public String getItm_isu_dt() {
+	public Date getItm_isu_dt() {
 		return itm_isu_dt;
 	}
-	public void setItm_isu_dt(String itm_isu_dt) {
+	public void setItm_isu_dt(Date itm_isu_dt) {
 		this.itm_isu_dt = itm_isu_dt;
 	}
-	public String getItm_sub_dt() {
+	public Date getItm_sub_dt() {
 		return itm_sub_dt;
 	}
-	public void setItm_sub_dt(String itm_sub_dt) {
+	public void setItm_sub_dt(Date itm_sub_dt) {
 		this.itm_sub_dt = itm_sub_dt;
 	}
 	public String getItm_status_flag() {

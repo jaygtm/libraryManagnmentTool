@@ -95,7 +95,7 @@ public class Factory {
 		else
 			System.err.println("Body Panel Is null");
 	}
-	public static Date addNextDay(String noOfDay) throws ParseException{
+	public static Date addNextDay(String noOfDay) throws Exception{
 		DateFormat sysDate= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		 Date date = new Date();
 	    String strsysDate=sysDate.format(date);

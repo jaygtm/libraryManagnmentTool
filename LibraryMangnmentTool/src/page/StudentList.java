@@ -34,7 +34,7 @@ public class StudentList extends JPanel implements ActionListener {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public StudentList() {
 		
-		setBounds(93, 28, 1020, 529);
+		setBounds(10, 11, 1129, 571);
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Student List");
@@ -69,7 +69,7 @@ public class StudentList extends JPanel implements ActionListener {
 		add(btnNewButton_7);
 		
 		JScrollPane scrollBar = new JScrollPane();
-		scrollBar.setBounds(10, 75, 989, 377);
+		scrollBar.setBounds(10, 75, 1109, 377);
 		add(scrollBar);
 		
 		table = new JTable(getRowData(),columnName());
@@ -77,27 +77,27 @@ public class StudentList extends JPanel implements ActionListener {
 		scrollBar.getViewport ().add(table);
 		
 		JButton btnNewButton_8 = new JButton("Add");
-		btnNewButton_8.setBounds(10, 475, 107, 43);
+		btnNewButton_8.setBounds(10, 475, 100, 43);
 		btnNewButton_8.addActionListener(this);
 		add(btnNewButton_8);
 		
 		JButton btnNewButton_12 = new JButton("View");
-		btnNewButton_12.setBounds(550, 475, 114, 43);
+		btnNewButton_12.setBounds(658, 475, 100, 43);
 		btnNewButton_12.addActionListener(this);
 		add(btnNewButton_12);
 		
 		JButton btnNewButton_9 = new JButton("Modify");
-		btnNewButton_9.setBounds(664, 475, 114, 43);
+		btnNewButton_9.setBounds(778, 475, 100, 43);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
 		JButton btnNewButton_10 = new JButton("Delete");
-		btnNewButton_10.setBounds(788, 475, 101, 43);
+		btnNewButton_10.setBounds(898, 475, 100, 43);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
-		btnNewButton_11.setBounds(899, 475, 100, 43);
+		btnNewButton_11.setBounds(1009, 475, 100, 43);
 		btnNewButton_11.addActionListener(this);
 		add(btnNewButton_11);
 		

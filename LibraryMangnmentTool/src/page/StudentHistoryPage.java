@@ -59,7 +59,7 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		while (itr.hasNext()) {
 			StudentHistoryModel book = (StudentHistoryModel) itr.next();
 			//System.out.println("name Book"+book.toString());
-			rowData[i][0] = ""+book.getBookmodel().getBook_name();
+			//rowData[i][0] = ""+book.getBookmodel().getBook_name();
 			rowData[i][1] = ""+book.getItm_isu_dt();
 			rowData[i][2] = ""+book.getItm_isu_dt();
 			rowData[i][3] = ""+book.getTxn_charge();

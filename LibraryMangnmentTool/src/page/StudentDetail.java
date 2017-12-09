@@ -73,19 +73,25 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		JButton btnNewButton_6 = new JButton("Issue Book");
 		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNewButton_6.addActionListener(this);
-		btnNewButton_6.setBounds(20, 45, 122, 29);
+		btnNewButton_6.setBounds(20, 45, 130, 28);
 		add(btnNewButton_6);
 		
 		JButton btnNewButton_7 = new JButton("Alloted Book");
 		btnNewButton_7.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_7.setBounds(148, 45, 129, 29);
+		btnNewButton_7.setBounds(158, 45, 130, 28);
 		add(btnNewButton_7);
 		
 		JButton btnViewHistory = new JButton("View History");
 		btnViewHistory.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnViewHistory.setBounds(285, 45, 111, 29);
+		btnViewHistory.setBounds(295, 45, 130, 28);
 		btnViewHistory.addActionListener(this);
 		add(btnViewHistory);
+		
+		JButton btnViewBalance = new JButton("View Balance");
+		btnViewBalance.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnViewBalance.setBounds(432, 45, 130, 28);
+		btnViewBalance.addActionListener(this);
+		add(btnViewBalance);
 	
 	}
 	@Override
@@ -109,7 +115,9 @@ public class StudentDetail extends JPanel implements ActionListener  {
 													@Override
 													public void run() {
 														//Factory.getBodyPanal().removeAll();
-														add(new IssueBookPage());
+														IssueBookPage issuePage = new IssueBookPage();
+														issuePage.setStudentNameAndId(studentIdpKey);
+														add(issuePage);
 														Factory.refresh();
 														}
 													});
