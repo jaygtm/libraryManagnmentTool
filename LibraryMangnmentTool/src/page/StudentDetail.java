@@ -20,6 +20,10 @@ public class StudentDetail extends JPanel implements ActionListener  {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
+	private String studentName ;
+	private String studentId,studentIdpKey ;
+	
+	
 	public StudentDetail() {
 		setBounds(10, 11, 1129, 571);
 		setLayout(null);
@@ -33,6 +37,8 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		textField_6.setBounds(148, 14, 212, 20);
 		add(textField_6);
 		textField_6.setColumns(10);
+		textField_6.setText(studentName);
+		textField_6.setEditable(false);
 		
 		JLabel lblStudentLibraryId = new JLabel("Student Library Id:-");
 		lblStudentLibraryId.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -43,6 +49,8 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		textField_7.setBounds(569, 14, 147, 20);
 		add(textField_7);
 		textField_7.setColumns(10);
+		textField_7.setText(studentId);
+		textField_7.setEditable(false);
 		
 		JLabel lblStudentSession = new JLabel("Student Session:-");
 		lblStudentSession.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -64,6 +72,7 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		
 		JButton btnNewButton_6 = new JButton("Issue Book");
 		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNewButton_6.addActionListener(this);
 		btnNewButton_6.setBounds(20, 45, 122, 29);
 		add(btnNewButton_6);
 		
@@ -95,11 +104,29 @@ public class StudentDetail extends JPanel implements ActionListener  {
 						}
 					});
 		break;
+		case "Issue Book" :EventQueue.invokeLater(new Runnable() {
+			
+													@Override
+													public void run() {
+														//Factory.getBodyPanal().removeAll();
+														add(new IssueBookPage());
+														Factory.refresh();
+														}
+													});
+		break;
 
 		default: removeAll();
 			break;
 		}
 		Factory.refresh();
 	}
+	
+	public boolean setStudentNameAndId(String name, String id,String pkey){
+		textField_6.setText(name);
+		textField_7.setText(id);
+		this.studentIdpKey = pkey;
+		return false;
+	}
+	
 
 }

@@ -26,8 +26,6 @@ public class demoTest {
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
-	private JTextField textField_1;
-	private JTextField textField_2;
 
 	
 	/**
@@ -130,55 +128,30 @@ public class demoTest {
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Student Name");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(34, 48, 93, 14);
-		panel_2.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("Issue Books");
-		lblNewLabel.setBounds(473, 5, 126, 22);
-		lblNewLabel.setFont(new Font("Sitka Small", Font.BOLD | Font.ITALIC, 17));
-		panel_2.add(lblNewLabel);
-		
-		JLabel lblNewLabel_2 = new JLabel("Student Id");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_2.setBounds(364, 49, 60, 14);
-		panel_2.add(lblNewLabel_2);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(137, 47, 194, 20);
-		panel_2.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(434, 47, 113, 20);
-		panel_2.add(textField_2);
-		textField_2.setColumns(10);
-		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(34, 101, 925, 8);
+		separator.setBounds(34, 38, 925, 8);
 		panel_2.add(separator);
 		
 		JLabel lblBookName = new JLabel("Book Name");
 		lblBookName.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
-		lblBookName.setBounds(158, 117, 81, 14);
+		lblBookName.setBounds(150, 57, 81, 14);
 		panel_2.add(lblBookName);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(84, 150, 219, 20);
+		comboBox.setBounds(84, 82, 219, 20);
 		panel_2.add(comboBox);
 		
 		JLabel lblNewLabel_3 = new JLabel("No Of Days");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
-		lblNewLabel_3.setBounds(481, 119, 106, 14);
+		lblNewLabel_3.setBounds(473, 57, 106, 14);
 		panel_2.add(lblNewLabel_3);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(444, 150, 143, 20);
+		comboBox_1.setBounds(434, 82, 143, 20);
 		panel_2.add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(84, 200, 219, 20);
+		comboBox_2.setBounds(84, 211, 219, 20);
 		panel_2.add(comboBox_2);
 		
 		JComboBox comboBox_3 = new JComboBox();
@@ -186,40 +159,44 @@ public class demoTest {
 		panel_2.add(comboBox_3);
 		
 		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(84, 309, 219, 20);
+		comboBox_4.setBounds(84, 169, 219, 20);
 		panel_2.add(comboBox_4);
 		
 		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(84, 363, 219, 20);
+		comboBox_5.setBounds(84, 126, 219, 20);
 		panel_2.add(comboBox_5);
 		
 		JComboBox comboBox_6 = new JComboBox();
-		comboBox_6.setBounds(444, 200, 143, 20);
+		comboBox_6.setBounds(434, 126, 143, 20);
 		panel_2.add(comboBox_6);
 		
 		JComboBox comboBox_7 = new JComboBox();
-		comboBox_7.setBounds(444, 254, 143, 20);
+		comboBox_7.setBounds(434, 169, 143, 20);
 		panel_2.add(comboBox_7);
 		
 		JComboBox comboBox_8 = new JComboBox();
-		comboBox_8.setBounds(444, 309, 143, 20);
+		comboBox_8.setBounds(434, 211, 143, 20);
 		panel_2.add(comboBox_8);
 		
 		JComboBox comboBox_9 = new JComboBox();
-		comboBox_9.setBounds(444, 363, 143, 20);
+		comboBox_9.setBounds(436, 254, 143, 20);
 		panel_2.add(comboBox_9);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(34, 426, 925, 8);
+		separator_1.setBounds(34, 318, 925, 8);
 		panel_2.add(separator_1);
 		
 		JButton btnIssue = new JButton("Issue");
-		btnIssue.setBounds(284, 445, 106, 34);
+		btnIssue.setBounds(243, 337, 106, 34);
 		panel_2.add(btnIssue);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(434, 445, 113, 34);
+		btnCancel.setBounds(406, 337, 113, 34);
 		panel_2.add(btnCancel);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(686, 59, 46, 14);
+		panel_2.add(lblNewLabel);
 		
 		
 		////////////////////////////////////////////////////////////////

@@ -229,7 +229,9 @@ public class StudentList extends JPanel implements ActionListener {
 						String Balence = table.getModel().getValueAt(row, 5).toString();
 						Factory.getBodyPanal().removeAll();
 						//Factory.getBodyPanal().add(new IssueBookPage());
-						Factory.getBodyPanal().add(new StudentDetail());
+						StudentDetail studentDeatil  =  new StudentDetail();
+						studentDeatil.setStudentNameAndId(name, student_id, value+"");
+						Factory.getBodyPanal().add(studentDeatil);
 						Factory.refresh();
 					}
 				}
