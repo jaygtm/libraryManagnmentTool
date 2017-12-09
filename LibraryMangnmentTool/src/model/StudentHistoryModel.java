@@ -1,6 +1,18 @@
 package model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="txn_item_his")
 public class StudentHistoryModel {
+	@Id
 	private int itm_his_id;
 	private int  book_id;
 	private int customer_id;
@@ -8,8 +20,7 @@ public class StudentHistoryModel {
 	private String itm_sub_dt;
 	private String itm_status_flag;
 	private Double txn_charge;
-	private BookModel bookmodel;
-	private CustomerModel customerModel;
+		
 	public int getItm_his_id() {
 		return itm_his_id;
 	}
@@ -51,18 +62,6 @@ public class StudentHistoryModel {
 	}
 	public void setTxn_charge(Double txn_charge) {
 		this.txn_charge = txn_charge;
-	}
-	public BookModel getBookmodel() {
-		return bookmodel;
-	}
-	public void setBookmodel(BookModel bookmodel) {
-		this.bookmodel = bookmodel;
-	}
-	public CustomerModel getCustomerModel() {
-		return customerModel;
-	}
-	public void setCustomerModel(CustomerModel customerModel) {
-		this.customerModel = customerModel;
 	}
 	
 }
