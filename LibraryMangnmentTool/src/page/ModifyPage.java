@@ -31,8 +31,9 @@ public class ModifyPage implements ActionListener {
 		/////////////////////////////////////////////////////////////////
 		this.parent = panel_1;
 		JPanel Reg_panel = new JPanel();
-		Reg_panel.setBounds(177, 25, 867, 538);
-		Reg_panel.setBackground(new Color(0,0,0,0));
+		//Reg_panel.setBounds(177, 25, 867, 538);
+		//Reg_panel.setBackground(new Color(0,0,0,0));
+		Reg_panel.setBounds(10, 11, 1129, 571);
 		Reg_panel.setBorder(BorderFactory.createTitledBorder(""));
 		Reg_panel.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
 		panel_1.add(Reg_panel);
@@ -182,9 +183,12 @@ public class ModifyPage implements ActionListener {
 					CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
 					boolean status = customerService.saveCustomerDetail(model);
 					System.out.println("Status of Save");
-					if(status)
+					if(status){
 						DialogService.showMgs(parent, "Save Successfully..!", "Success");
-					else
+						parent.removeAll();
+						parent.add(new StudentList());
+					Factory.refresh();
+					}else
 						DialogService.showErrorMgs(parent, "Error to Save ..!", "Error");
 				}
 			}
@@ -196,10 +200,8 @@ public class ModifyPage implements ActionListener {
 			@Override
 			public void run() {
 				parent.removeAll();
-				CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
-				List<CustomerModel> status = customerService.getAllCustomerDetail();
-			     CustomerList customerList=new CustomerList();
-		        customerList.customerList(parent,status);
+				parent.add(new StudentList());
+				Factory.refresh();
 			}
 		});
 			break;
