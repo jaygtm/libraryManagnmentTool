@@ -22,6 +22,7 @@ public class StudentDetail extends JPanel implements ActionListener  {
 	private JTextField textField_8;
 	private String studentName ;
 	private String studentId,studentIdpKey ;
+	private JPanel innerBodyPane;
 	
 	
 	public StudentDetail() {
@@ -79,6 +80,7 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		JButton btnNewButton_7 = new JButton("Alloted Book");
 		btnNewButton_7.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNewButton_7.setBounds(158, 45, 130, 28);
+		btnNewButton_7.addActionListener(this);
 		add(btnNewButton_7);
 		
 		JButton btnViewHistory = new JButton("View History");
@@ -98,14 +100,16 @@ public class StudentDetail extends JPanel implements ActionListener  {
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand().trim();
 		System.out.println(""+action);
-		
+		JPanel self = this;
 		switch (action) {
 		case "View History" :EventQueue.invokeLater(new Runnable() {
 													
 					@Override
 					public void run() {
-						//Factory.getMainFrame().removeAll();
-						add(new StudentHistoryPage());
+						if(innerBodyPane!=null)
+							self.remove(innerBodyPane);
+						innerBodyPane=new StudentHistoryPage(studentIdpKey,false);
+						add(innerBodyPane);
 						Factory.refresh();
 						}
 					});
@@ -114,13 +118,40 @@ public class StudentDetail extends JPanel implements ActionListener  {
 			
 													@Override
 													public void run() {
-														//Factory.getBodyPanal().removeAll();
-														IssueBookPage issuePage = new IssueBookPage();
-														issuePage.setStudentNameAndId(studentIdpKey);
-														add(issuePage);
+														if(innerBodyPane!=null)
+															self.remove(innerBodyPane);
+														innerBodyPane = new IssueBookPage();
+														((IssueBookPage)innerBodyPane).setStudentNameAndId(studentIdpKey);
+														add(innerBodyPane);
 														Factory.refresh();
 														}
 													});
+		break;
+		
+		case "Alloted Book" :EventQueue.invokeLater(new Runnable() {
+			
+					@Override
+					public void run() {
+						if(innerBodyPane!=null)
+							self.remove(innerBodyPane);
+						innerBodyPane=new StudentHistoryPage(studentIdpKey,true);
+						add(innerBodyPane);
+						Factory.refresh();
+						}
+					});
+		break;
+
+		case "View Balance" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(innerBodyPane!=null)
+					self.remove(innerBodyPane);
+				//innerBodyPane = new IssueBookPage();
+				
+				Factory.refresh();
+				}
+			});
 		break;
 
 		default: removeAll();

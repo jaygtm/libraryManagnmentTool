@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.impl.CustomerDaoImpl;
 import model.CustomerModel;
+import model.GetStudentModel;
 import model.StudentHistoryModel;
 import service.CustomerService;
 
@@ -32,8 +33,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public List<StudentHistoryModel> viewHistory(String id) {
+	public List<GetStudentModel> viewHistory(String id) {
 		return customerDaoImpl.viewHistory(id);
+	}
+	@Override
+	public List<GetStudentModel> viewAlloted(String id, String string) {
+		// TODO Auto-generated method stub
+		return customerDaoImpl.viewAlloted(id,string);
 	}
 
 }

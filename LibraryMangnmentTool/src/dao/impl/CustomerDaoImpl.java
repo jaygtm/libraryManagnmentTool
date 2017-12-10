@@ -1,11 +1,11 @@
 package dao.impl;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import common.service.Factory;
 import dao.CustomerDao;
 import model.CustomerModel;
+import model.GetStudentModel;
 import model.StudentHistoryModel;
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -48,7 +49,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		return true;
 	}
 
-	@SuppressWarnings({ "unchecked",  "null" })
+	@SuppressWarnings({ "unchecked"})
 	@Override
 	public List<CustomerModel> getAllCustomerDetail() {
 		Session session = Factory.sessionfactory.openSession();
@@ -74,14 +75,51 @@ public class CustomerDaoImpl implements CustomerDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<StudentHistoryModel> viewHistory(String id){
+	public List<GetStudentModel> viewHistory(String id){
 		Session session = Factory.sessionfactory.openSession();
-		List<StudentHistoryModel> list=new ArrayList<>();
-		session.beginTransaction();
-		Criteria criteria  = session.createCriteria(StudentHistoryModel.class);
-		list=criteria.add(Restrictions.eq("customer_id", 8)).list();
-	    session.close(); 
-	   
+		Transaction tx = null;
+		List<GetStudentModel> list=new ArrayList<GetStudentModel>();
+		
+		
+	     try {
+	         tx = session.beginTransaction(); 
+	         Criteria c=session.createCriteria(GetStudentModel.class);  
+	         c.add(Restrictions.eq("customer_id",Integer.parseInt(id)));//salary is the propertyname  
+	         list=c.list();  
+
+	     } catch (HibernateException ex) {
+	         if (tx != null) {
+	             tx.rollback();
+	         }            
+	         ex.printStackTrace(System.err);
+	     } finally {
+	    	 session.close(); 
+	     }
+		return list;
+		
+	}
+
+	public List<GetStudentModel> viewAlloted(String id, String string) {
+		Session session = Factory.sessionfactory.openSession();
+		Transaction tx = null;
+		List<GetStudentModel> list=new ArrayList<GetStudentModel>();
+		
+		
+	     try {
+	         tx = session.beginTransaction(); 
+	         Criteria c=session.createCriteria(GetStudentModel.class);  
+	         c.add(Restrictions.eq("customer_id",Integer.parseInt(id)));
+	         c.add(Restrictions.eq("itm_status_flag",string));
+	         list=c.list();  
+
+	     } catch (HibernateException ex) {
+	         if (tx != null) {
+	             tx.rollback();
+	         }            
+	         ex.printStackTrace(System.err);
+	     } finally {
+	    	 session.close(); 
+	     }
 		return list;
 		
 	}
