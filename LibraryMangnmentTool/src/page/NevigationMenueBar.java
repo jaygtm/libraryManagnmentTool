@@ -35,6 +35,7 @@ public class NevigationMenueBar implements ActionListener {
 		JButton btnNewButton_1 = new JButton("Add Book                            ");
 		//btnNewButton_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("../img/java_jar.gif")));
 		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton_1.setBackground(new Color(105, 105, 105));
 		btnNewButton_1.setBounds(432, 45, 130, 28);
 		//btnNewButton_1.setBorder(null);
@@ -44,6 +45,7 @@ public class NevigationMenueBar implements ActionListener {
 		JButton viewBookBtn = new JButton("Book List                            ");
 		viewBookBtn.setForeground(Color.WHITE);
 		viewBookBtn.setBackground(new Color(105, 105, 105));
+		viewBookBtn.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_1.setBorder(null);
 		viewBookBtn.addActionListener(this);
 		panel.add(viewBookBtn);
@@ -54,24 +56,28 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(new Color(105, 105, 105));
 		//btnNewButton.setBorder(null);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton.addActionListener(this);
 		panel.add(btnNewButton);
 		
 		JButton StudentlistButton = new JButton("Student List                      ");
 		StudentlistButton.setForeground(Color.WHITE);
 		StudentlistButton.setBackground(new Color(105, 105, 105));
+		StudentlistButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		StudentlistButton.addActionListener(this);
 		panel.add(StudentlistButton);
 		
 		JButton btnNewButton_4 = new JButton("User Creation                   ");
 		btnNewButton_4.setForeground(Color.WHITE);
 		btnNewButton_4.setBackground(new Color(105, 105, 105));
+		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_4.setBorder(null);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_3 = new JButton("Issue Books                      ");
 		btnNewButton_3.setForeground(Color.WHITE);
 		btnNewButton_3.setBackground(new Color(105, 105, 105));
+		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_3.setBorder(null);
 		btnNewButton_3.addActionListener(this);
 		panel.add(btnNewButton_3);
@@ -79,12 +85,14 @@ public class NevigationMenueBar implements ActionListener {
 		JButton btnNewButton_2 = new JButton("View Issue Detail             ");
 		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setBackground(new Color(105, 105, 105));
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_2.setBorder(null);
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_5 = new JButton("Submit Book                     ");
 		btnNewButton_5.setForeground(Color.WHITE);
 		btnNewButton_5.setBackground(new Color(105, 105, 105));
+		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_5.setBorder(null);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
