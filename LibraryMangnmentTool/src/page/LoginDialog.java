@@ -126,7 +126,13 @@ public class LoginDialog extends JDialog implements ActionListener {
 				
 							
 				break;
-			case "Cancel":dispose();
+			case "Cancel":
+				EventQueue.invokeLater( new Runnable() {
+					@Override
+					public void run() {
+						parent.dispose();
+					}
+				});
 				break;
 		}
 		
