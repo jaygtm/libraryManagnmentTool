@@ -95,7 +95,7 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 	
 	}
 	public String[] columnName() {
-		String columnName[] = { "Book Name","Book issue date", "Book Submit date", "Charge","Status"};
+		String columnName[] = { "Book Name","Aurther","Publication","Book issue date", "Book Submit date", "Charge","Status"};
 		return columnName;
 	}
 	
@@ -107,17 +107,19 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 			}else{
 				 list = customerService.viewAlloted(id,"A");	
 				}
-				String rowData[][] =new String[list.size()][5];
+				String rowData[][] =new String[list.size()][7];
 				Iterator<GetStudentModel> itr =  list.iterator();
 				int i=0;
 				while (itr.hasNext()) {
 						GetStudentModel book = (GetStudentModel) itr.next();
 						//System.out.println("name Book"+book.toString());
 						rowData[i][0] = ""+book.getBook_id().getBook_name();
-						rowData[i][1] = ""+book.getItm_isu_dt();
-						rowData[i][2] = ""+book.getItm_isu_dt();
-						rowData[i][3] = (book.getTxn_charge()!=null)?""+book.getTxn_charge():"";
-						rowData[i][4] = (book.getItm_status_flag().equals("A"))?"Issued":"Submitted";
+						rowData[i][1] = ""+book.getBook_id().getBook_aurthor();
+						rowData[i][2] = ""+book.getBook_id().getBook_publication();
+						rowData[i][3] = ""+book.getItm_isu_dt();
+						rowData[i][4] = ""+book.getItm_sub_dt();
+						rowData[i][5] = (book.getTxn_charge()!=null)?""+book.getTxn_charge():"";
+						rowData[i][6] = (book.getItm_status_flag().equals("A"))?"Issued":"Submitted";
 						i++;
 				}
 			
