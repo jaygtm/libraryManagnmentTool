@@ -23,66 +23,68 @@ import service.CustomerService;
 public class NevigationMenueBar implements ActionListener {
 	private JPanel panel;
 	private JPanel bodyPanel ;
+	private JFrame mainframe;
 	public void manueBar(JFrame mainframe){
-
+		this.mainframe=mainframe;
 		panel = new JPanel();
-		panel.setBackground(SystemColor.textHighlight);
+		panel.setBackground(new Color(105, 105, 105));
 		panel.setForeground(Color.WHITE);
-		panel.setBounds(10, 63, 188, 593);
+		panel.setBounds(10, 63, 195, 593);
 		mainframe.getContentPane().add(panel);
 		
 		JButton btnNewButton_1 = new JButton("Add Book                            ");
 		//btnNewButton_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("../img/java_jar.gif")));
 		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setBackground(SystemColor.textHighlight);
+		btnNewButton_1.setBackground(new Color(105, 105, 105));
+		btnNewButton_1.setBounds(432, 45, 130, 28);
 		//btnNewButton_1.setBorder(null);
 		btnNewButton_1.addActionListener(this);
 		panel.add(btnNewButton_1);
 		
 		JButton viewBookBtn = new JButton("Book List                            ");
 		viewBookBtn.setForeground(Color.WHITE);
-		viewBookBtn.setBackground(SystemColor.textHighlight);
+		viewBookBtn.setBackground(new Color(105, 105, 105));
 		//btnNewButton_1.setBorder(null);
 		viewBookBtn.addActionListener(this);
 		panel.add(viewBookBtn);
 		
 		
 		
-		JButton btnNewButton = new JButton("Add Student                              ");
+		JButton btnNewButton = new JButton("Add Student                      ");
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(SystemColor.textHighlight);
+		btnNewButton.setBackground(new Color(105, 105, 105));
 		//btnNewButton.setBorder(null);
 		btnNewButton.addActionListener(this);
 		panel.add(btnNewButton);
 		
-		JButton StudentlistButton = new JButton("Student List                             ");
+		JButton StudentlistButton = new JButton("Student List                      ");
 		StudentlistButton.setForeground(Color.WHITE);
-		StudentlistButton.setBackground(SystemColor.textHighlight);
+		StudentlistButton.setBackground(new Color(105, 105, 105));
 		StudentlistButton.addActionListener(this);
 		panel.add(StudentlistButton);
 		
-		JButton btnNewButton_4 = new JButton("User Creation                            ");
+		JButton btnNewButton_4 = new JButton("User Creation                   ");
 		btnNewButton_4.setForeground(Color.WHITE);
-		btnNewButton_4.setBackground(SystemColor.textHighlight);
+		btnNewButton_4.setBackground(new Color(105, 105, 105));
 		//btnNewButton_4.setBorder(null);
 		panel.add(btnNewButton_4);
 		
-		JButton btnNewButton_3 = new JButton("Issue Books                              ");
+		JButton btnNewButton_3 = new JButton("Issue Books                      ");
 		btnNewButton_3.setForeground(Color.WHITE);
-		btnNewButton_3.setBackground(SystemColor.textHighlight);
+		btnNewButton_3.setBackground(new Color(105, 105, 105));
 		//btnNewButton_3.setBorder(null);
 		btnNewButton_3.addActionListener(this);
 		panel.add(btnNewButton_3);
 		
-		JButton btnNewButton_2 = new JButton("View Issue Detail                       ");
+		JButton btnNewButton_2 = new JButton("View Issue Detail             ");
 		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.setBackground(SystemColor.textHighlight);
+		btnNewButton_2.setBackground(new Color(105, 105, 105));
 		//btnNewButton_2.setBorder(null);
 		panel.add(btnNewButton_2);
 		
-		JButton btnNewButton_5 = new JButton("Submit Book                               ");
+		JButton btnNewButton_5 = new JButton("Submit Book                     ");
 		btnNewButton_5.setForeground(Color.WHITE);
-		btnNewButton_5.setBackground(SystemColor.textHighlight);
+		btnNewButton_5.setBackground(new Color(105, 105, 105));
 		//btnNewButton_5.setBorder(null);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -105,6 +107,7 @@ public class NevigationMenueBar implements ActionListener {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setBounds(1229, 11, 103, 23);
+		btnLogout.addActionListener(this);
 		panel_3.add(btnLogout);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
@@ -194,6 +197,16 @@ public class NevigationMenueBar implements ActionListener {
 														}
 													});
 		break;
+		case "Logout" :EventQueue.invokeLater(new Runnable() {
+			
+												@Override
+												public void run() {
+													mainframe.dispose();
+													new DashboardPage("LibraryManagnmentTool");
+												}
+											});
+		break;
+		
 
 		default: bodyPanel.removeAll();
 			break;
