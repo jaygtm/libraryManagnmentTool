@@ -68,9 +68,11 @@ public class LoginDialog extends JDialog implements ActionListener {
         panel.setBorder(new LineBorder(Color.GRAY));
  
         btnLogin = new JButton("Login");
- 
+        btnLogin.setBackground(Factory.loginBtnColor);
         btnLogin.addActionListener(this);
+        
         btnCancel = new JButton("Cancel");
+    	btnCancel.setBackground(Factory.cancleBtnColor);
         btnCancel.addActionListener(this);
         JPanel bp = new JPanel();
         bp.add(btnLogin);

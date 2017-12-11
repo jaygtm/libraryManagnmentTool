@@ -83,20 +83,24 @@ public class StudentList extends JPanel implements ActionListener {
 		
 		JButton btnNewButton_12 = new JButton("View");
 		btnNewButton_12.setBounds(658, 475, 100, 43);
+		btnNewButton_12.setBackground(Factory.viewBtnColor);
 		btnNewButton_12.addActionListener(this);
 		add(btnNewButton_12);
 		
 		JButton btnNewButton_9 = new JButton("Modify");
+		btnNewButton_9.setBackground(Factory.modifyBtnColor);
 		btnNewButton_9.setBounds(778, 475, 100, 43);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
 		JButton btnNewButton_10 = new JButton("Delete");
+		btnNewButton_10.setBackground(Factory.deleteBtnColor);
 		btnNewButton_10.setBounds(898, 475, 100, 43);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(1009, 475, 100, 43);
 		btnNewButton_11.addActionListener(this);
 		add(btnNewButton_11);

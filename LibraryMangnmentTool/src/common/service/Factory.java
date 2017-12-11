@@ -3,6 +3,7 @@ package common.service;
 
 
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,6 +28,15 @@ public class Factory {
 	public static SessionFactory sessionfactory;
 	private static JFrame mainFrame;
 	private static JPanel bodyPanal;
+	public static final Color cancleBtnColor=new Color(255, 51, 0);
+	public static final Color deleteBtnColor=new Color(178, 34, 34);
+	public static final Color modifyBtnColor=new Color(51, 153, 102);
+	public static final Color saveBtnColor=new Color(51, 153, 102);
+	public static final Color viewBtnColor=new Color(51, 153, 102);
+	public static final Color backBtnColor=new Color(51, 153, 102);
+	public static final Color loginBtnColor=new Color(0, 153, 204);
+	//height 35,width 135
+	
 	
 	static {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");

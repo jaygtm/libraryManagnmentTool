@@ -95,15 +95,15 @@ public class ModifyPage implements ActionListener {
 		textField_4.setColumns(10);
 
 		JButton btnNewButton_6 = new JButton("Save");
-		btnNewButton_6.setBackground(new Color(0, 153, 102));
-		btnNewButton_6.setBounds(541, 471, 135, 40);
+		btnNewButton_6.setBackground(Factory.saveBtnColor);
+		btnNewButton_6.setBounds(541, 471, 135, 35);
 		Reg_panel.add(btnNewButton_6);
 		btnNewButton_6.addActionListener(this);
 		
 
 		JButton btnNewButton_7 = new JButton("Cancel");
-		btnNewButton_7.setBackground(new Color(255, 51, 0));
-		btnNewButton_7.setBounds(686, 471, 135, 40);
+		btnNewButton_7.setBackground(Factory.cancleBtnColor);
+		btnNewButton_7.setBounds(686, 471, 135, 35);
 		Reg_panel.add(btnNewButton_7);
 		btnNewButton_7.addActionListener(this);
 		

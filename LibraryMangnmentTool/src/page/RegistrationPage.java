@@ -93,13 +93,15 @@ public class RegistrationPage implements ActionListener {
 		textField_4.setColumns(10);
 
 		JButton btnNewButton_6 = new JButton("Save");
-		btnNewButton_6.setBounds(175, 428, 89, 23);
+		btnNewButton_6.setBounds(630, 448, 100, 35);
+		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		Reg_panel.add(btnNewButton_6);
 		btnNewButton_6.addActionListener(this);
 		
 
 		JButton btnNewButton_7 = new JButton("Cancel");
-		btnNewButton_7.setBounds(394, 428, 89, 23);
+		btnNewButton_7.setBounds(750, 448, 100, 35);
+		btnNewButton_7.setBackground(Factory.cancleBtnColor);
 		btnNewButton_7.addActionListener(this);
 		Reg_panel.add(btnNewButton_7);
 		/////////////////////////////////////////////////

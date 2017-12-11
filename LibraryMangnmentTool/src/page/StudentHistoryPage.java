@@ -41,15 +41,18 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		gridpanel.getViewport ().add(table);
 		add(gridpanel);
 		JButton btnNewButton_9 = new JButton("Print as Excel");
+		btnNewButton_9.setBackground(Factory.backBtnColor);
 		btnNewButton_9.setBounds(660, 450, 120, 30);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
 		JButton btnNewButton_10 = new JButton("Back");
+		btnNewButton_10.setBackground(Factory.backBtnColor);
 		btnNewButton_10.setBounds(790, 450, 120, 30);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(920, 450, 120, 30);
 		btnNewButton_11.addActionListener(this);
 		add(btnNewButton_11);
