@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -118,16 +119,23 @@ public class AddBookPage implements ActionListener {
 		textField_5.setColumns(10);
 		
 		JButton btnNewButton_6 = new JButton("Save");
-		btnNewButton_6.setBounds(630, 448, 100, 35);
+		btnNewButton_6.setBounds(850, 516, 115, 32);
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		btnNewButton_6.addActionListener(this);
 		add_Book.add(btnNewButton_6);
 		
 		JButton btnSave = new JButton("Cancel");
 		btnSave.setBackground(Factory.cancleBtnColor);
-		btnSave.setBounds(750, 448, 100, 35);
+		btnSave.setBounds(979, 514, 109, 34);
 		btnSave.addActionListener(this);
 		add_Book.add(btnSave);
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 497, 1109, 8);
+		add_Book.add(separator_1);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 50, 1109, 8);
+		add_Book.add(separator);
 		
 	}
 	public AddBookPage(){
