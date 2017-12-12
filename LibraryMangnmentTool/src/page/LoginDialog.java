@@ -19,6 +19,7 @@ import javax.swing.border.LineBorder;
 
 import common.service.DialogService;
 import common.service.Factory;
+import model.LoginUserDetail;
 import service.UserLoginService;
 
 
@@ -113,8 +114,9 @@ public class LoginDialog extends JDialog implements ActionListener {
 					}else{
 						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
 						boolean result = userLoginService.validateUserName(uname,pass);
+						LoginUserDetail name=userLoginService.getUserDetail(uname);
 						if(result){
-							NevigationMenueBar n =new NevigationMenueBar();
+							NevigationMenueBar n =new NevigationMenueBar(name.getUser_name());
 							n.manueBar(parent);
 							parent.revalidate();
 							parent.repaint();

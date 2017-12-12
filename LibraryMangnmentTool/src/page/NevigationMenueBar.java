@@ -24,6 +24,10 @@ public class NevigationMenueBar implements ActionListener {
 	private JPanel panel;
 	private JPanel bodyPanel ;
 	private JFrame mainframe;
+	String userName="";
+	public NevigationMenueBar(String userName){
+		this.userName=userName;
+	}
 	public void manueBar(JFrame mainframe){
 		this.mainframe=mainframe;
 		panel = new JPanel();
@@ -118,7 +122,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnLogout.addActionListener(this);
 		panel_3.add(btnLogout);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblNewLabel_1 = new JLabel(userName);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1.setBounds(1086, 15, 133, 14);
 		panel_3.add(lblNewLabel_1);

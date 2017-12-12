@@ -14,6 +14,13 @@ public class UserModel {
 	private String user_name;
 	private String user_passwprd;
 	private Date user_lastLogin;
+	private int user_id_info;
+	public int getUser_id_info() {
+		return user_id_info;
+	}
+	public void setUser_id_info(int user_id_info) {
+		this.user_id_info = user_id_info;
+	}
 	public int getUser_id() {
 		return user_id;
 	}

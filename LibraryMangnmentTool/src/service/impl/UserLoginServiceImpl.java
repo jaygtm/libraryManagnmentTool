@@ -3,6 +3,7 @@ package service.impl;
 import java.util.List;
 
 import dao.UserLoginDao;
+import model.LoginUserDetail;
 import model.UserModel;
 import service.UserLoginService;
 
@@ -24,9 +25,9 @@ public class UserLoginServiceImpl implements UserLoginService {
 	}
 
 	@Override
-	public UserModel getUserDetail(String userName) {
+	public LoginUserDetail getUserDetail(String userName) {
 		// TODO Auto-generated method stub
-		return null;
+		return userLoginDao.getUsrAllDetail(userName);
 	}
 
 	@Override
