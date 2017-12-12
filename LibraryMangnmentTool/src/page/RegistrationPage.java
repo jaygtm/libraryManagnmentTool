@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import common.service.DialogService;
@@ -36,6 +37,13 @@ public class RegistrationPage implements ActionListener {
 		Reg_panel.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
 		panel_1.add(Reg_panel);
 		Reg_panel.setLayout(null);
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 497, 1109, 8);
+		Reg_panel.add(separator_1);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 50, 1109, 8);
+		Reg_panel.add(separator);
 
 		JLabel lblStudentRegistration = new JLabel("Student Registration");
 		lblStudentRegistration.setBounds(316, 11, 214, 32);
@@ -93,14 +101,14 @@ public class RegistrationPage implements ActionListener {
 		textField_4.setColumns(10);
 
 		JButton btnNewButton_6 = new JButton("Save");
-		btnNewButton_6.setBounds(630, 448, 100, 35);
+		btnNewButton_6.setBounds(850, 516, 115, 32);
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		Reg_panel.add(btnNewButton_6);
 		btnNewButton_6.addActionListener(this);
 		
 
 		JButton btnNewButton_7 = new JButton("Cancel");
-		btnNewButton_7.setBounds(750, 448, 100, 35);
+		btnNewButton_7.setBounds(979, 514, 109, 34);
 		btnNewButton_7.setBackground(Factory.cancleBtnColor);
 		btnNewButton_7.addActionListener(this);
 		Reg_panel.add(btnNewButton_7);

@@ -75,7 +75,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_4.setForeground(Color.WHITE);
 		btnNewButton_4.setBackground(new Color(105, 105, 105));
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		//btnNewButton_4.setBorder(null);
+		btnNewButton_4.addActionListener(this);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_3 = new JButton("Issue Books                      ");
@@ -218,7 +218,17 @@ public class NevigationMenueBar implements ActionListener {
 												}
 											});
 		break;
-		
+		case "User Creation" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				bodyPanel.removeAll();
+				bodyPanel.add(new UserRegistrationPage());
+				Factory.refresh();
+			}
+		});
+break;
+
 
 		default: bodyPanel.removeAll();
 			break;
