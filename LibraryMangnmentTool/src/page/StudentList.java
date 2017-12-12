@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -39,9 +40,16 @@ public class StudentList extends JPanel implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel("Student List");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel.setBounds(469, 21, 100, 14);
+		lblNewLabel.setBounds(469, 10, 100, 14);
 		add(lblNewLabel);
 		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 30, 1109, 8);
+		add(separator);
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 497, 1109, 8);
+		add(separator_1);
+
 		JLabel lblNewLabel_1 = new JLabel("Search By");
 		lblNewLabel_1.setBounds(10, 47, 73, 14);
 		add(lblNewLabel_1);
@@ -69,7 +77,7 @@ public class StudentList extends JPanel implements ActionListener {
 		add(btnNewButton_7);
 		
 		JScrollPane scrollBar = new JScrollPane();
-		scrollBar.setBounds(10, 75, 1109, 377);
+		scrollBar.setBounds(10, 75, 1109, 420);
 		add(scrollBar);
 		
 		table = new JTable(getRowData(),columnName());
@@ -77,31 +85,31 @@ public class StudentList extends JPanel implements ActionListener {
 		scrollBar.getViewport ().add(table);
 		
 		JButton btnNewButton_8 = new JButton("Add");
-		btnNewButton_8.setBounds(10, 475, 100, 43);
+		btnNewButton_8.setBounds(10, 514, 109, 34);
 		btnNewButton_8.addActionListener(this);
 		add(btnNewButton_8);
 		
 		JButton btnNewButton_12 = new JButton("View");
-		btnNewButton_12.setBounds(658, 475, 100, 43);
+		btnNewButton_12.setBounds(632, 514, 109, 34);
 		btnNewButton_12.setBackground(Factory.viewBtnColor);
 		btnNewButton_12.addActionListener(this);
 		add(btnNewButton_12);
 		
 		JButton btnNewButton_9 = new JButton("Modify");
 		btnNewButton_9.setBackground(Factory.modifyBtnColor);
-		btnNewButton_9.setBounds(778, 475, 100, 43);
+		btnNewButton_9.setBounds(750, 514, 109, 34);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
 		JButton btnNewButton_10 = new JButton("Delete");
 		btnNewButton_10.setBackground(Factory.deleteBtnColor);
-		btnNewButton_10.setBounds(898, 475, 100, 43);
+		btnNewButton_10.setBounds(865, 514, 109, 34);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
-		btnNewButton_11.setBounds(1009, 475, 100, 43);
+		btnNewButton_11.setBounds(979, 514, 109, 34);
 		btnNewButton_11.addActionListener(this);
 		add(btnNewButton_11);
 		

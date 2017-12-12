@@ -101,7 +101,7 @@ public class RegistrationPage implements ActionListener {
 		textField_4.setColumns(10);
 
 		JButton btnNewButton_6 = new JButton("Save");
-		btnNewButton_6.setBounds(850, 516, 115, 32);
+		btnNewButton_6.setBounds(850, 516, 115, 34);
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		Reg_panel.add(btnNewButton_6);
 		btnNewButton_6.addActionListener(this);
