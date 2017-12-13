@@ -17,12 +17,19 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import common.service.DialogService;
 import common.service.Factory;
+import model.BookModel;
 import model.CustomerModel;
+import model.LoginUserDetail;
+import model.UserModel;
+import service.BookService;
 import service.CustomerService;
+import service.UserLoginService;
 
-public class StudentList extends JPanel implements ActionListener {
+public class UserList extends JPanel implements ActionListener {
 	
 	
 	JTable table;
@@ -31,12 +38,12 @@ public class StudentList extends JPanel implements ActionListener {
 	JComboBox comboBox;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public StudentList() {
+	public UserList() {
 		
 		setBounds(10, 11, 1129, 571);
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Student List");
+		JLabel lblNewLabel = new JLabel("User List");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		lblNewLabel.setBounds(469, 10, 100, 14);
 		add(lblNewLabel);
@@ -114,25 +121,25 @@ public class StudentList extends JPanel implements ActionListener {
 	}
 	
 	public String[] columnName() {
-		String columnName[] = { "Library Id No","Student Name", "Student Mobile", "Student email", "Student Id", "Student Balance"};
+		String columnName[] = {"User Name", "User Mobile", "Addhar/Id No.", "User Address", "User Role","User UserId"};
 		return columnName;
 	}
 	
 	
 	public String[][] getRowData(){
-		CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
-		List<CustomerModel> list = customerService.getAllCustomerDetail();
-		String rowData[][] =new String[list.size()][8]; ;
-		Iterator<CustomerModel> itr =  list.iterator();
+		UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
+		List<LoginUserDetail> list = userLoginService.getAllUser();
+		String rowData[][] =new String[list.size()][columnName().length]; ;
+		Iterator<LoginUserDetail> itr =  list.iterator();
 		int i=0;
 		while (itr.hasNext()) {
-			CustomerModel customer = (CustomerModel) itr.next();
-			rowData[i][0] = ""+customer.getCustomer_id();
-			rowData[i][1] = customer.getCustomer_name();
-			rowData[i][2] = customer.getCustomer_mobile();
-			rowData[i][3] = customer.getCustomer_email();
-			rowData[i][4] = customer.getCustomer_cId();
-			rowData[i][5] = ""+customer.getCustomer_balance();
+			LoginUserDetail loginUserDetail = (LoginUserDetail) itr.next();
+			rowData[i][0] = ""+loginUserDetail.getUser_name();
+			rowData[i][1] = loginUserDetail.getUser_mobile();
+			rowData[i][2] = loginUserDetail.getUser_idNo();
+			rowData[i][3] = loginUserDetail.getUser_addr();
+			rowData[i][4] = loginUserDetail.getUsrRole().getRole_name();
+			rowData[i][5] = ""+loginUserDetail.getIdPass().getUser_name();
 			i++;
 		}
 		return rowData;
@@ -194,7 +201,7 @@ public class StudentList extends JPanel implements ActionListener {
 						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
 						customerService.deleteCustomerDetail(value);
 						Factory.getBodyPanal().removeAll();
-						Factory.getBodyPanal().add(new StudentList());
+						Factory.getBodyPanal().add(new UserList());
 						Factory.refresh();
 					}
 				}

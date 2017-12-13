@@ -4,9 +4,7 @@ import java.util.List;
 
 import dao.UserLoginDao;
 import model.LoginUserDetail;
-import model.UserModel;
 import service.UserLoginService;
-
 public class UserLoginServiceImpl implements UserLoginService {
 	
 	private UserLoginDao userLoginDao;
@@ -31,9 +29,8 @@ public class UserLoginServiceImpl implements UserLoginService {
 	}
 
 	@Override
-	public List<UserModel> getAllUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LoginUserDetail> getAllUser() {
+		return userLoginDao.getAllUser();
 	}
 
 	

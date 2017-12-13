@@ -40,10 +40,10 @@ public class UserLoginDaoImpl implements UserLoginDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserModel> getAllUser() {
+	public List<LoginUserDetail> getAllUser() {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
-		List<UserModel> list = seession.createCriteria(UserModel.class).list();
+		List<LoginUserDetail> list = seession.createCriteria(LoginUserDetail.class).list();
 		seession.close();
 		return list;
 	}

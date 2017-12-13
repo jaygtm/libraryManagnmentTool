@@ -8,5 +8,5 @@ import model.UserModel;
 public interface UserLoginService {
 	public boolean validateUserName(String username ,String password);
 	public LoginUserDetail getUserDetail(String userName);
-	public List<UserModel> getAllUser();
+	public List<LoginUserDetail> getAllUser();
 }

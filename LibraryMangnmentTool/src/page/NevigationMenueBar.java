@@ -223,7 +223,7 @@ public class NevigationMenueBar implements ActionListener {
 			@Override
 			public void run() {
 				bodyPanel.removeAll();
-				bodyPanel.add(new UserRegistrationPage());
+				bodyPanel.add(new UserList());
 				Factory.refresh();
 			}
 		});
