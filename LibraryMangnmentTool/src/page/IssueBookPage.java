@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ import common.service.Factory;
 import model.BookModel;
 import model.StudentHistoryModel;
 import service.BookService;
+import service.CustomerService;
 
 public class IssueBookPage extends JPanel implements ActionListener {
 	
@@ -36,8 +38,9 @@ public class IssueBookPage extends JPanel implements ActionListener {
 	private String publicationList[];
 	private int bookId [];
 	private int noOfBookAvilabe ;
-	private int customerId;
+	private Integer customerId;
 	private JButton btnIssue;
+	private List<BookModel> list ;
 	
 	private String noOfDays[] = new String[]{"-Select-","1","3","5","7","10","15","30","45"};
 	
@@ -47,13 +50,21 @@ public class IssueBookPage extends JPanel implements ActionListener {
 	
 	{
 		setBookList();
-		noOfBookAvilabe = 2;
 		
+		
+	}
+	
+	private int getNoOfAvailableBook(){
+		CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
+		List alotedList  =customerService.viewAlloted(customerId.toString(), "A");
+		return 5-alotedList.size();
 	}
 	
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public IssueBookPage() {
+	public IssueBookPage(String customerId) {
+		this.customerId = Integer.parseInt(customerId);
+		noOfBookAvilabe = getNoOfAvailableBook();
 		setBounds(20, 79, 1099, 481);
 		setLayout(null);
 
@@ -165,17 +176,35 @@ public class IssueBookPage extends JPanel implements ActionListener {
 		separator_1.setBounds(34, 318, 925, 8);
 		add(separator_1);
 
-		btnIssue = new JButton("Issue");
+		/*btnIssue = new JButton("Issue");
 		btnIssue.setBounds(243, 337, 106, 34);
 		btnIssue.setBackground(Factory.saveBtnColor);
 		btnIssue.addActionListener(this);
-		add(btnIssue);
+		add(btnIssue);*/
 
-		JButton btnCancel = new JButton("Cancel");
+		/*JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(406, 337, 113, 34);
 		btnCancel.setBackground(Factory.cancleBtnColor);
 		btnCancel.addActionListener(this);
-		add(btnCancel);
+		add(btnCa		btnCancel.setBackground(Factory.cancleBtnColor);
+ncel);*/
+		
+		btnIssue = new JButton("Issue");
+		btnIssue.setBounds(660, 450, 120, 30);
+		btnIssue.addActionListener(this);
+		add(btnIssue);
+		
+		JButton btnNewButton_10 = new JButton("Back");
+		btnNewButton_10.setBounds(790, 450, 120, 30);
+		btnNewButton_10.addActionListener(this);
+		add(btnNewButton_10);
+		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11.setBounds(920, 450, 120, 30);
+		btnNewButton_11.addActionListener(this);
+		add(btnNewButton_11);
+		
+		
+		
 
 		JLabel lblNewLabel = new JLabel("Authour");
 		lblNewLabel.setBounds(689, 57, 46, 14);
@@ -357,7 +386,7 @@ public class IssueBookPage extends JPanel implements ActionListener {
 			
 			
 		break;
-		case "Cancel":EventQueue.invokeLater(new Runnable() {
+		case "Back":EventQueue.invokeLater(new Runnable() {
 			
 												@Override
 												public void run() {
@@ -366,6 +395,17 @@ public class IssueBookPage extends JPanel implements ActionListener {
 												}
 											});
 			break;
+			
+		case "Cancel":EventQueue.invokeLater(new Runnable() {
+												
+												@Override
+												public void run() {
+												Factory.getBodyPanal().removeAll();
+												Factory.getBodyPanal().add(new StudentList());
+												Factory.refresh();
+												}
+											});
+		break;
 		
 		}
 		
@@ -376,7 +416,8 @@ public class IssueBookPage extends JPanel implements ActionListener {
 	
 	private boolean validationAndSave(){
 		boolean flagNoBook = true;
-		
+		List<StudentHistoryModel> bookListForIssue = new ArrayList<StudentHistoryModel>();
+		List<String> bookName = new ArrayList<String>();
 		if(!Book_1.getSelectedItem().toString().equals("-Select-")){
 			flagNoBook = false;
 			if(!day_1.getSelectedItem().toString().equals("-Select-")){
@@ -386,20 +427,12 @@ public class IssueBookPage extends JPanel implements ActionListener {
 				
 				smodel.setBook_id(bookId[a-1]);
 				smodel.setCustomer_id(this.customerId);
-				smodel.setItm_status_flag("I");
+				smodel.setItm_status_flag("A");
 				smodel.setItm_isu_dt(new Date());
 				
 				smodel.setItm_sub_dt(Factory.addNextDay(day_1.getSelectedItem().toString()));
-					
-				BookService bookService = (BookService) Factory.getContext().getBean("bookService");
+				bookListForIssue.add(smodel);
 				
-				if(bookService.issueBook(smodel)){
-					DialogService.showMgs(Factory.getMainFrame(), "Book Issued Successfully..!", "Success");
-					Factory.homePage();
-					Factory.getBodyPanal().add(new StudentList());
-					Factory.refresh();
-				}else
-					DialogService.showErrorMgs(Factory.getMainFrame(), "Error To Issue Book ..!", "Error");
 					
 				} catch (Exception e) {
 						e.printStackTrace();
@@ -418,11 +451,28 @@ public class IssueBookPage extends JPanel implements ActionListener {
 			flagNoBook = false;
 			if(!day_2.getSelectedItem().toString().equals("-Select-")){
 				int a = book_2.getSelectedIndex();
+				try {
+				StudentHistoryModel smodel = new StudentHistoryModel();
+				
+				smodel.setBook_id(bookId[a-1]);
+				smodel.setCustomer_id(this.customerId);
+				smodel.setItm_status_flag("A");
+				smodel.setItm_isu_dt(new Date());
+				
+				smodel.setItm_sub_dt(Factory.addNextDay(day_2.getSelectedItem().toString()));
+				bookListForIssue.add(smodel);
+					
+				} catch (Exception e) {
+						e.printStackTrace();
+						DialogService.showErrorMgs(Factory.getMainFrame(), "StackError"+e.getMessage(), "Error Developer Side");
+						return false;
+				}   
 				
 				
 			}else{
 				DialogService.showErrorMgs(Factory.getMainFrame(),"Please Select day of Book 2", "Error");
 				btnIssue.setEnabled(true);
+				return false;
 			}
 			
 		}
@@ -430,11 +480,28 @@ public class IssueBookPage extends JPanel implements ActionListener {
 			flagNoBook = false;
 			if(!day_3.getSelectedItem().toString().equals("-Select-")){
 				int a = book_3.getSelectedIndex();
+				try {
+				StudentHistoryModel smodel = new StudentHistoryModel();
+				
+				smodel.setBook_id(bookId[a-1]);
+				smodel.setCustomer_id(this.customerId);
+				smodel.setItm_status_flag("A");
+				smodel.setItm_isu_dt(new Date());
+				
+				smodel.setItm_sub_dt(Factory.addNextDay(day_3.getSelectedItem().toString()));
+				bookListForIssue.add(smodel);
+					
+				} catch (Exception e) {
+						e.printStackTrace();
+						DialogService.showErrorMgs(Factory.getMainFrame(), "StackError"+e.getMessage(), "Error Developer Side");
+						return false;
+				}   
 				
 				
 			}else{
 				DialogService.showErrorMgs(Factory.getMainFrame(),"Please Select day of Book 3", "Error");
 				btnIssue.setEnabled(true);
+				return false;
 			}
 			
 		}
@@ -442,11 +509,28 @@ public class IssueBookPage extends JPanel implements ActionListener {
 			flagNoBook = false;
 			if(!day_4.getSelectedItem().toString().equals("-Select-")){
 				int a = book_4.getSelectedIndex();
+				try {
+				StudentHistoryModel smodel = new StudentHistoryModel();
+				
+				smodel.setBook_id(bookId[a-1]);
+				smodel.setCustomer_id(this.customerId);
+				smodel.setItm_status_flag("A");
+				smodel.setItm_isu_dt(new Date());
+				
+				smodel.setItm_sub_dt(Factory.addNextDay(day_4.getSelectedItem().toString()));
+				bookListForIssue.add(smodel);
+					
+				} catch (Exception e) {
+						e.printStackTrace();
+						DialogService.showErrorMgs(Factory.getMainFrame(), "StackError"+e.getMessage(), "Error Developer Side");
+						return false;
+				}   
 				
 				
 			}else{
 				DialogService.showErrorMgs(Factory.getMainFrame(),"Please Select day of Book 4", "Error");
 				btnIssue.setEnabled(true);
+				return false;
 			}
 			
 		}
@@ -454,29 +538,78 @@ public class IssueBookPage extends JPanel implements ActionListener {
 			flagNoBook = false;
 			if(!day_5.getSelectedItem().toString().equals("-Select-")){
 				int a = book_5.getSelectedIndex();
+				try {
+				StudentHistoryModel smodel = new StudentHistoryModel();
+				
+				smodel.setBook_id(bookId[a-1]);
+				smodel.setCustomer_id(this.customerId);
+				smodel.setItm_status_flag("A");
+				smodel.setItm_isu_dt(new Date());
+				
+				smodel.setItm_sub_dt(Factory.addNextDay(day_5.getSelectedItem().toString()));
+				bookListForIssue.add(smodel);
+					
+				} catch (Exception e) {
+						e.printStackTrace();
+						DialogService.showErrorMgs(Factory.getMainFrame(), "StackError"+e.getMessage(), "Error Developer Side");
+						return false;
+				}   
 				
 				
 			}else{
 				DialogService.showErrorMgs(Factory.getMainFrame(),"Please Select day of Book 5", "Error");
 				btnIssue.setEnabled(true);
+				return false;
 			}
 			
 		}
 		if(flagNoBook){
 			DialogService.showErrorMgs(Factory.getMainFrame(),"Please Select Book..!", "Error");
 			btnIssue.setEnabled(true);
+			return false;
+		}else{
+			btnIssue.setEnabled(true);
+			return issueBookRequest(bookListForIssue);
 		}
 		
-		
-		return false;
-		
-	}
-	//customerId / studentId
-	public boolean setStudentNameAndId(String customerId){
-		this.customerId = Integer.parseInt(customerId);
-		return true;
 	}
 	
+	
+	public boolean issueBookRequest(List<StudentHistoryModel> bookList){
+		if(!bookList.isEmpty()){
+			BookService bookService = (BookService) Factory.getContext().getBean("bookService");
+			/**For issue book db entery*/
+			if(bookService.issueBook(bookList))
+				DialogService.showMgs(Factory.getMainFrame(), "Book Issued Successfully..!", "Success");
+			else{
+				DialogService.showErrorMgs(Factory.getMainFrame(), "Error To Issue Books ..!", "Error");
+				return false;
+			}
+			/**Find Book Model Form list and save in list **/
+			List<BookModel> issueBookDetails = new ArrayList<BookModel>();
+			for(StudentHistoryModel smodel : bookList){
+				for(BookModel bmodel :list){
+					if(smodel.getBook_id() == bmodel.getBook_id()){
+						issueBookDetails.add(bmodel);
+						break;
+					}
+				}
+				
+			}
+			/***Update book model and save in DB**/
+			for(BookModel bmodel :issueBookDetails){
+				bmodel.setBook_aval(bmodel.getBook_aval()-1);
+				bookService.editBook(bmodel);
+			}
+			
+			Factory.homePage();
+			Factory.getBodyPanal().add(new StudentList());
+			Factory.refresh();
+			return true;
+		}else
+			return false;
+			
+	}
 	
 	
 	
@@ -484,7 +617,7 @@ public class IssueBookPage extends JPanel implements ActionListener {
 	
 	private void setBookList(){
 		BookService bookService 	= (BookService) Factory.getContext().getBean("bookService");
-		List<BookModel> list 		= bookService.getBookaList();
+		list 		= bookService.getAvailableBookList();
 		Collections.sort(list);  
 		
 		this.booklist 			= new String[list.size()+1];

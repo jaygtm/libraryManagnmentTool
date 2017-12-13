@@ -95,7 +95,7 @@ public class SelectStudentForIssue extends JPanel implements ActionListener {
 											@Override
 											public void run() {
 												Factory.getBodyPanal().removeAll();
-												Factory.getBodyPanal().add(new IssueBookPage());
+												//Factory.getBodyPanal().add(new IssueBookPage());
 												Factory.refresh();
 											}
 										});

@@ -34,8 +34,7 @@ public class BookServiceImp implements BookService {
 
 	@Override
 	public boolean editBook(BookModel bookModel) {
-		// TODO Auto-generated method stub
-		return false;
+		return bookDao.editBook(bookModel);
 	}
 
 	@Override
@@ -68,8 +67,19 @@ public class BookServiceImp implements BookService {
 	}
 
 	@Override
-	public boolean issueBook(StudentHistoryModel model) {
+	public boolean issueBook(List<StudentHistoryModel> model) {
 		return bookDao.issueBook(model);
+	}
+
+	@Override
+	public List<BookModel> getAvailableBookList() {
+		return bookDao.getAvailableBookList();
+	}
+
+	@Override
+	public List<BookModel> getAlotedBookList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -120,8 +120,7 @@ public class StudentDetail extends JPanel implements ActionListener  {
 													public void run() {
 														if(innerBodyPane!=null)
 															self.remove(innerBodyPane);
-														innerBodyPane = new IssueBookPage();
-														((IssueBookPage)innerBodyPane).setStudentNameAndId(studentIdpKey);
+														innerBodyPane = new IssueBookPage(studentIdpKey);
 														add(innerBodyPane);
 														Factory.refresh();
 														}

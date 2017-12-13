@@ -11,13 +11,13 @@ public interface BookService {
 	public boolean addBook(BookModel bookModel);
 	public boolean editBook(BookModel bookModel);
 	public boolean delteBook(BookModel bookModel);
+	public List<BookModel> getAvailableBookList();
+	public List<BookModel> getAlotedBookList();
 	
 	public List<BookTypeModel> getAllBookType();
 	public BookTypeModel getBookType(String name);
 	public boolean deleteBookType(BookTypeModel model);
 	public boolean addBookType(BookTypeModel model);
 	
-	public boolean issueBook(StudentHistoryModel model);
-	
-
+	public boolean issueBook(List<StudentHistoryModel> model);
 }
