@@ -100,4 +100,20 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		
 	}
 
+	@Override
+	public LoginUserDetail userLoginDao(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean saveUser(LoginUserDetail loginUserDetail) {
+		Session session = Factory.sessionfactory.openSession();
+		session.beginTransaction();
+		session.saveOrUpdate(loginUserDetail);
+		session.beginTransaction().commit();
+		System.out.println("done..!");
+			return true;
+	}
+
 }

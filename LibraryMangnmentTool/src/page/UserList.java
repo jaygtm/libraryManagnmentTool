@@ -94,11 +94,6 @@ public class UserList extends JPanel implements ActionListener {
 		btnNewButton_8.addActionListener(this);
 		add(btnNewButton_8);
 		
-		JButton btnNewButton_12 = new JButton("View");
-		btnNewButton_12.setBounds(632, 514, 109, 34);
-		btnNewButton_12.setBackground(Factory.viewBtnColor);
-		btnNewButton_12.addActionListener(this);
-		add(btnNewButton_12);
 		
 		JButton btnNewButton_9 = new JButton("Modify");
 		btnNewButton_9.setBackground(Factory.modifyBtnColor);
@@ -162,22 +157,20 @@ public class UserList extends JPanel implements ActionListener {
 					if (row == -1) {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
 					} else {
-						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-						String name = table.getModel().getValueAt(row, 1).toString();
-						String mobile = table.getModel().getValueAt(row, 2).toString();
-						String email = table.getModel().getValueAt(row, 3).toString();
-						String student_id = table.getModel().getValueAt(row, 4).toString();
-						String Balence = table.getModel().getValueAt(row, 5).toString();
+						String uname = table.getModel().getValueAt(row, 5).toString();
+						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
+						LoginUserDetail name=userLoginService.getUserDetail(uname);
+						UserRegistrationPage registrationPage=new UserRegistrationPage();
 						Factory.getBodyPanal().removeAll();
-						ModifyPage modifyPage = new ModifyPage();
-						modifyPage.modifyPage(Factory.getBodyPanal());
-						modifyPage.getTextField_5().setText("" + value);
-						modifyPage.getTextField().setText(name);
-						modifyPage.getTextField_1().setText(mobile);
-						modifyPage.getTextField_2().setText(email);
-						modifyPage.getTextField_3().setText(student_id);
-						modifyPage.getTextField_4().setText(Balence);
-						modifyPage.getTextField_5().enable(false);
+						Factory.getBodyPanal().add(registrationPage);
+						
+						registrationPage.getTextField().setText("" + name.getUser_name());
+						registrationPage.getTextField_1().setText(name.getUser_mobile());
+						registrationPage.getTextField_2().setText(name.getUser_idNo());
+						registrationPage.getTextField_3().setText(name.getUser_addr());
+						registrationPage.getTextField_9().setText(name.getIdPass().getUser_name());
+						registrationPage.getTextField_5().setText(name.getIdPass().getUser_passwprd());
+						registrationPage.getTextField_4().setText(name.getIdPass().getUser_name());
 						Factory.refresh();
 					}
 
@@ -223,8 +216,9 @@ public class UserList extends JPanel implements ActionListener {
 				@Override
 				public void run() {
 					Factory.homePage();
-					RegistrationPage registrationPage=new RegistrationPage();
-					registrationPage.registrationPage(Factory.getBodyPanal());
+					UserRegistrationPage registrationPage=new UserRegistrationPage();
+					Factory.getBodyPanal().removeAll();
+					Factory.getBodyPanal().add(registrationPage);
 					Factory.refresh();
 				}
 			});

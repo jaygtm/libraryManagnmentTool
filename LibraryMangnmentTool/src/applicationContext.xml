@@ -12,9 +12,9 @@
 	<bean name="customerService" class="service.impl.CustomerServiceImpl" >  
 		<property name="customerDaoImpl" ref="customerDao"></property>
 	</bean> 
-	
 	<bean name="customerDao" class="dao.impl.CustomerDaoImpl" >  
 	</bean>
+	
 	<bean name="customerModel" class="model.CustomerModel">
 	</bean>
 	
