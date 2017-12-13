@@ -167,11 +167,13 @@ public class IssueBookPage extends JPanel implements ActionListener {
 
 		btnIssue = new JButton("Issue");
 		btnIssue.setBounds(243, 337, 106, 34);
+		btnIssue.setBackground(Factory.saveBtnColor);
 		btnIssue.addActionListener(this);
 		add(btnIssue);
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(406, 337, 113, 34);
+		btnCancel.setBackground(Factory.cancleBtnColor);
 		btnCancel.addActionListener(this);
 		add(btnCancel);
 
