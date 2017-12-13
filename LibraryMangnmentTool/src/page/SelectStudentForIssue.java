@@ -79,6 +79,7 @@ public class SelectStudentForIssue extends JPanel implements ActionListener {
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(899, 475, 100, 43);
 		add(btnNewButton_11);
 		
