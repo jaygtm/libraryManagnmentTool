@@ -24,6 +24,10 @@ public class NevigationMenueBar implements ActionListener {
 	private JPanel panel;
 	private JPanel bodyPanel ;
 	private JFrame mainframe;
+	String userName="";
+	public NevigationMenueBar(String userName){
+		this.userName=userName;
+	}
 	public void manueBar(JFrame mainframe){
 		this.mainframe=mainframe;
 		panel = new JPanel();
@@ -71,7 +75,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_4.setForeground(Color.WHITE);
 		btnNewButton_4.setBackground(new Color(105, 105, 105));
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		//btnNewButton_4.setBorder(null);
+		btnNewButton_4.addActionListener(this);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_3 = new JButton("Issue Books                      ");
@@ -118,7 +122,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnLogout.addActionListener(this);
 		panel_3.add(btnLogout);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblNewLabel_1 = new JLabel(userName);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1.setBounds(1086, 15, 133, 14);
 		panel_3.add(lblNewLabel_1);
@@ -214,7 +218,17 @@ public class NevigationMenueBar implements ActionListener {
 												}
 											});
 		break;
-		
+		case "User Creation" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				bodyPanel.removeAll();
+				bodyPanel.add(new UserList());
+				Factory.refresh();
+			}
+		});
+break;
+
 
 		default: bodyPanel.removeAll();
 			break;

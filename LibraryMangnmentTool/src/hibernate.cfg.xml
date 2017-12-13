@@ -20,6 +20,8 @@
          <mapping class="model.StudentHistoryModel"/>
           <mapping class="model.BookTypeModel"/>
           <mapping class="model.GetStudentModel"/>
+          <mapping class="model.LoginUserDetail"/>
+          <mapping class="model.UserRole"/>
         
     </session-factory>  
   
