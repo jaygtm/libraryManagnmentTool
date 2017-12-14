@@ -12,6 +12,9 @@ public class DialogService {
 	public static void showErrorMgs(Component parant,String mgs,String title){
 		JOptionPane.showMessageDialog(parant,mgs,title,JOptionPane.ERROR_MESSAGE);
 	}
-	
+	public static void confirmPopup(Component parent , String confirmMgs , String title,int dialogButton){
+		JOptionPane.showConfirmDialog(parent, confirmMgs,title,dialogButton);
+		
+	}
 
 }

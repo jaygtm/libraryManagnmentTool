@@ -8,11 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import common.service.DialogService;
 import common.service.Factory;
 import model.GetStudentModel;
 import service.CustomerService;
@@ -34,14 +36,26 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 			    
 		table = new JTable(getRowData(customer_id,flag),columnName());
         table.setRowSelectionAllowed(true);
+        table.setSelectionMode(1);
         table.setColumnSelectionAllowed(false);
         JTableHeader header = table.getTableHeader();
         header.setBackground(Color.LIGHT_GRAY);
         
 		gridpanel.getViewport ().add(table);
 		add(gridpanel);
+		if(flag){
+			JButton submitBook = new JButton("Submit Book");
+			submitBook.setBackground(Factory.backBtnColor);
+			submitBook.setBounds(530, 450, 120, 30);
+			submitBook.addActionListener(this);
+			add(submitBook);
+			
+		}
+		
+		
 		JButton btnNewButton_9 = new JButton("Print as Excel");
 		btnNewButton_9.setBackground(Factory.backBtnColor);
+		btnNewButton_9.setForeground(Factory.buttonTextColor);
 		btnNewButton_9.setBounds(660, 450, 120, 30);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
@@ -50,7 +64,8 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		btnNewButton_10.setBackground(Factory.backBtnColor);
 		btnNewButton_10.setBounds(790, 450, 120, 30);
 		btnNewButton_10.addActionListener(this);
-		add(btnNewButton_10);
+		add(btnNewBu		btnNewButton_10.setForeground(Factory.buttonTextColor);
+tton_10);
 		JButton btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(920, 450, 120, 30);
@@ -63,6 +78,7 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		btnNewButton_11.setForeground(Factory.buttonTextColor);
 
 		String action = e.getActionCommand().trim();
 		System.out.println("Action " + action+" At "+getClass().toString());
@@ -89,6 +105,31 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 												}
 											});
 			break;
+		case "Submit Book":EventQueue.invokeLater(new Runnable() {
+												
+												@Override
+												public void run() {
+													int dialogButton= JOptionPane.YES_NO_OPTION;
+													DialogService.confirmPopup(Factory.getMainFrame(), "DO You Want Submit Book ?", "Submit Confirmation", dialogButton);
+													
+													if(dialogButton == JOptionPane.YES_OPTION){
+														int row = table.getSelectedRow();
+														
+														if (row == -1) {
+															DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
+														} else {
+															String value =table.getModel().getValueAt(row, 0).toString();
+															String name = table.getModel().getValueAt(row, 1).toString();
+															String mobile = table.getModel().getValueAt(row, 2).toString();
+															String email = table.getModel().getValueAt(row, 3).toString();
+															String student_id = table.getModel().getValueAt(row, 4).toString();
+															String Balence = table.getModel().getValueAt(row, 5).toString();
+															System.out.println(value+"  "+name+"  "+email +"  "+student_id+"  "+ Balence);
+														}
+													}
+												}
+											});
+		break;
 		
 		}
 		
