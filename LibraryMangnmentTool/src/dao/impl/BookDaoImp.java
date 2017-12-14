@@ -13,6 +13,7 @@ import common.service.Factory;
 import dao.BookDao;
 import model.BookModel;
 import model.BookTypeModel;
+import model.CustomerModel;
 import model.StudentHistoryModel;
 
 public class BookDaoImp implements BookDao {
@@ -60,7 +61,14 @@ public class BookDaoImp implements BookDao {
 
 	@Override
 	public boolean delteBook(BookModel bookModel) {
-		// TODO Auto-generated method stub
+		Session session = Factory.sessionfactory.openSession();
+		BookModel deletbook=(BookModel) session.load(BookModel.class,new Integer(bookModel.getBook_id()));
+		Transaction tx = session.beginTransaction();
+		session.delete(deletbook);
+        System.out.println("Object Deleted successfully.....!!");
+        tx.commit();
+        session.close();
+		
 		return false;
 	}
 

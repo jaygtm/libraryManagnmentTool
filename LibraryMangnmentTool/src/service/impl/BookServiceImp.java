@@ -39,8 +39,7 @@ public class BookServiceImp implements BookService {
 
 	@Override
 	public boolean delteBook(BookModel bookModel) {
-		// TODO Auto-generated method stub
-		return false;
+		return bookDao.delteBook(bookModel);
 	}
 
 	@Override

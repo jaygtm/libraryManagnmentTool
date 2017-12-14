@@ -22,7 +22,7 @@ import model.BookModel;
 import model.BookTypeModel;
 import service.BookService;
 
-public class AddBookPage implements ActionListener {
+public class AddBookPage extends JPanel implements ActionListener {
 	private BookService bookService;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -31,91 +31,96 @@ public class AddBookPage implements ActionListener {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JComboBox comboBox;
-	public void addBookPage(JPanel panel_1) {
-		JPanel add_Book = new JPanel();
-		add_Book.setBounds(10, 11, 1129, 571);
-		//add_Book.setBackground(new Color(0,0,0,0));
-		add_Book.setBorder(BorderFactory.createTitledBorder(""));
-		add_Book.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
-		panel_1.add(add_Book);
-		add_Book.setLayout(null);
+	private boolean backOnList =true;
+	
+	{
+		bookService = (BookService) Factory.getContext().getBean("bookService");
+	}
+	
+	public  AddBookPage(boolean backOnList) {
+		this.backOnList =backOnList;
+		setBounds(10, 11, 1129, 571);
+		// setBackground(new Color(0,0,0,0));
+		 setBorder(BorderFactory.createTitledBorder(""));
+		 setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
+		 setLayout(null);
 		
 		JLabel lblStudentRegistration = new JLabel("Add Book");
 		lblStudentRegistration.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStudentRegistration.setBounds(363, 11, 214, 32);
 		lblStudentRegistration.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 26));
-		add_Book.add(lblStudentRegistration);
+		 add(lblStudentRegistration);
 		
 		JLabel lblNewLabel = new JLabel("Name");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setBounds(148, 108, 128, 32);
-		add_Book.add(lblNewLabel);
+		 add(lblNewLabel);
 		
 		JLabel lblBookTypeId = new JLabel("Type Name");
 		lblBookTypeId.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBookTypeId.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBookTypeId.setBounds(148, 151, 140, 32);
-		add_Book.add(lblBookTypeId);
+		 add(lblBookTypeId);
 		
 		JLabel lblBookMrp = new JLabel("MRP");
 		lblBookMrp.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBookMrp.setBounds(148, 194, 128, 32);
-		add_Book.add(lblBookMrp);
+		 add(lblBookMrp);
 		
 		JLabel lblBookRent = new JLabel("Rent");
 		lblBookRent.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBookRent.setBounds(148, 237, 125, 32);
-		add_Book.add(lblBookRent);
+		 add(lblBookRent);
 		
 		JLabel lblBookRentPer = new JLabel("Rent Per Day");
 		lblBookRentPer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBookRentPer.setBounds(148, 280, 140, 32);
-		add_Book.add(lblBookRentPer);
+		 add(lblBookRentPer);
 		
 		JLabel lblBookAurthor = new JLabel("Book Aurthor");
 		lblBookAurthor.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBookAurthor.setBounds(148, 323, 128, 32);
-		add_Book.add(lblBookAurthor);
+		 add(lblBookAurthor);
 		
 		JLabel lblPublication = new JLabel("Publication");
 		lblPublication.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblPublication.setBounds(148, 366, 112, 32);
-		add_Book.add(lblPublication);
+		 add(lblPublication);
 		
 		textField = new JTextField();
 		textField.setBounds(432, 117, 261, 20);
-		add_Book.add(textField);
+		 add(textField);
 		textField.setColumns(10);
 		
 		comboBox = new JComboBox<String>(getBookType());
 		comboBox.setBounds(432, 160, 261, 20);
 		//comboBox.setBackground(new Color(0,0,0,0));
-		add_Book.add(comboBox);
+		 add(comboBox);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(432, 203, 262, 20);
-		add_Book.add(textField_1);
+		 add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(432, 246, 261, 20);
-		add_Book.add(textField_2);
+		 add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
 		textField_3.setBounds(432, 289, 261, 20);
-		add_Book.add(textField_3);
+		 add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
 		textField_4.setBounds(432, 331, 261, 23);
-		add_Book.add(textField_4);
+		 add(textField_4);
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
 		textField_5.setBounds(432, 374, 261, 23);
-		add_Book.add(textField_5);
+		 add(textField_5);
 		textField_5.setColumns(10);
 		
 		JButton btnNewButton_6 = new JButton("Save");
@@ -123,26 +128,26 @@ public class AddBookPage implements ActionListener {
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		btnNewButton_6.addActionListener(this);
 		btnNewButton_6.setForeground(Factory.buttonTextColor);
-		add_Book.add(btnNewButton_6);
+		 add(btnNewButton_6);
 		
 		JButton btnSave = new JButton("Cancel");
 		btnSave.setBackground(Factory.cancleBtnColor);
 		btnSave.setBounds(979, 514, 109, 34);
 		btnSave.setForeground(Factory.buttonTextColor);
 		btnSave.addActionListener(this);
-		add_Book.add(btnSave);
+		 add(btnSave);
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 497, 1109, 8);
-		add_Book.add(separator_1);
+		 add(separator_1);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 50, 1109, 8);
-		add_Book.add(separator);
+		 add(separator);
+		 
+		 setVisible(true);
 		
 	}
-	public AddBookPage(){
-		bookService = (BookService) Factory.getContext().getBean("bookService");
-	}
+	
 	
 	private String[] getBookType(){
 		List<BookTypeModel> list = bookService.getAllBookType();
@@ -181,33 +186,49 @@ public class AddBookPage implements ActionListener {
 					String type = comboBox.getSelectedItem().toString();
 					
 					if(checkBlank(new String[]{bookName,mrp,rent,rentprdat,authour,publication,type})){
-						DialogService.showErrorMgs(textField, "Please Fill All Field", "Error");
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Please Fill All Field", "Error");
 						
 					}else{
-						BookModel m = new BookModel();
-						m.setBook_name(bookName);
-						m.setBook_aurthor(authour);
-						m.setBook_publication(publication);
-						m.setBook_mrp(Integer.parseInt(mrp));
-						m.setBook_rent(Integer.parseInt(rent));
-						m.setBook_rentPerDay(Integer.parseInt(rentprdat));
-						m.setBook_typeId(getBookId(type));
-						m.setBook_Total(1);
-						m.setBook_aval(1);
+						if(!type.equals("-Select-")){
+							BookModel m = new BookModel();
+							m.setBook_name(bookName);
+							m.setBook_aurthor(authour);
+							m.setBook_publication(publication);
+							m.setBook_mrp(Integer.parseInt(mrp));
+							m.setBook_rent(Integer.parseInt(rent));
+							m.setBook_rentPerDay(Integer.parseInt(rentprdat));
+							m.setBook_typeId(getBookId(type));
+							m.setBook_Total(1);
+							m.setBook_aval(1);
+							
+							
+							boolean status = bookService.addBook(m);
+							
+							DialogService.showMgs(Factory.getMainFrame(), "Book Add Successfully", "Success");
 						
-						
-						boolean status = bookService.addBook(m);
-						
-						DialogService.showMgs(comboBox, "Book Add Successfully", "Success");
-						
+						}else
+							DialogService.showErrorMgs(Factory.getMainFrame(), "Please Select Book Type", "Error");
 					}
 					
 					
 					
 			}
 		});
+		
+		break;
+		
+		case "Cancel": EventQueue.invokeLater(new Runnable() {
 			
-			
+							@Override
+							public void run() {
+								if(backOnList){
+									Factory.getBodyPanal().removeAll();
+									Factory.getBodyPanal().add(new StudentList());
+								}else
+									Factory.getBodyPanal().removeAll();
+								Factory.refresh();
+							}
+						});
 			break;
 		default:
 			break;

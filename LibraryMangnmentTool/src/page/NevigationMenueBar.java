@@ -190,8 +190,8 @@ public class NevigationMenueBar implements ActionListener {
 													@Override
 													public void run() {
 														bodyPanel.removeAll();
-														AddBookPage addbook=new AddBookPage();
-														addbook.addBookPage(bodyPanel);
+														AddBookPage addbook=new AddBookPage(false);
+														bodyPanel.add(addbook);	
 														Factory.refresh();
 													}
 												});
