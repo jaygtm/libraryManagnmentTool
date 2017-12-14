@@ -53,6 +53,7 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 			JButton submitBook = new JButton("Submit Book");
 			submitBook.setBackground(Factory.backBtnColor);
 			submitBook.setBounds(530, 450, 120, 30);
+			submitBook.setForeground(Factory.buttonTextColor);
 			submitBook.addActionListener(this);
 			add(submitBook);
 			
@@ -117,15 +118,15 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 												
 												@Override
 												public void run() {
-													int dialogButton= JOptionPane.YES_NO_OPTION;
-													DialogService.confirmPopup(Factory.getMainFrame(), "DO You Want Submit Book ?", "Submit Confirmation", dialogButton);
+													int row = table.getSelectedRow();
 													
-													if(dialogButton == JOptionPane.YES_OPTION){
-														int row = table.getSelectedRow();
+													if (row == -1) {
+														DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
+													} else {
+														int dialogButton= JOptionPane.YES_NO_OPTION;
+														DialogService.confirmPopup(Factory.getMainFrame(), "DO You Want Submit Book ?", "Submit Confirmation", dialogButton);
 														
-														if (row == -1) {
-															DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
-														} else {
+														if(dialogButton == JOptionPane.YES_OPTION){
 															String value =table.getModel().getValueAt(row, 0).toString();
 															String name = table.getModel().getValueAt(row, 1).toString();
 															String mobile = table.getModel().getValueAt(row, 2).toString();
@@ -134,7 +135,11 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 															String Balence = table.getModel().getValueAt(row, 5).toString();
 															System.out.println(value+"  "+name+"  "+email +"  "+student_id+"  "+ Balence);
 														}
+														
 													}
+													
+													
+													
 												}
 											});
 		break;
