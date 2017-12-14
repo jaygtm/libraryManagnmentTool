@@ -65,8 +65,8 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		btnNewButton_10.setBounds(790, 450, 120, 30);
 		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		btnNewButton_10.addActionListener(this);
-		add(btnNewBu		btnNewButton_10.setForeground(Factory.buttonTextColor);
-tton_10);
+		btnNewButton_10.setForeground(Factory.buttonTextColor);
+		add(btnNewButton_10);
 		JButton btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(920, 450, 120, 30);
@@ -80,7 +80,7 @@ tton_10);
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		btnNewButton_11.setForeground(Factory.buttonTextColor);
+
 
 		String action = e.getActionCommand().trim();
 		System.out.println("Action " + action+" At "+getClass().toString());
