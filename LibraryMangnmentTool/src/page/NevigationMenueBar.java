@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -146,9 +147,12 @@ public class NevigationMenueBar implements ActionListener {
 		lblDate.setBounds(963, 0, 101, 25);
 		panel_4.add(lblDate);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel();
 		lblNewLabel_2.setBounds(1090, 7, 213, 14);
 		panel_4.add(lblNewLabel_2);
+		
+		new timeUpdate(lblNewLabel_2).start();
+		
 	
 	}
 	
@@ -236,6 +240,32 @@ break;
 		default: bodyPanel.removeAll();
 			break;
 		}
+		
+	}
+	
+	
+	class timeUpdate extends Thread {
+		private JLabel timeLabal ;
+		public timeUpdate(JLabel timeLabal) {
+			this.timeLabal = timeLabal;
+		}
+		
+		public void run(){
+			while(true){
+				this.timeLabal.setText(new Date().toString());
+				Factory.refresh();
+				try {
+					currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		}
+		
+		
 		
 	}
 	

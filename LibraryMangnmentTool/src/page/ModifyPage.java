@@ -96,6 +96,7 @@ public class ModifyPage implements ActionListener {
 
 		JButton btnNewButton_6 = new JButton("Save");
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
+		btnNewButton_6.setForeground(Factory.buttonTextColor);
 		btnNewButton_6.setBounds(541, 471, 135, 35);
 		Reg_panel.add(btnNewButton_6);
 		btnNewButton_6.addActionListener(this);
@@ -103,6 +104,7 @@ public class ModifyPage implements ActionListener {
 
 		JButton btnNewButton_7 = new JButton("Cancel");
 		btnNewButton_7.setBackground(Factory.cancleBtnColor);
+		btnNewButton_7.setForeground(Factory.buttonTextColor);
 		btnNewButton_7.setBounds(686, 471, 135, 35);
 		Reg_panel.add(btnNewButton_7);
 		btnNewButton_7.addActionListener(this);

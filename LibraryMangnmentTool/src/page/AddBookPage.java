@@ -122,11 +122,13 @@ public class AddBookPage implements ActionListener {
 		btnNewButton_6.setBounds(850, 516, 115, 32);
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		btnNewButton_6.addActionListener(this);
+		btnNewButton_6.setForeground(Factory.buttonTextColor);
 		add_Book.add(btnNewButton_6);
 		
 		JButton btnSave = new JButton("Cancel");
 		btnSave.setBackground(Factory.cancleBtnColor);
 		btnSave.setBounds(979, 514, 109, 34);
+		btnSave.setForeground(Factory.buttonTextColor);
 		btnSave.addActionListener(this);
 		add_Book.add(btnSave);
 		JSeparator separator_1 = new JSeparator();

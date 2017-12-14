@@ -22,6 +22,18 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	
+	String[] userRolelist;
+	
+	{
+		userRolelist = getUserRoleList();
+		
+	}
+	
+	private String[] getUserRoleList(){
+		return new String[]{"User"};
+	}
+
 	public JTextField getTextField() {
 		return textField;
 	}
@@ -86,12 +98,14 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	JButton btnNewButton_9 = new JButton("Save");
 	btnNewButton_9.setBackground(Factory.modifyBtnColor);
 	btnNewButton_9.setBounds(850, 516, 115, 32);
+	btnNewButton_9.setForeground(Factory.buttonTextColor);
 	btnNewButton_9.addActionListener(this);
 	add(btnNewButton_9);
 	
 	JButton btnNewButton_11 = new JButton("Cancel");
 	btnNewButton_11.setBackground(Factory.cancleBtnColor);
 	btnNewButton_11.setBounds(979, 514, 109, 34);
+	btnNewButton_11.setForeground(Factory.buttonTextColor);
 	btnNewButton_11.addActionListener(this);
 	add(btnNewButton_11);
 	JLabel lblName = new JLabel("Name:-");
@@ -104,13 +118,16 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	add(textField);
 	textField.setColumns(10);
 	
+	
 	JLabel lblUserRole = new JLabel("User Role:-");
 	lblUserRole.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 	lblUserRole.setBounds(581, 187, 99, 14);
 	add(lblUserRole);
 	
-	JComboBox comboBox = new JComboBox();
+	JComboBox comboBox = new JComboBox(userRolelist);
 	comboBox.setBounds(722, 186, 243, 20);
+	comboBox.setSelectedItem("1");
+	
 	add(comboBox);
 	
 	JLabel lblUserMobile = new JLabel("User Mobile:-");

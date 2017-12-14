@@ -7,6 +7,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -77,6 +81,28 @@ public class LoginDialog extends JDialog implements ActionListener {
         btnCancel.addActionListener(this);
         JPanel bp = new JPanel();
         bp.add(btnLogin);
+        btnLogin.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				System.out.println("key Code"+e.getKeyCode());
+				loginProcess();
+			}
+		});
+        
+        
         bp.add(btnCancel);
  
         getContentPane().add(panel, BorderLayout.CENTER);
@@ -85,6 +111,15 @@ public class LoginDialog extends JDialog implements ActionListener {
         pack();
         setResizable(false);
         setLocationRelativeTo(parent);
+        
+        this.addWindowListener(new WindowAdapter() {
+        	@Override
+        	public void windowClosing(WindowEvent e) {
+        		super.windowClosing(e);
+        		System.exit(1);
+        	}
+        	
+		});
     }
  
     public String getUsername() {
@@ -140,5 +175,31 @@ public class LoginDialog extends JDialog implements ActionListener {
 				break;
 		}
 		
+	}
+	
+	
+	private void loginProcess(){
+		EventQueue.invokeLater( new Runnable() {
+			public void run() {
+				String uname = getUsername();
+				String pass = getPassword();
+				if(uname.trim().equals("") || pass.trim().equals("")){
+					DialogService.showErrorMgs(Factory.getMainFrame(), "Username and Password can't be blank..!", "Invaild User");
+				}else{
+					UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
+					boolean result = userLoginService.validateUserName(uname,pass);
+					LoginUserDetail name=userLoginService.getUserDetail(uname);
+					if(result){
+						NevigationMenueBar n =new NevigationMenueBar(name.getUser_name());
+						n.manueBar(parent);
+						parent.revalidate();
+						parent.repaint();
+						dispose();
+					}else
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Please Enter valid Username and password .!", "Invaild User");
+				}
+				
+			}
+		});
 	}
 }

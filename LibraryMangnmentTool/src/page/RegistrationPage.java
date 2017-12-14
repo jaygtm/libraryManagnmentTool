@@ -101,6 +101,7 @@ public class RegistrationPage implements ActionListener {
 		textField_4.setColumns(10);
 
 		JButton btnNewButton_6 = new JButton("Save");
+		btnNewButton_6.setForeground(Factory.buttonTextColor);
 		btnNewButton_6.setBounds(850, 516, 115, 34);
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		Reg_panel.add(btnNewButton_6);
@@ -109,6 +110,7 @@ public class RegistrationPage implements ActionListener {
 
 		JButton btnNewButton_7 = new JButton("Cancel");
 		btnNewButton_7.setBounds(979, 514, 109, 34);
+		btnNewButton_7.setForeground(Factory.buttonTextColor);
 		btnNewButton_7.setBackground(Factory.cancleBtnColor);
 		btnNewButton_7.addActionListener(this);
 		Reg_panel.add(btnNewButton_7);
