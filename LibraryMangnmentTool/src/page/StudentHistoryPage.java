@@ -7,11 +7,13 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
 
 import common.service.DialogService;
@@ -29,6 +31,10 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		setBounds(20, 79, 1099, 481);
 		setBackground(Color.WHITE);
 		setLayout(null);
+		if(flag)
+			setBorder(BorderFactory.createTitledBorder("Alloted Book"));
+		else
+			setBorder(BorderFactory.createTitledBorder("Book History"));
 		
 		JScrollPane gridpanel = new JScrollPane();
 		gridpanel.setBounds(0, 0, 1099, 450);
@@ -65,8 +71,8 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		btnNewButton_10.setBounds(790, 450, 120, 30);
 		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		btnNewButton_10.addActionListener(this);
-		add(btnNewBu		btnNewButton_10.setForeground(Factory.buttonTextColor);
-tton_10);
+		btnNewButton_10.setForeground(Factory.buttonTextColor);
+		add(btnNewButton_10);
 		JButton btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(920, 450, 120, 30);
@@ -80,7 +86,7 @@ tton_10);
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		btnNewButton_11.setForeground(Factory.buttonTextColor);
+
 
 		String action = e.getActionCommand().trim();
 		System.out.println("Action " + action+" At "+getClass().toString());
