@@ -63,6 +63,7 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 		JButton btnNewButton_10 = new JButton("Back");
 		btnNewButton_10.setBackground(Factory.backBtnColor);
 		btnNewButton_10.setBounds(790, 450, 120, 30);
+		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewBu		btnNewButton_10.setForeground(Factory.buttonTextColor);
 tton_10);
@@ -70,6 +71,7 @@ tton_10);
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(920, 450, 120, 30);
 		btnNewButton_11.addActionListener(this);
+		btnNewButton_11.setForeground(Factory.buttonTextColor);
 		add(btnNewButton_11);
 		setVisible(true);
 	}

@@ -99,6 +99,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		
 	}
 
+	@Override
 	public List<GetStudentModel> viewAlloted(String id, String string) {
 		Session session = Factory.sessionfactory.openSession();
 		Transaction tx = null;

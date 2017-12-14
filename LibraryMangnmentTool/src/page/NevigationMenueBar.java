@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -33,6 +34,7 @@ public class NevigationMenueBar implements ActionListener {
 		panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setForeground(Color.WHITE);
+		panel.setLayout(null);
 		panel.setBounds(10, 63, 195, 593);
 		mainframe.getContentPane().add(panel);
 		
@@ -41,7 +43,7 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton_1.setBackground(new Color(105, 105, 105));
-		btnNewButton_1.setBounds(432, 45, 130, 28);
+		btnNewButton_1.setBounds(0, 4, 205, 44);
 		//btnNewButton_1.setBorder(null);
 		btnNewButton_1.addActionListener(this);
 		panel.add(btnNewButton_1);
@@ -50,7 +52,7 @@ public class NevigationMenueBar implements ActionListener {
 		viewBookBtn.setForeground(Color.WHITE);
 		viewBookBtn.setBackground(new Color(105, 105, 105));
 		viewBookBtn.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		//btnNewButton_1.setBorder(null);
+		viewBookBtn.setBounds(0, 47, 205, 44);
 		viewBookBtn.addActionListener(this);
 		panel.add(viewBookBtn);
 		
@@ -59,7 +61,7 @@ public class NevigationMenueBar implements ActionListener {
 		JButton btnNewButton = new JButton("Add Student                      ");
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(new Color(105, 105, 105));
-		//btnNewButton.setBorder(null);
+		btnNewButton.setBounds(0, 88, 205, 44);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton.addActionListener(this);
 		panel.add(btnNewButton);
@@ -69,6 +71,7 @@ public class NevigationMenueBar implements ActionListener {
 		StudentlistButton.setBackground(new Color(105, 105, 105));
 		StudentlistButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		StudentlistButton.addActionListener(this);
+		StudentlistButton.setBounds(0, 131, 205, 44);
 		panel.add(StudentlistButton);
 		
 		JButton btnNewButton_4 = new JButton("User Creation                   ");
@@ -76,9 +79,10 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_4.setBackground(new Color(105, 105, 105));
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton_4.addActionListener(this);
+		btnNewButton_4.setBounds(0, 173, 205, 44);
 		panel.add(btnNewButton_4);
 		
-		JButton btnNewButton_3 = new JButton("Issue Books                      ");
+	/*	JButton btnNewButton_3 = new JButton("Issue Books                      ");
 		btnNewButton_3.setForeground(Color.WHITE);
 		btnNewButton_3.setBackground(new Color(105, 105, 105));
 		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -104,7 +108,7 @@ public class NevigationMenueBar implements ActionListener {
 		});
 		panel.add(btnNewButton_5);
 		
-		bodyPanel = new JPanel();
+	*/	bodyPanel = new JPanel();
 		bodyPanel.setBounds(208, 63, 1149, 593);
 		//bodyPanel.setBackground(new Color(213, 134, 145, 100));
 		bodyPanel.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.5f));
@@ -143,9 +147,12 @@ public class NevigationMenueBar implements ActionListener {
 		lblDate.setBounds(963, 0, 101, 25);
 		panel_4.add(lblDate);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel();
 		lblNewLabel_2.setBounds(1090, 7, 213, 14);
 		panel_4.add(lblNewLabel_2);
+		
+		new timeUpdate(lblNewLabel_2).start();
+		
 	
 	}
 	
@@ -233,6 +240,32 @@ break;
 		default: bodyPanel.removeAll();
 			break;
 		}
+		
+	}
+	
+	
+	class timeUpdate extends Thread {
+		private JLabel timeLabal ;
+		public timeUpdate(JLabel timeLabal) {
+			this.timeLabal = timeLabal;
+		}
+		
+		public void run(){
+			while(true){
+				this.timeLabal.setText(new Date().toString());
+				Factory.refresh();
+				try {
+					currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		}
+		
+		
 		
 	}
 	

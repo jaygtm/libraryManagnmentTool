@@ -192,14 +192,20 @@ ncel);*/
 		btnIssue = new JButton("Issue");
 		btnIssue.setBounds(660, 450, 120, 30);
 		btnIssue.addActionListener(this);
+		btnIssue.setBackground(Factory.modifyBtnColor);
+		btnIssue.setForeground(Factory.buttonTextColor);
 		add(btnIssue);
 		
 		JButton btnNewButton_10 = new JButton("Back");
 		btnNewButton_10.setBounds(790, 450, 120, 30);
+		btnNewButton_10.setBackground(Factory.backBtnColor);
+		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(920, 450, 120, 30);
+		btnNewButton_11.setForeground(Factory.buttonTextColor);
 		btnNewButton_11.addActionListener(this);
 		add(btnNewButton_11);
 		

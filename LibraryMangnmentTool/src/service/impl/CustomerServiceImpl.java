@@ -2,44 +2,43 @@ package service.impl;
 
 import java.util.List;
 
-import dao.impl.CustomerDaoImpl;
+import dao.CustomerDao;
 import model.CustomerModel;
 import model.GetStudentModel;
-import model.StudentHistoryModel;
 import service.CustomerService;
 
 public class CustomerServiceImpl implements CustomerService {
 	
-	private CustomerDaoImpl customerDaoImpl;
+	private CustomerDao customerDao;
 	
-	public CustomerDaoImpl getCustomerDaoImpl() {
-		return customerDaoImpl;
+	public CustomerDao getCustomerDaoImpl() {
+		return customerDao;
 	}
-	public void setCustomerDaoImpl(CustomerDaoImpl customerDaoImpl) {
-		this.customerDaoImpl = customerDaoImpl;
+	public void setCustomerDaoImpl(CustomerDao customerDaoImpl) {
+		this.customerDao = customerDaoImpl;
 	}
 	@Override
 	public boolean saveCustomerDetail(CustomerModel customerModel){
-		return  customerDaoImpl.saveCustomerDetail(customerModel);
+		return  customerDao.saveCustomerDetail(customerModel);
 	}
 	
 	@Override
 	public boolean deleteCustomerDetail(int customerId){
-		return  customerDaoImpl.deleteCustomerDetail(customerId);
+		return  customerDao.deleteCustomerDetail(customerId);
 	}
 	@Override
 	public List<CustomerModel> getAllCustomerDetail() {
-		return customerDaoImpl.getAllCustomerDetail();
+		return customerDao.getAllCustomerDetail();
 	}
 	
 	@Override
 	public List<GetStudentModel> viewHistory(String id) {
-		return customerDaoImpl.viewHistory(id);
+		return customerDao.viewHistory(id);
 	}
 	@Override
 	public List<GetStudentModel> viewAlloted(String id, String string) {
 		// TODO Auto-generated method stub
-		return customerDaoImpl.viewAlloted(id,string);
+		return customerDao.viewAlloted(id,string);
 	}
 
 }

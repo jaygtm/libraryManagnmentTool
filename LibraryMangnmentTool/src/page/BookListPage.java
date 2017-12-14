@@ -76,21 +76,26 @@ public class BookListPage extends JPanel implements ActionListener {
 		
 		JButton btnNewButton_8 = new JButton("New button");
 		btnNewButton_8.setBounds(10, 475, 107, 43);
+		btnNewButton_8.setBackground(Factory.saveBtnColor);
+		btnNewButton_8.setForeground(Factory.buttonTextColor);
 		add(btnNewButton_8);
 		
 		JButton btnNewButton_9 = new JButton("Modify");
 		btnNewButton_9.setBackground(Factory.modifyBtnColor);
+		btnNewButton_9.setForeground(Factory.buttonTextColor);
 		btnNewButton_9.setBounds(664, 475, 114, 43);
 		add(btnNewButton_9);
 		
 		JButton btnNewButton_10 = new JButton("Delete");
 		btnNewButton_10.setBackground(Factory.deleteBtnColor);
+		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		btnNewButton_10.setBounds(788, 475, 101, 43);
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBounds(899, 475, 100, 43);
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
+		btnNewButton_11.setForeground(Factory.buttonTextColor);
 		add(btnNewButton_11);
 		
 	}
