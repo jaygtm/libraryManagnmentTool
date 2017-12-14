@@ -13,5 +13,6 @@ public interface CustomerDao {
 	boolean deleteCustomerDetail(int customerId);
 	public List<CustomerModel> getAllCustomerDetail();
 	List<GetStudentModel> viewHistory(String id);
+	List<GetStudentModel> viewAlloted(String id, String string);
 
 }
