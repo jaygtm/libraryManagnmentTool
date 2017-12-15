@@ -1,6 +1,7 @@
 package page;
 
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import common.service.DialogService;
 import common.service.Factory;
 import model.BookModel;
 import service.BookService;
+import service.CustomerService;
 
 @SuppressWarnings("serial")
 public class BookListPage extends JPanel implements ActionListener {
@@ -36,15 +40,22 @@ public class BookListPage extends JPanel implements ActionListener {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Book List");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel.setBounds(469, 11, 89, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		lblNewLabel.setBounds(469, 10, 100, 14);
 		add(lblNewLabel);
 		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 30, 1109, 8);
+		add(separator);
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 497, 1109, 8);
+		add(separator_1);
+
 		JLabel lblNewLabel_1 = new JLabel("Search By");
 		lblNewLabel_1.setBounds(10, 47, 73, 14);
 		add(lblNewLabel_1);
 		
-		comboBox = new JComboBox(new String[]{"-Select-","Name","Authour","Publication","Id"});
+		comboBox = new JComboBox(new String[]{"-Select-","Name","Mobile","Email"});
 		comboBox.setBounds(73, 44, 175, 20);
 		comboBox.setPreferredSize(new Dimension(350, 30));
 		add(comboBox);
@@ -67,34 +78,40 @@ public class BookListPage extends JPanel implements ActionListener {
 		add(btnNewButton_7);
 		
 		JScrollPane scrollBar = new JScrollPane();
-		scrollBar.setBounds(10, 75, 1109, 377);
+		scrollBar.setBounds(10, 75, 1109, 420);
 		add(scrollBar);
 		
 		table = new JTable(getRowData(),columnName());
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
-		JButton btnNewButton_8 = new JButton("New button");
-		btnNewButton_8.setBounds(10, 475, 107, 43);
+		JButton btnNewButton_8 = new JButton("Add");
 		btnNewButton_8.setBackground(Factory.saveBtnColor);
+		btnNewButton_8.setBounds(10, 514, 109, 34);
 		btnNewButton_8.setForeground(Factory.buttonTextColor);
+		btnNewButton_8.addActionListener(this);
 		add(btnNewButton_8);
+		
+		
 		
 		JButton btnNewButton_9 = new JButton("Modify");
 		btnNewButton_9.setBackground(Factory.modifyBtnColor);
+		btnNewButton_9.setBounds(750, 514, 109, 34);
 		btnNewButton_9.setForeground(Factory.buttonTextColor);
-		btnNewButton_9.setBounds(664, 475, 114, 43);
+		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
 		JButton btnNewButton_10 = new JButton("Delete");
 		btnNewButton_10.setBackground(Factory.deleteBtnColor);
+		btnNewButton_10.setBounds(865, 514, 109, 34);
+		btnNewButton_10.addActionListener(this);
 		btnNewButton_10.setForeground(Factory.buttonTextColor);
-		btnNewButton_10.setBounds(788, 475, 101, 43);
 		add(btnNewButton_10);
 		
 		JButton btnNewButton_11 = new JButton("Cancel");
-		btnNewButton_11.setBounds(899, 475, 100, 43);
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
+		btnNewButton_11.setBounds(979, 514, 109, 34);
+		btnNewButton_11.addActionListener(this);
 		btnNewButton_11.setForeground(Factory.buttonTextColor);
 		add(btnNewButton_11);
 		
@@ -102,7 +119,72 @@ public class BookListPage extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand().trim();
+		System.out.println("Action " + action+"At Class "+getClass().toString());
+		switch (action) {
+		case "Modify":
+			EventQueue.invokeLater(new Runnable() {
+				
+
+				@Override
+				public void run() {
+
+					int row = table.getSelectedRow();
+					if (row == -1) {
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select Row First", "Alert");
+					} else {
+						BookService bookService = (BookService) Factory.getContext().getBean("bookService");
+						bookService.editBook(null);
+					}
+
+				}
+			});
+			break;
+
+		case "Delete":
+			EventQueue.invokeLater(new Runnable() {
+				
+
+				@Override
+				public void run() {
+					int row = table.getSelectedRow();
+
+					if (row == -1) {
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select Row First", "Alert");
+					} else {
+						BookService bookService = (BookService) Factory.getContext().getBean("bookService");
+						bookService.delteBook(null);
+					}
+				}
+			});
+			break;
+		case "Cancel":
+			EventQueue.invokeLater(new Runnable() {
+
+				@Override
+				public void run() {
+					Factory.homePage();
+					Factory.refresh();
+				}
+			});
+			break;
+		case "Add":
+			EventQueue.invokeLater(new Runnable() {
+
+				@Override
+				public void run() {
+					Factory.homePage();
+					AddBookPage addbook = new AddBookPage(true);
+					Factory.getBodyPanal().add(addbook);
+					Factory.refresh();
+				}
+			});
+			break;
 		
+
+		default:
+			break;
+		}
 	}
 	public String[] columnName() {
 		String columnName[] = { "Book_id","Book Name", "Book Mrp", "Book Rent", "Book Rant per day", "Book Authour","publication","Available","Total"};
