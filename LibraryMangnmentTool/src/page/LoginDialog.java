@@ -34,7 +34,7 @@ public class LoginDialog extends JDialog implements ActionListener {
     private JLabel lbUsername;
     private JLabel lbPassword;
     private JButton btnLogin;
-    private JButton btnCancel;
+    JButton btnCancel;
     private boolean succeeded;
     private JFrame parent;
  
@@ -149,9 +149,10 @@ public class LoginDialog extends JDialog implements ActionListener {
 					}else{
 						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
 						boolean result = userLoginService.validateUserName(uname,pass);
-						LoginUserDetail name=userLoginService.getUserDetail(uname);
+						//LoginUserDetail name=userLoginService.getUserDetail(uname);
+						Factory.loginUserDetail=userLoginService.getUserDetail(uname);
 						if(result){
-							NevigationMenueBar n =new NevigationMenueBar(name.getUser_name());
+							NevigationMenueBar n =new NevigationMenueBar(Factory.loginUserDetail.getUser_name());
 							n.manueBar(parent);
 							parent.revalidate();
 							parent.repaint();

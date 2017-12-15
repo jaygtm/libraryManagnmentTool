@@ -82,22 +82,24 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_4.setBounds(0, 173, 205, 44);
 		panel.add(btnNewButton_4);
 		
-	/*	JButton btnNewButton_3 = new JButton("Issue Books                      ");
+		JButton btnNewButton_3 = new JButton("Lock                                    ");
 		btnNewButton_3.setForeground(Color.WHITE);
 		btnNewButton_3.setBackground(new Color(105, 105, 105));
 		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_3.setBorder(null);
+		btnNewButton_3.setBounds(0, 216, 205, 44);
 		btnNewButton_3.addActionListener(this);
 		panel.add(btnNewButton_3);
 		
-		JButton btnNewButton_2 = new JButton("View Issue Detail             ");
+		JButton btnNewButton_2 = new JButton("Exit                                     ");
 		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setBackground(new Color(105, 105, 105));
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		//btnNewButton_2.setBorder(null);
+		btnNewButton_2.setBounds(0, 259, 205, 44);
+		btnNewButton_2.addActionListener(this);
 		panel.add(btnNewButton_2);
 		
-		JButton btnNewButton_5 = new JButton("Submit Book                     ");
+		/*JButton btnNewButton_5 = new JButton("Submit Book                     ");
 		btnNewButton_5.setForeground(Color.WHITE);
 		btnNewButton_5.setBackground(new Color(105, 105, 105));
 		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -234,8 +236,27 @@ public class NevigationMenueBar implements ActionListener {
 				Factory.refresh();
 			}
 		});
-break;
+		break;
+		case "Exit" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				mainframe.dispose();
+			}
+		});
+		break;
+		case "Lock" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				LoginDialog loginDialog= new LoginDialog(Factory.getMainFrame());
+				loginDialog.btnCancel.setEnabled(false);
+				Factory.refresh();
 
+			}
+		});
+		break;
+			
 
 		default: bodyPanel.removeAll();
 			break;

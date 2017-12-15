@@ -17,6 +17,8 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import model.LoginUserDetail;
+
 public class Factory {
 	private static  ApplicationContext context;
 	public static SessionFactory sessionfactory;
@@ -30,6 +32,7 @@ public class Factory {
 	public static final Color backBtnColor	= new Color(51, 153, 102);
 	public static final Color loginBtnColor	= new Color(0, 153, 204);
 	public static final Color buttonTextColor	= Color.white;
+	public static LoginUserDetail loginUserDetail=null;
 	
 	//height 35,width 135
 	
