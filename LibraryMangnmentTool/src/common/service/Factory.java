@@ -33,7 +33,7 @@ public class Factory {
 	public static final Color loginBtnColor	= new Color(0, 153, 204);
 	public static final Color buttonTextColor	= Color.white;
 	public static LoginUserDetail loginUserDetail=null;
-	
+	//login user
 	//height 35,width 135
 	
 	
