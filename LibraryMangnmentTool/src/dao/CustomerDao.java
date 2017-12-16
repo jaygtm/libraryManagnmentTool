@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.CustomerModel;
 import model.GetStudentModel;
-import model.StudentHistoryModel;
 
 public interface CustomerDao {
 	
@@ -14,5 +13,6 @@ public interface CustomerDao {
 	public List<CustomerModel> getAllCustomerDetail();
 	List<GetStudentModel> viewHistory(String id);
 	List<GetStudentModel> viewAlloted(String id, String string);
+	List<CustomerModel> getSearchStudentList(String searchBy, String value);
 
 }

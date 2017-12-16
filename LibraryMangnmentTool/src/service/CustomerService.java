@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.CustomerModel;
 import model.GetStudentModel;
-import model.StudentHistoryModel;
 
 public interface CustomerService {
 
@@ -16,5 +15,7 @@ public interface CustomerService {
 	List<GetStudentModel> viewHistory(String id);
 
 	List<GetStudentModel> viewAlloted(String id, String string);
+
+	List<CustomerModel> getSearchStudentList(String searchBy, String value);
 
 }

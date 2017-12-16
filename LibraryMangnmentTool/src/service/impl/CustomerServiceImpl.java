@@ -40,5 +40,9 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return customerDao.viewAlloted(id,string);
 	}
+	@Override
+	public List<CustomerModel> getSearchStudentList(String searchBy, String value){
+		return customerDao.getSearchStudentList(searchBy, value);
+	}
 
 }

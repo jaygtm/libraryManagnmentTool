@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -148,6 +149,7 @@ public class BookDaoImp implements BookDao {
 	@Override
 	public List<BookModel> getSearchBookList(String searchBy,String value) {
 		String columnName="";
+		List<BookModel> list=new LinkedList<BookModel>();
 		if(searchBy.equals("Name")){
 			columnName="book_name";
 		}else if(searchBy.equals("Aurther")){
@@ -155,11 +157,14 @@ public class BookDaoImp implements BookDao {
 		}else if(searchBy.equals("Publication")){
 			columnName="book_publication";
 		}
+		if(columnName.equals("")){
+			return list;
+		}
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(BookModel.class);
 		c.add(Restrictions.gt(columnName, value));
-		List<BookModel> list = c.list();
+		list = c.list();
 		seession.close();
 		return list;
 	}
