@@ -19,9 +19,13 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	@Override
 	public UserModel getUserDetail(String userName) {
 		LoginUserDetail detail= getUsrAllDetail(userName);
-			if(detail.getIdPass().getUser_name().trim().equals(userName))
+		if(detail != null){
+			if(detail.getIdPass().getUser_name().equals(userName))
 				return detail.getIdPass();
-		return null;
+			else
+				return null;
+		}else
+			return null;
 	}
 
 	@Override
@@ -29,8 +33,10 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		UserModel userModel = getUserDetail(username);
 	//	LoginUserDetail LoginUserDetail=getUsrAllDetail(username);
 		if(userModel != null){
-			if(userModel.getUser_passwprd().equals(password))
+			if(userModel.getUser_passwprd().equals(password)){
+				Factory.loginUserDetail= getUsrAllDetail(username);
 				return true;
+			}
 			else
 				return false;
 		}else
@@ -51,16 +57,15 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public LoginUserDetail getUsrAllDetail(String username){
-
 		Session session = Factory.sessionfactory.openSession();
 		Transaction tx = null;
 		List<LoginUserDetail> list=new ArrayList<LoginUserDetail>();
-		
-		
+		int id=getUserId(username);
+		if(id!=0){
 	     try {
 	         tx = session.beginTransaction(); 
 	         Criteria c=session.createCriteria(LoginUserDetail.class);  
-	         c.add(Restrictions.eq("user_id", getUserId(username)));//salary is the propertyname  
+	         c.add(Restrictions.eq("user_id", id));//salary is the propertyname  
 	         list=c.list();  
 
 	     } catch (HibernateException ex) {
@@ -71,9 +76,13 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	     } finally {
 	    	 session.close(); 
 	     }
-		return list.get(0);
-		
-	
+	    
+	     if(list.isEmpty())
+	    	 return null;
+	     else
+	    	 return list.get(0);
+		}else
+			return null;
 	}
 	private int getUserId(String username){
 
@@ -96,7 +105,10 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	     } finally {
 	    	 session.close(); 
 	     }
-		return list.get(0).getUser_id_info();
+	     if(list.size()==0)
+	    	 return 0;
+	     else
+	    	 return list.get(0).getUser_id_info();
 		
 	}
 

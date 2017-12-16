@@ -29,7 +29,7 @@ import service.UserLoginService;
 
 public class LoginDialog extends JDialog implements ActionListener {
 	 
-    private JTextField tfUsername;
+    JTextField tfUsername;
     private JPasswordField pfPassword;
     private JLabel lbUsername;
     private JLabel lbPassword;
@@ -145,12 +145,12 @@ public class LoginDialog extends JDialog implements ActionListener {
 					String uname = getUsername();
 					String pass = getPassword();
 					if(uname.trim().equals("") || pass.trim().equals("")){
-						DialogService.showErrorMgs(d, "Username and Password can't be blank..!", "Invaild User");
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Username and Password can't be blank..!", "Invaild User");
 					}else{
 						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
 						boolean result = userLoginService.validateUserName(uname,pass);
 						//LoginUserDetail name=userLoginService.getUserDetail(uname);
-						Factory.loginUserDetail=userLoginService.getUserDetail(uname);
+						//Factory.loginUserDetail=userLoginService.getUserDetail(uname);
 						if(result){
 							NevigationMenueBar n =new NevigationMenueBar(Factory.loginUserDetail.getUser_name());
 							n.manueBar(parent);
@@ -158,7 +158,7 @@ public class LoginDialog extends JDialog implements ActionListener {
 							parent.repaint();
 							dispose();
 						}else
-							DialogService.showErrorMgs(d, "Please Enter valid Username and password .!", "Invaild User");
+							DialogService.showErrorMgs(Factory.getMainFrame(), "Please Enter valid Username and password .!", "Invaild User");
 					}
 					
 				}
