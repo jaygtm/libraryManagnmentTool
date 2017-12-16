@@ -80,5 +80,8 @@ public class BookServiceImp implements BookService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Override
+	public List<BookModel> getSearchBookList(String searchBy,String value){
+		return bookDao.getSearchBookList(searchBy, value);
+	}
 }

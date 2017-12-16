@@ -55,7 +55,7 @@ public class BookListPage extends JPanel implements ActionListener {
 		lblNewLabel_1.setBounds(10, 47, 73, 14);
 		add(lblNewLabel_1);
 		
-		comboBox = new JComboBox(new String[]{"-Select-","Name","Mobile","Email"});
+		comboBox = new JComboBox(new String[]{"-Select-","Name","Aurther","Publication"});
 		comboBox.setBounds(73, 44, 175, 20);
 		comboBox.setPreferredSize(new Dimension(350, 30));
 		add(comboBox);

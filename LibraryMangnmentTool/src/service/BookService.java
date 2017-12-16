@@ -20,4 +20,5 @@ public interface BookService {
 	public boolean addBookType(BookTypeModel model);
 	
 	public boolean issueBook(List<StudentHistoryModel> model);
+	List<BookModel> getSearchBookList(String searchBy, String value);
 }

@@ -144,5 +144,24 @@ public class BookDaoImp implements BookDao {
 		seession.close();
 		return list;
 	}
+	
+	@Override
+	public List<BookModel> getSearchBookList(String searchBy,String value) {
+		String columnName="";
+		if(searchBy.equals("Name")){
+			columnName="book_name";
+		}else if(searchBy.equals("Aurther")){
+			columnName="book_aurthor";
+		}else if(searchBy.equals("Publication")){
+			columnName="book_publication";
+		}
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		Criteria c = seession.createCriteria(BookModel.class);
+		c.add(Restrictions.gt(columnName, value));
+		List<BookModel> list = c.list();
+		seession.close();
+		return list;
+	}
 
 }
