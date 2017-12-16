@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
@@ -17,7 +16,10 @@ public class LoginUserDetail {
 	@GeneratedValue
      private int user_id;
     // private int user_roleId;
-     private String user_mobile, user_idNo, user_addr,user_name;
+     private String user_mobile;
+     private String user_idNo;
+     private String user_addr;
+     private String user_name;
      @OneToOne(fetch = FetchType.EAGER)
  	 @JoinColumn(name="user_roleId")
      private UserRole usrRole;
