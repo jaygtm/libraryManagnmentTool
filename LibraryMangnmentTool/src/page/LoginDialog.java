@@ -29,12 +29,12 @@ import service.UserLoginService;
 
 public class LoginDialog extends JDialog implements ActionListener {
 	 
-    JTextField tfUsername;
+    private JTextField tfUsername;
     private JPasswordField pfPassword;
     private JLabel lbUsername;
     private JLabel lbPassword;
     private JButton btnLogin;
-    JButton btnCancel;
+    private JButton btnCancel;
     private boolean succeeded;
     private JFrame parent;
  
@@ -120,6 +120,7 @@ public class LoginDialog extends JDialog implements ActionListener {
         	}
         	
 		});
+        lockMode();
     }
  
     public String getUsername() {
@@ -152,10 +153,13 @@ public class LoginDialog extends JDialog implements ActionListener {
 						//LoginUserDetail name=userLoginService.getUserDetail(uname);
 						//Factory.loginUserDetail=userLoginService.getUserDetail(uname);
 						if(result){
-							NevigationMenueBar n =new NevigationMenueBar(Factory.loginUserDetail.getUser_name());
-							n.manueBar(parent);
-							parent.revalidate();
-							parent.repaint();
+							if(!Factory.lockModeOn){
+								Factory.lockModeOn=false;
+								NevigationMenueBar n =new NevigationMenueBar(Factory.loginUserDetail.getUser_name());
+								n.manueBar(parent);
+								parent.revalidate();
+								parent.repaint();
+							}
 							dispose();
 						}else
 							DialogService.showErrorMgs(Factory.getMainFrame(), "Please Enter valid Username and password .!", "Invaild User");
@@ -202,5 +206,13 @@ public class LoginDialog extends JDialog implements ActionListener {
 				
 			}
 		});
+	}
+	public void lockMode(){
+		if(Factory.lockModeOn){
+        	btnCancel.setEnabled(false);
+			tfUsername.setText(Factory.loginUserDetail.getIdPass().getUser_name());
+			tfUsername.setEditable(false);
+			setVisible(true);
+        }
 	}
 }

@@ -249,11 +249,8 @@ public class NevigationMenueBar implements ActionListener {
 			
 												@Override
 												public void run() {
+													Factory.lockModeOn=true;
 													LoginDialog loginDialog= new LoginDialog(Factory.getMainFrame());
-													loginDialog.btnCancel.setEnabled(false);
-													loginDialog.tfUsername.setText(Factory.loginUserDetail.getIdPass().getUser_name());
-													loginDialog.tfUsername.setEditable(false);
-													loginDialog.setVisible(true);
 													Factory.refresh();
 									
 												}
