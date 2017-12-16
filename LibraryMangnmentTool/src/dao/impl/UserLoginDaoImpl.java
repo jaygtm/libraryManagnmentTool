@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -53,6 +54,29 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		seession.close();
 		return list;
 	}
+	
+	@Override
+	public List<LoginUserDetail> getSearchStudentList(String searchBy,String value) {
+		String columnName="";
+		List<LoginUserDetail> list=new LinkedList<LoginUserDetail>();
+		if(searchBy.equals("Name")){
+			columnName="user_name";
+		}else if(searchBy.equals("Mobile")){
+			columnName="user_mobile";
+		}
+		
+		if(columnName.equals("")){
+			return list;
+		}
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		Criteria c = seession.createCriteria(LoginUserDetail.class);
+		c.add(Restrictions.gt(columnName, value));
+		list = c.list();
+		seession.close();
+		return list;
+	}
+
 	
 	@SuppressWarnings("unchecked")
 	@Override
