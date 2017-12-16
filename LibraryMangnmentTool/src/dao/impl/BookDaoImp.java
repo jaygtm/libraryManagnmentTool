@@ -14,7 +14,6 @@ import common.service.Factory;
 import dao.BookDao;
 import model.BookModel;
 import model.BookTypeModel;
-import model.CustomerModel;
 import model.StudentHistoryModel;
 
 public class BookDaoImp implements BookDao {

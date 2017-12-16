@@ -1,11 +1,11 @@
 package dao.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -14,7 +14,6 @@ import common.service.Factory;
 import dao.CustomerDao;
 import model.CustomerModel;
 import model.GetStudentModel;
-import model.StudentHistoryModel;
 
 public class CustomerDaoImpl implements CustomerDao {
 
@@ -124,4 +123,27 @@ public class CustomerDaoImpl implements CustomerDao {
 		return list;
 		
 	}
+	@Override
+	public List<CustomerModel> getSearchStudentList(String searchBy,String value) {
+		String columnName="";
+		List<CustomerModel> list=new LinkedList<CustomerModel>();
+		if(searchBy.equals("Name")){
+			columnName="customer_name";
+		}else if(searchBy.equals("Mobile")){
+			columnName="customer_mobile";
+		}else if(searchBy.equals("Email")){
+			columnName="customer_email";
+		}
+		if(columnName.equals("")){
+			return list;
+		}
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		Criteria c = seession.createCriteria(CustomerModel.class);
+		c.add(Restrictions.gt(columnName, value));
+		list = c.list();
+		seession.close();
+		return list;
+	}
+
 }
