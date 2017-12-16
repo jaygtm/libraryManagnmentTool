@@ -12,4 +12,5 @@ public interface UserLoginDao {
 	LoginUserDetail userLoginDao(String username);
 	LoginUserDetail getUsrAllDetail(String username);
 	public boolean saveUser(LoginUserDetail loginUserDetail);
+	List<LoginUserDetail> getSearchStudentList(String searchBy, String value);
 }

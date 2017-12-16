@@ -32,7 +32,11 @@ public class UserLoginServiceImpl implements UserLoginService {
 	public List<LoginUserDetail> getAllUser() {
 		return userLoginDao.getAllUser();
 	}
-
+	
+	@Override
+	public List<LoginUserDetail> getSearchStudentList(String searchBy, String value){
+		return userLoginDao.getSearchStudentList(searchBy, value);
+	}
 	
 
 	
