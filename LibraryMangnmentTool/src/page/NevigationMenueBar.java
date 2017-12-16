@@ -220,45 +220,45 @@ public class NevigationMenueBar implements ActionListener {
 		break;
 		case "Logout" :EventQueue.invokeLater(new Runnable() {
 			
-												@Override
-												public void run() {
-													mainframe.dispose();
-													new DashboardPage("LibraryManagnmentTool");
-												}
-											});
+														@Override
+														public void run() {
+															mainframe.dispose();
+															new DashboardPage("LibraryManagnmentTool");
+														}
+													});
 		break;
 		case "User Creation" :EventQueue.invokeLater(new Runnable() {
 			
-			@Override
-			public void run() {
-				bodyPanel.removeAll();
-				bodyPanel.add(new UserList());
-				Factory.refresh();
-			}
-		});
+													@Override
+													public void run() {
+														bodyPanel.removeAll();
+														bodyPanel.add(new UserList());
+														Factory.refresh();
+													}
+												});
 		break;
 		case "Exit" :EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				mainframe.dispose();
-			}
-		});
+					
+													@Override
+													public void run() {
+														mainframe.dispose();
+													}
+												});
 		break;
 		case "Lock" :EventQueue.invokeLater(new Runnable() {
 			
-			@Override
-			public void run() {
-				LoginDialog loginDialog= new LoginDialog(Factory.getMainFrame());
-				loginDialog.btnCancel.setEnabled(false);
-				loginDialog.tfUsername.setText(Factory.loginUserDetail.getIdPass().getUser_name());
-				loginDialog.tfUsername.setEditable(false);
-				loginDialog.setVisible(true);
-				Factory.refresh();
-
-			}
-		});
-		break;
+												@Override
+												public void run() {
+													LoginDialog loginDialog= new LoginDialog(Factory.getMainFrame());
+													loginDialog.btnCancel.setEnabled(false);
+													loginDialog.tfUsername.setText(Factory.loginUserDetail.getIdPass().getUser_name());
+													loginDialog.tfUsername.setEditable(false);
+													loginDialog.setVisible(true);
+													Factory.refresh();
+									
+												}
+											});
+			break;
 			
 
 		default: bodyPanel.removeAll();
