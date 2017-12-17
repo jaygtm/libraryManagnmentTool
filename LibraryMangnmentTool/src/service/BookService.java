@@ -8,6 +8,7 @@ import model.StudentHistoryModel;
 
 public interface BookService {
 	public List<BookModel> getBookaList();
+	public BookModel getBook(int bookId);
 	public boolean addBook(BookModel bookModel);
 	public boolean editBook(BookModel bookModel);
 	public boolean delteBook(BookModel bookModel);

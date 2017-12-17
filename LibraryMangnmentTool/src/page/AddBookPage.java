@@ -223,7 +223,7 @@ public class AddBookPage extends JPanel implements ActionListener {
 							public void run() {
 								if(backOnList){
 									Factory.getBodyPanal().removeAll();
-									Factory.getBodyPanal().add(new StudentList());
+									Factory.getBodyPanal().add(new BookListPage());
 								}else
 									Factory.getBodyPanal().removeAll();
 								Factory.refresh();

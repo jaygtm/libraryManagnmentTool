@@ -3,7 +3,6 @@ package service.impl;
 import java.util.List;
 
 import dao.BookDao;
-import dao.impl.BookDaoImp;
 import model.BookModel;
 import model.BookTypeModel;
 import model.StudentHistoryModel;
@@ -83,5 +82,10 @@ public class BookServiceImp implements BookService {
 	@Override
 	public List<BookModel> getSearchBookList(String searchBy,String value){
 		return bookDao.getSearchBookList(searchBy, value);
+	}
+
+	@Override
+	public BookModel getBook(int bookId) {
+		return bookDao.getBook(bookId);
 	}
 }

@@ -11,6 +11,8 @@ public interface CustomerService {
 
 	boolean deleteCustomerDetail(int customerId);
 	public List<CustomerModel> getAllCustomerDetail();
+	//This is use when book submit
+	public boolean modifyDeatils(GetStudentModel model);
 
 	List<GetStudentModel> viewHistory(String id);
 

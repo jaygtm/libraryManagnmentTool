@@ -20,6 +20,21 @@ public class GetStudentModel {
 	private Date itm_sub_dt;
 	private String itm_status_flag;
 	private Double txn_charge;
+	private Date txn_item_eq_submit_dt;
+	private Double txn_item_late_submit_charge;
+	
+	public Date getTxn_item_eq_submit_dt() {
+		return txn_item_eq_submit_dt;
+	}
+	public void setTxn_item_eq_submit_dt(Date txn_item_eq_submit_dt) {
+		this.txn_item_eq_submit_dt = txn_item_eq_submit_dt;
+	}
+	public Double getTxn_item_late_submit_charge() {
+		return txn_item_late_submit_charge;
+	}
+	public void setTxn_item_late_submit_charge(Double txn_item_late_submit_charge) {
+		this.txn_item_late_submit_charge = txn_item_late_submit_charge;
+	}
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="book_id")
 	private BookModel book_id;

@@ -44,5 +44,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<CustomerModel> getSearchStudentList(String searchBy, String value){
 		return customerDao.getSearchStudentList(searchBy, value);
 	}
+	@Override
+	public boolean modifyDeatils(GetStudentModel model) {
+		
+		return customerDao.modifyDeatils(model);
+	}
 
 }
