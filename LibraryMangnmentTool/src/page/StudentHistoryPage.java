@@ -14,9 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
-
 import common.service.DialogService;
 import common.service.Factory;
 import model.BookModel;
@@ -29,8 +27,12 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	int latefee = 10; 
+	String customer_id;
+	boolean flag;
 	
 	public StudentHistoryPage(String customer_id,boolean flag) {
+		this.customer_id = customer_id;
+		this.flag = flag;
 		setBounds(20, 79, 1099, 481);
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -182,6 +184,9 @@ public class StudentHistoryPage extends JPanel implements ActionListener {
 												}
 											});
 		break;
+		
+		case "Print as Excel": Factory.exportDataInExcel(columnName(),getRowData(customer_id,flag), "Student History","Student History"); 
+			break;
 		
 		}
 		

@@ -4,15 +4,26 @@ package common.service;
 
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -131,4 +142,61 @@ public class Factory {
 	    }
 	   return daysBetween;
 	}
+	
+	public static  void exportDataInExcel(String[] columnName,String[][] data,String sheetName,String fileName ){
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setSelectedFile(new File(fileName+".xlsx"));
+		if(fileChooser.showSaveDialog(Factory.getMainFrame()) == JFileChooser.APPROVE_OPTION){
+			File file = fileChooser.getSelectedFile();
+			
+			XSSFWorkbook workbook = new XSSFWorkbook();
+	        XSSFSheet sheet = workbook.createSheet(sheetName);
+	        
+	        
+	        
+	        Row row_c = sheet.createRow(0);
+	        CellStyle style = workbook.createCellStyle();
+	        style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+	        row_c.setRowStyle(style);
+            int colNum = 0;
+            for (String field : columnName) {
+                Cell cell = row_c.createCell(colNum++);
+                cell.setCellValue(field);
+            }
+	        
+	        
+	        
+	        int rowNum = 1;
+	        System.out.println("Creating excel");
+
+	        for (String[] rowData : data) {
+	            Row row = sheet.createRow(rowNum++);
+	            colNum = 0;
+	            for (String field : rowData) {
+	                Cell cell = row.createCell(colNum++);
+	                cell.setCellValue(field);
+	            }
+	        }
+
+	        try {
+	            FileOutputStream outputStream = new FileOutputStream(file);
+	            workbook.write(outputStream);
+	            DialogService.showMgs(mainFrame, "Your File Export Successfully..!", "Export");
+	            workbook.close();
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	            DialogService.showErrorMgs(mainFrame, "Error to Export ..!", "Export");
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 }

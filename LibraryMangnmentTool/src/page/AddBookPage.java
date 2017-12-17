@@ -1,6 +1,5 @@
 package page;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -31,14 +30,15 @@ public class AddBookPage extends JPanel implements ActionListener {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JComboBox comboBox;
+	JButton btnNewButton_6;//Save Button
+	BookModel bookModel;
 	private boolean backOnList =true;
 	
 	{
 		bookService = (BookService) Factory.getContext().getBean("bookService");
 	}
 	
-	public  AddBookPage(boolean backOnList) {
-		this.backOnList =backOnList;
+	public  AddBookPage() {
 		setBounds(10, 11, 1129, 571);
 		// setBackground(new Color(0,0,0,0));
 		 setBorder(BorderFactory.createTitledBorder(""));
@@ -123,7 +123,7 @@ public class AddBookPage extends JPanel implements ActionListener {
 		 add(textField_5);
 		textField_5.setColumns(10);
 		
-		JButton btnNewButton_6 = new JButton("Save");
+		btnNewButton_6 = new JButton("Save");
 		btnNewButton_6.setBounds(850, 516, 115, 32);
 		btnNewButton_6.setBackground(Factory.saveBtnColor);
 		btnNewButton_6.addActionListener(this);
@@ -144,9 +144,40 @@ public class AddBookPage extends JPanel implements ActionListener {
 		separator.setBounds(10, 50, 1109, 8);
 		 add(separator);
 		 
-		 setVisible(true);
+		setVisible(true);
 		
 	}
+	
+	public AddBookPage(boolean backOnList,BookModel model){
+		this();
+		this.backOnList =backOnList;
+		if(model != null){
+			setModel(model);
+			this.bookModel = model;
+		}
+			
+	}
+	private void setModel(BookModel model){
+		textField.setText(model.getBook_name());
+		textField_1.setText(""+model.getBook_mrp());
+		textField_2.setText(""+model.getBook_rent());
+		textField_3.setText(""+model.getBook_rentPerDay());
+		textField_4.setText(""+model.getBook_aurthor());
+		textField_5.setText(model.getBook_publication());
+		comboBox.setSelectedIndex(getIndexOfBookType(model.getBook_typeId())+1);
+		btnNewButton_6.setText("Update");
+	}
+	private int getIndexOfBookType(int bookTypeId){
+		List<BookTypeModel> list = bookService.getAllBookType();
+		int i=0;
+		for(BookTypeModel model : list){
+			if(model.getBookType_id() == bookTypeId)
+				return i;
+			i++;
+		}
+		return 0;
+	}
+	
 	
 	
 	private String[] getBookType(){
@@ -165,6 +196,7 @@ public class AddBookPage extends JPanel implements ActionListener {
 				return m.getBookType_id();
 		return null;
 	}
+	
 	
 	
 	@Override
@@ -230,6 +262,57 @@ public class AddBookPage extends JPanel implements ActionListener {
 							}
 						});
 			break;
+		case "Update": EventQueue.invokeLater(new Runnable() {
+							
+							@Override
+							public void run() {
+								
+								String bookName = textField.getText();
+								String mrp = textField_1.getText();
+								String rent = textField_2.getText();
+								String rentprdat = textField_3.getText();
+								String authour = textField_4.getText();
+								String publication = textField_5.getText();
+								String type = comboBox.getSelectedItem().toString();
+								
+								if(checkBlank(new String[]{bookName,mrp,rent,rentprdat,authour,publication,type})){
+									DialogService.showErrorMgs(Factory.getMainFrame(), "Please Fill All Field", "Error");
+									
+								}else{
+									if(!type.equals("-Select-")){
+										BookModel m = bookModel;
+										m.setBook_name(bookName);
+										m.setBook_aurthor(authour);
+										m.setBook_publication(publication);
+										m.setBook_mrp(Integer.parseInt(mrp));
+										m.setBook_rent(Integer.parseInt(rent));
+										m.setBook_rentPerDay(Integer.parseInt(rentprdat));
+										m.setBook_typeId(getBookId(type));
+										
+										boolean status = bookService.editBook(m);
+										
+										DialogService.showMgs(Factory.getMainFrame(), "Book Modify Successfully", "Success");
+										
+										Factory.getBodyPanal().removeAll();
+										Factory.getBodyPanal().add(new BookListPage());
+										Factory.refresh();
+									}else
+										DialogService.showErrorMgs(Factory.getMainFrame(), "Please Select Book Type", "Error");
+								}
+								
+								
+								
+								
+								
+								if(backOnList){
+									Factory.getBodyPanal().removeAll();
+									Factory.getBodyPanal().add(new BookListPage());
+								}else
+									Factory.getBodyPanal().removeAll();
+								Factory.refresh();
+							}
+						});
+		break;
 		default:
 			break;
 		}

@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import common.service.DialogService;
 import common.service.Factory;
 import model.BookModel;
+import model.BookTypeModel;
 import service.BookService;
 import service.CustomerService;
 
@@ -34,7 +35,8 @@ public class BookListPage extends JPanel implements ActionListener {
 	@SuppressWarnings("rawtypes")
 	JComboBox comboBox;
 	private JScrollPane scrollBar;
-	
+	private List<BookTypeModel> bookTypeList;
+	private List<BookModel> list;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public BookListPage() {
 		
@@ -137,8 +139,10 @@ public class BookListPage extends JPanel implements ActionListener {
 					if (row == -1) {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select Row First", "Alert");
 					} else {
-						BookService bookService = (BookService) Factory.getContext().getBean("bookService");
-						bookService.editBook(null);
+						BookModel bookModel = list.get(row);
+						Factory.getBodyPanal().removeAll();
+						Factory.getBodyPanal().add(new AddBookPage(true, bookModel));
+						Factory.refresh();
 					}
 
 				}
@@ -152,12 +156,22 @@ public class BookListPage extends JPanel implements ActionListener {
 				@Override
 				public void run() {
 					int row = table.getSelectedRow();
-
 					if (row == -1) {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select Row First", "Alert");
 					} else {
-						BookService bookService = (BookService) Factory.getContext().getBean("bookService");
-						bookService.delteBook(null);
+						BookModel bookModel = list.get(row);
+						if(bookModel.getBook_Total() == bookModel.getBook_aval()){
+							BookService bookService = (BookService) Factory.getContext().getBean("bookService");
+							boolean status =bookService.delteBook(bookModel);
+							DialogService.showMgs(Factory.getMainFrame(), "Book Delete Successfully..!", "Book Delete Action");
+							Factory.getBodyPanal().removeAll();
+							Factory.getBodyPanal().add(new BookListPage());
+							Factory.refresh();
+							
+						}else{
+							DialogService.showErrorMgs(Factory.getMainFrame(), "You Can't Delete Book Because Book Issued Some one..!", "Alert");
+						}
+						
 					}
 				}
 			});
@@ -221,7 +235,7 @@ public class BookListPage extends JPanel implements ActionListener {
 				@Override
 				public void run() {
 					Factory.homePage();
-					AddBookPage addbook = new AddBookPage(true);
+					AddBookPage addbook = new AddBookPage(true,null);
 					Factory.getBodyPanal().add(addbook);
 					Factory.refresh();
 				}
@@ -234,18 +248,18 @@ public class BookListPage extends JPanel implements ActionListener {
 		}
 	}
 	public String[] columnName() {
-		String columnName[] = { "Book_id","Book Name", "Book Mrp", "Book Rent", "Book Rant per day", "Book Authour","publication","Available","Total"};
+		String columnName[] = { "Book_id","Book Name","Book Type", "Book Mrp", "Book Rent", "Book Rant per day", "Book Authour","publication","Available","Total"};
 		return columnName;
 	}
 	
 	public String[][] getBookList(String searchBy, String value){
 		BookService bookService = (BookService) Factory.getContext().getBean("bookService");
-		List<BookModel> list=new ArrayList<BookModel>();
+		list = new ArrayList<BookModel>();
 		if(searchBy!=null && value!=null)
 			list = bookService.getSearchBookList(searchBy, value);
 		else
 			list = bookService.getBookaList();
-		String rowData[][] =new String[list.size()][9]; ;
+		String rowData[][] =new String[list.size()][10]; ;
 		Iterator<BookModel> itr =  list.iterator();
 		int i=0;
 		while (itr.hasNext()) {
@@ -253,15 +267,32 @@ public class BookListPage extends JPanel implements ActionListener {
 			System.out.println("name Book"+book.getBook_name());
 			rowData[i][0] = ""+book.getBook_id();
 			rowData[i][1] = ""+book.getBook_name();
-			rowData[i][2] = ""+book.getBook_mrp();
-			rowData[i][3] = ""+book.getBook_rent();
-			rowData[i][4] = ""+book.getBook_rentPerDay();
-			rowData[i][5] = ""+book.getBook_aurthor();
-			rowData[i][6] = ""+book.getBook_publication();
-			rowData[i][7] = ""+book.getBook_aval();
-			rowData[i][8] = ""+book.getBook_Total();
+			rowData[i][2] = ""+getBookType(book.getBook_typeId());
+			rowData[i][3] = ""+book.getBook_mrp();
+			rowData[i][4] = ""+book.getBook_rent();
+			rowData[i][5] = ""+book.getBook_rentPerDay();
+			rowData[i][6] = ""+book.getBook_aurthor();
+			rowData[i][7] = ""+book.getBook_publication();
+			rowData[i][8] = ""+book.getBook_aval();
+			rowData[i][9] = ""+book.getBook_Total();
 			i++;
 		}
 		return rowData;
 	}
+	
+	private String getBookType(int bookTypeId){
+		if(bookTypeList == null){
+			BookService bookService = (BookService) Factory.getContext().getBean("bookService");
+			bookTypeList = bookService.getAllBookType();
+		}
+		
+		for(BookTypeModel m :bookTypeList){
+			if(m.getBookType_id() == bookTypeId)
+				return m.getBookType_code();
+		}
+		
+		return "";
+	}
+	
+	
 }
