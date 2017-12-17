@@ -162,7 +162,7 @@ public class BookDaoImp implements BookDao {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(BookModel.class);
-		c.add(Restrictions.gt(columnName, value));
+		c.add(Restrictions.eq(columnName, value));
 		list = c.list();
 		seession.close();
 		return list;
