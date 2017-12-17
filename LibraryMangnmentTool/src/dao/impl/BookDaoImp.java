@@ -162,10 +162,22 @@ public class BookDaoImp implements BookDao {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(BookModel.class);
-		c.add(Restrictions.gt(columnName, value));
+		c.add(Restrictions.eq(columnName, value));
 		list = c.list();
 		seession.close();
 		return list;
+	}
+
+	@Override
+	public BookModel getBook(int bookId) {
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		
+		BookModel book= (BookModel) seession.get(BookModel.class, bookId);
+		
+		seession.close();
+		
+		return book;
 	}
 
 }

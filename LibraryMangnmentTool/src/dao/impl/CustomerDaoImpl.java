@@ -140,10 +140,21 @@ public class CustomerDaoImpl implements CustomerDao {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(CustomerModel.class);
-		c.add(Restrictions.gt(columnName, value));
+		c.add(Restrictions.eq(columnName, value));
 		list = c.list();
 		seession.close();
 		return list;
+	}
+
+	@Override
+	public boolean modifyDeatils(GetStudentModel model) {
+		Session session = Factory.sessionfactory.openSession();
+		session.beginTransaction();
+		session.update(model);
+		session.beginTransaction().commit();
+		System.out.println("done..!");
+		//if(id!=null)
+			return true;
 	}
 
 }
