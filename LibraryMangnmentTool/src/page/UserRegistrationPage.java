@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,7 +17,10 @@ import javax.swing.JTextField;
 
 import common.service.DialogService;
 import common.service.Factory;
-import model.CustomerModel;
+import model.LoginUserDetail;
+import model.UserModel;
+import model.UserRole;
+import service.impl.UserLoginServiceImpl;
 
 public class UserRegistrationPage extends JPanel implements ActionListener {
 
@@ -22,6 +28,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private List<UserRole> roleobject=new ArrayList<>();
 	
 	String[] userRolelist;
 	
@@ -31,7 +38,22 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	}
 	
 	private String[] getUserRoleList(){
-		return new String[]{"User"};
+		UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
+		roleobject=userLoginServiceImpl.getUserRoleList();
+		String[] roles=new String[roleobject.size()];
+		for(int i=0;i<roleobject.size();i++){
+			UserRole rl=(UserRole)roleobject.get(i);
+			roles[i]=rl.getRole_name();
+		}
+		return roles;
+	}
+
+	public List<UserRole> getRole() {
+		return roleobject;
+	}
+
+	public void setRole(List<UserRole> role) {
+		this.roleobject = role;
 	}
 
 	public JTextField getTextField() {
@@ -79,6 +101,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	private JTextField textField_4;
 	private JTextField textField_9;
 	private JTextField textField_5;
+	private JComboBox comboBox;
 	public UserRegistrationPage(){
 		setBounds(10, 11, 1129, 571);
 		setLayout(null);
@@ -124,7 +147,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	lblUserRole.setBounds(581, 187, 99, 14);
 	add(lblUserRole);
 	
-	JComboBox comboBox = new JComboBox(userRolelist);
+	comboBox = new JComboBox(userRolelist);
 	comboBox.setBounds(722, 186, 243, 20);
 	comboBox.setSelectedItem("1");
 	
@@ -196,25 +219,47 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand().trim();
 		System.out.println(""+action);
+		UserRegistrationPage self=this;
 		switch (action) {
-		/*case "Save":EventQueue.invokeLater(new Runnable() {
+		case "Save":EventQueue.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				UserRegistrationPage model =validateAndGetData();
-				if(model != null){
-					CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
-					boolean status = customerService.saveCustomerDetail(model);
+				//UserRegistrationPage model =validateAndGetData();
+				//if(model != null){
+				LoginUserDetail loginUserDetail=new LoginUserDetail();
+				UserRole role=new UserRole();
+				UserModel mod=new UserModel();
+				loginUserDetail.setUser_addr(textField_3.getText());
+				loginUserDetail.setUser_name(textField.getText());
+				loginUserDetail.setUser_mobile(textField_1.getText());
+				loginUserDetail.setUser_idNo(textField_2.getText());
+				mod.setUser_name(textField_9.getText());
+				mod.setUser_passwprd(textField_5.getText());
+				mod.setUser_lastLogin(new Date());
+				loginUserDetail.setIdPass(mod);
+				UserRole roleSelected=null;
+				for(int j=0;j<self.getRole().size();j++){
+					UserRole rool=(self.getRole()).get(j);
+					if(rool.getRole_name().equals(comboBox.getSelectedItem())){
+						roleSelected=rool;
+					}
+					
+				}
+				loginUserDetail.setUsrRole(roleSelected);
+				//loginUserDetail.se);
+					UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
+					boolean status = userLoginServiceImpl.saveUser(loginUserDetail);
 					System.out.println("Status of Save");
 					if(status)
-						DialogService.showMgs(parent, "Save Successfully..!", "Success");
+						DialogService.showMgs(Factory.getMainFrame(), "Save Successfully..!", "Success");
 					else
-						DialogService.showErrorMgs(parent, "Error to Save ..!", "Error");
-				}
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Error to Save ..!", "Error");
+				//}
 			}
 		});
 			break;
-			*/
+
 		case "Cancel":EventQueue.invokeLater(new Runnable() {
 			
 			@Override
@@ -233,6 +278,5 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 		}
 		
 	}
-	
 	
 }

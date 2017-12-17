@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.UserLoginDao;
 import model.LoginUserDetail;
+import model.UserRole;
 import service.UserLoginService;
 public class UserLoginServiceImpl implements UserLoginService {
 	
@@ -38,6 +39,14 @@ public class UserLoginServiceImpl implements UserLoginService {
 		return userLoginDao.getSearchStudentList(searchBy, value);
 	}
 	
-
+	@Override
+	public boolean saveUser(LoginUserDetail loginUserDetail){
+		return userLoginDao.saveUser(loginUserDetail);
+	}
+	
+	@Override
+	public List<UserRole> getUserRoleList(){
+		return userLoginDao.getUserRoleList();
+	}
 	
 }

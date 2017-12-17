@@ -14,6 +14,7 @@ import common.service.Factory;
 import dao.UserLoginDao;
 import model.LoginUserDetail;
 import model.UserModel;
+import model.UserRole;
 
 public class UserLoginDaoImpl implements UserLoginDao {
 
@@ -150,6 +151,29 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		session.beginTransaction().commit();
 		System.out.println("done..!");
 			return true;
+	}
+
+	@Override
+	public List<UserRole> getUserRoleList() {
+
+		Session session = Factory.sessionfactory.openSession();
+		Transaction tx = null;
+		List<UserRole> list=new ArrayList<UserRole>();
+	     try {
+	         tx = session.beginTransaction(); 
+	         Criteria c=session.createCriteria(UserRole.class);  
+	         list=c.list();  
+	     } catch (HibernateException ex) {
+	         if (tx != null) {
+	             tx.rollback();
+	         }            
+	         ex.printStackTrace(System.err);
+	         return list;
+	     } finally {
+	    	 session.close(); 
+	     }
+	   return list;
+		
 	}
 
 }

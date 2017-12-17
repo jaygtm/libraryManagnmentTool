@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.LoginUserDetail;
 import model.UserModel;
+import model.UserRole;
 
 public interface UserLoginDao {
 	public boolean validateUserName(String username ,String password);
@@ -13,4 +14,6 @@ public interface UserLoginDao {
 	LoginUserDetail getUsrAllDetail(String username);
 	public boolean saveUser(LoginUserDetail loginUserDetail);
 	List<LoginUserDetail> getSearchStudentList(String searchBy, String value);
+	List<UserRole> getUserRoleList();
+	
 }
