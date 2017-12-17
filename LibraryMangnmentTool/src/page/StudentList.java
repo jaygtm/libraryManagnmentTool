@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import javax.swing.JTextField;
 
 import common.service.DialogService;
 import common.service.Factory;
+import model.BookModel;
 import model.CustomerModel;
 import service.CustomerService;
 
@@ -29,6 +31,7 @@ public class StudentList extends JPanel implements ActionListener {
 	JTextField textField;
 	@SuppressWarnings("rawtypes")
 	JComboBox comboBox;
+	private JScrollPane scrollBar;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public StudentList() {
@@ -52,7 +55,7 @@ public class StudentList extends JPanel implements ActionListener {
 		lblNewLabel_1.setBounds(10, 47, 73, 14);
 		add(lblNewLabel_1);
 		
-		comboBox = new JComboBox(new String[]{"-Select-","Name","Mobile","Email"});
+		comboBox = new JComboBox(new String[]{"Name","Mobile","Email"});
 		comboBox.setBounds(73, 44, 175, 20);
 		comboBox.setPreferredSize(new Dimension(350, 30));
 		add(comboBox);
@@ -68,17 +71,19 @@ public class StudentList extends JPanel implements ActionListener {
 		
 		JButton btnNewButton_6 = new JButton("Search");
 		btnNewButton_6.setBounds(521, 43, 89, 23);
+		btnNewButton_6.addActionListener(this);
 		add(btnNewButton_6);
 		
 		JButton btnNewButton_7 = new JButton("Clear");
 		btnNewButton_7.setBounds(620, 43, 89, 23);
+		btnNewButton_7.addActionListener(this);
 		add(btnNewButton_7);
 		
-		JScrollPane scrollBar = new JScrollPane();
+		scrollBar = new JScrollPane();
 		scrollBar.setBounds(10, 75, 1109, 420);
 		add(scrollBar);
 		
-		table = new JTable(getRowData(),columnName());
+		table = new JTable(getStudentListData(null,null),columnName());
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
@@ -125,9 +130,16 @@ public class StudentList extends JPanel implements ActionListener {
 	}
 	
 	
-	public String[][] getRowData(){
+	public String[][] getStudentListData(String searchBy,String value){
 		CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
-		List<CustomerModel> list = customerService.getAllCustomerDetail();
+
+		List<CustomerModel> list=new ArrayList<CustomerModel>();
+		if(searchBy!=null && value!=null)
+			list = customerService.getSearchStudentList(searchBy, value);
+		else
+			list = customerService.getAllCustomerDetail();
+		
+		
 		String rowData[][] =new String[list.size()][8]; ;
 		Iterator<CustomerModel> itr =  list.iterator();
 		int i=0;
@@ -250,6 +262,48 @@ public class StudentList extends JPanel implements ActionListener {
 						Factory.getBodyPanal().add(studentDeatil);
 						Factory.refresh();
 					}
+				}
+			});
+			break;
+		case "Search":
+			EventQueue.invokeLater(new Runnable() {
+
+				@Override
+				public void run() {
+					String columnType=comboBox.getSelectedItem().toString();
+					String columnValue=textField.getText();
+					if(columnValue.equals("") || columnValue==null) {
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Please fill search Content", "Alert");
+						scrollBar.remove(table);
+						table = new JTable(getStudentListData(null, null),columnName());
+						table.setBounds(163, 235, 1, 1);
+						scrollBar.getViewport ().add(table);
+					}else{
+						String[][]  list=getStudentListData(columnType, columnValue);
+						if(list.length==0){
+							DialogService.showErrorMgs(Factory.getMainFrame(), "No record found", "Alert");
+						}else{
+							scrollBar.remove(table);
+							table = new JTable(list,columnName());
+							table.setBounds(163, 235, 1, 1);
+							scrollBar.getViewport ().add(table);
+						}
+					}
+					Factory.refresh();
+				}
+			});
+			break;
+		case "Clear":
+			EventQueue.invokeLater(new Runnable() {
+
+				@Override
+				public void run() {
+					textField.setText("");
+					comboBox.setSelectedIndex(0);
+					table = new JTable(getStudentListData(null, null),columnName());
+					table.setBounds(163, 235, 1, 1);
+					scrollBar.getViewport ().add(table);
+					Factory.refresh();
 				}
 			});
 			break;

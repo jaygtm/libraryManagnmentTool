@@ -35,8 +35,8 @@ public class UserLoginServiceImpl implements UserLoginService {
 	}
 	
 	@Override
-	public List<LoginUserDetail> getSearchStudentList(String searchBy, String value){
-		return userLoginDao.getSearchStudentList(searchBy, value);
+	public List<LoginUserDetail> getSearchUserList(String searchBy, String value){
+		return userLoginDao.getSearchUserList(searchBy, value);
 	}
 	
 	@Override

@@ -57,7 +57,7 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	}
 	
 	@Override
-	public List<LoginUserDetail> getSearchStudentList(String searchBy,String value) {
+	public List<LoginUserDetail> getSearchUserList(String searchBy,String value) {
 		String columnName="";
 		List<LoginUserDetail> list=new LinkedList<LoginUserDetail>();
 		if(searchBy.equals("Name")){
@@ -72,7 +72,7 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(LoginUserDetail.class);
-		c.add(Restrictions.gt(columnName, value));
+		c.add(Restrictions.eq(columnName, value));
 		list = c.list();
 		seession.close();
 		return list;

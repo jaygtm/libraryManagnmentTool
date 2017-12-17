@@ -10,7 +10,7 @@ public interface UserLoginService {
 	public boolean validateUserName(String username ,String password);
 	public LoginUserDetail getUserDetail(String userName);
 	public List<LoginUserDetail> getAllUser();
-	List<LoginUserDetail> getSearchStudentList(String searchBy, String value);
 	boolean saveUser(LoginUserDetail loginUserDetail);
 	List<UserRole> getUserRoleList();
+	List<LoginUserDetail> getSearchUserList(String searchBy, String value);
 }
