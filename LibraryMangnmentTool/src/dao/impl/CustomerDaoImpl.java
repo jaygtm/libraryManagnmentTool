@@ -140,7 +140,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(CustomerModel.class);
-		c.add(Restrictions.gt(columnName, value));
+		c.add(Restrictions.eq(columnName, value));
 		list = c.list();
 		seession.close();
 		return list;
