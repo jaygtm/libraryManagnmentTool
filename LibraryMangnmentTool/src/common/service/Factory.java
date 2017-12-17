@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -118,5 +119,16 @@ public class Factory {
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date startDate = df.parse(addedDate.format(c.getTime()));
 		return startDate;
+	}
+	
+	public static long dateDifference(Date toDate,Date fromDate) {
+	    long daysBetween = 0;
+	    try {
+	        long diff = fromDate.getTime() - toDate.getTime();
+	        daysBetween = (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	   return daysBetween;
 	}
 }
