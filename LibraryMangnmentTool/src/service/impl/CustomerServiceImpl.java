@@ -49,5 +49,14 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		return customerDao.modifyDeatils(model);
 	}
+	@Override
+	public int viewCustomerBalance(int customerId) {
+		return customerDao.viewCustomerBalance(customerId);
+	}
+	@Override
+	public boolean deleteCustomerItem(int value) {
+		return  customerDao.deleteCustomerItem(value);
+		
+	}
 
 }

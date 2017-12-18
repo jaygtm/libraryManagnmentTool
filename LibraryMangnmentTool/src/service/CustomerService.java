@@ -19,5 +19,9 @@ public interface CustomerService {
 	List<GetStudentModel> viewAlloted(String id, String string);
 
 	List<CustomerModel> getSearchStudentList(String searchBy, String value);
+	
+	int viewCustomerBalance(int customerId);
+
+	boolean deleteCustomerItem(int value);
 
 }

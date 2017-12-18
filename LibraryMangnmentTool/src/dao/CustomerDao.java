@@ -15,5 +15,7 @@ public interface CustomerDao {
 	List<GetStudentModel> viewAlloted(String id, String string);
 	List<CustomerModel> getSearchStudentList(String searchBy, String value);
 	public boolean modifyDeatils(GetStudentModel model);
+	public int viewCustomerBalance(int customerId);
+	public boolean deleteCustomerItem(int value);
 
 }

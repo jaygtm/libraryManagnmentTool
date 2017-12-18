@@ -157,4 +157,21 @@ public class CustomerDaoImpl implements CustomerDao {
 			return true;
 	}
 
+	@Override
+	public int viewCustomerBalance(int customerId) {
+		return 0;
+	}
+
+	@Override
+	public boolean deleteCustomerItem(int customerId) {
+		Session session = Factory.sessionfactory.openSession();
+		GetStudentModel deletcustomerItem=(GetStudentModel) session.load(GetStudentModel.class,new Integer(customerId));
+		Transaction tx = session.beginTransaction();
+		session.delete(deletcustomerItem);
+        System.out.println("Object Deleted successfully.....!!");
+        tx.commit();
+        session.close();
+		return true;
+	}
+
 }

@@ -210,10 +210,13 @@ public class StudentList extends JPanel implements ActionListener {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
 					} else {
 						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-						customerService.deleteCustomerDetail(value);
-						Factory.getBodyPanal().removeAll();
-						Factory.getBodyPanal().add(new StudentList());
-						Factory.refresh();
+						if(customerService.viewCustomerBalance(value)==0){
+							customerService.deleteCustomerItem(value);
+							customerService.deleteCustomerDetail(value);
+							Factory.getBodyPanal().removeAll();
+							Factory.getBodyPanal().add(new StudentList());
+							Factory.refresh();
+						}
 					}
 				}
 			});
