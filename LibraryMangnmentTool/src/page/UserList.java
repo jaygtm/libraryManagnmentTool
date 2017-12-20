@@ -18,15 +18,9 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import common.service.DialogService;
 import common.service.Factory;
-import model.BookModel;
-import model.CustomerModel;
-import model.LoginUserDetail;
-import model.UserModel;
-import service.BookService;
+import model.UserLoginModel;
 import service.CustomerService;
 import service.UserLoginService;
 
@@ -132,24 +126,23 @@ public class UserList extends JPanel implements ActionListener {
 	
 	public String[][] getSearchUserData(String searchBy,String value){
 		UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
-		List<LoginUserDetail> list=new ArrayList<LoginUserDetail>();
+		List<UserLoginModel> list=new ArrayList<UserLoginModel>();
 		if(searchBy!=null && value!=null)
 			list = userLoginService.getSearchUserList(searchBy, value);
 		else
-			list = userLoginService.getAllUser();
-		
+			list = userLoginService.getSearchUserList("d","");
 		
 		String rowData[][] =new String[list.size()][columnName().length]; ;
-		Iterator<LoginUserDetail> itr =  list.iterator();
+		Iterator<UserLoginModel> itr =  list.iterator();
 		int i=0;
 		while (itr.hasNext()) {
-			LoginUserDetail loginUserDetail = (LoginUserDetail) itr.next();
-			rowData[i][0] = ""+loginUserDetail.getUser_name();
-			rowData[i][1] = loginUserDetail.getUser_mobile();
-			rowData[i][2] = loginUserDetail.getUser_idNo();
-			rowData[i][3] = loginUserDetail.getUser_addr();
-			rowData[i][4] = loginUserDetail.getUsrRole().getRole_name();
-			rowData[i][5] = ""+loginUserDetail.getIdPass().getUser_name();
+			UserLoginModel loginUserDetail = (UserLoginModel) itr.next();
+			rowData[i][0] = ""+loginUserDetail.getUser().getUser_name();
+			rowData[i][1] = loginUserDetail.getUser().getUser_mobile();
+			rowData[i][2] = loginUserDetail.getUser().getUser_idNo();
+			rowData[i][3] = loginUserDetail.getUser().getUser_addr();
+			rowData[i][4] = loginUserDetail.getUser().getRole().getRole_name();
+			rowData[i][5] = ""+loginUserDetail.getUser_name();
 			i++;
 		}
 		return rowData;
@@ -174,18 +167,19 @@ public class UserList extends JPanel implements ActionListener {
 					} else {
 						String uname = table.getModel().getValueAt(row, 5).toString();
 						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
-						LoginUserDetail name=userLoginService.getUserDetail(uname);
+						List<UserLoginModel>  userobject=userLoginService.getUserDetail(uname);
+						UserLoginModel name=userobject.get(0);
 						UserRegistrationPage registrationPage=new UserRegistrationPage();
 						Factory.getBodyPanal().removeAll();
 						Factory.getBodyPanal().add(registrationPage);
 						
-						registrationPage.getTextField().setText("" + name.getUser_name());
-						registrationPage.getTextField_1().setText(name.getUser_mobile());
-						registrationPage.getTextField_2().setText(name.getUser_idNo());
-						registrationPage.getTextField_3().setText(name.getUser_addr());
-						registrationPage.getTextField_9().setText(name.getIdPass().getUser_name());
-						registrationPage.getTextField_5().setText(name.getIdPass().getUser_passwprd());
-						registrationPage.getTextField_4().setText(name.getIdPass().getUser_name());
+						registrationPage.getTextField().setText("" +name.getUser().getUser_name());
+						registrationPage.getTextField_1().setText(name.getUser().getUser_mobile());
+						registrationPage.getTextField_2().setText(name.getUser().getUser_idNo());
+						registrationPage.getTextField_3().setText(name.getUser().getUser_addr());
+						registrationPage.getTextField_9().setText(name.getUser_name());
+						registrationPage.getTextField_5().setText(name.getUser_passwprd());
+						registrationPage.getTextField_4().setText(name.getUser_name());
 						Factory.refresh();
 					}
 

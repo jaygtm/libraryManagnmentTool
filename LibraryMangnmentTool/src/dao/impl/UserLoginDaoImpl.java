@@ -31,6 +31,21 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		return list;
 			
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserLoginModel> getUserDetail(String userName) {
+
+		List<UserLoginModel> list=new LinkedList<UserLoginModel>();
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		Criteria c = seession.createCriteria(UserLoginModel.class);
+		c.add(Restrictions.eq("user_name", userName));
+		list = c.list();
+		seession.close();
+		return list;
+			
+	}
 
 	@Override
 	public boolean saveUser(UserLoginModel loginUserDetail) {
@@ -46,11 +61,15 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	@Override
 	public List<UserLoginModel> getSearchUserList(String searchBy, String value) {
 		String columnName="";
+		boolean criteriaflag =true;
 		List<UserLoginModel> list=new LinkedList<UserLoginModel>();
-		if(searchBy.equals("Name")){
+		if(searchBy.equals("Name"))
 			columnName="user_name";
-		}else if(searchBy.equals("Mobile")){
+		else if(searchBy.equals("Mobile"))
 			columnName="user_mobile";
+		else{
+			criteriaflag=false;
+			columnName="d";
 		}
 		
 		if(columnName.equals("")){
@@ -59,7 +78,8 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
 		Criteria c = seession.createCriteria(UserLoginModel.class);
-		c.add(Restrictions.eq(columnName, value));
+		if(criteriaflag)
+			c.add(Restrictions.eq(columnName, value));
 		list = c.list();
 		seession.close();
 		return list;

@@ -19,7 +19,7 @@ public class UserModel {
 	private String user_idNo;
 	private String user_addr;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="user_roleId")
 	private UserRole role;
 	public int getUser_id() {

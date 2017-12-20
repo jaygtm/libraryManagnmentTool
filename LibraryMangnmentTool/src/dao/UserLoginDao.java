@@ -13,4 +13,6 @@ public interface UserLoginDao {
 
 	List<UserLoginModel> getSearchUserList(String searchBy, String value);
 
-	List<UserRole> getUserRoleList();}
+	List<UserRole> getUserRoleList();
+
+	List<UserLoginModel> getUserDetail(String userName);}

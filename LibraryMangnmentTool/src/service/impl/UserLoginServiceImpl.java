@@ -37,5 +37,10 @@ public class UserLoginServiceImpl implements UserLoginService {
 	public List<UserRole> getUserRoleList(){
 		return userLoginDao.getUserRoleList();
 	}
+
+	@Override
+	public List<UserLoginModel> getUserDetail(String userName) {
+		return userLoginDao.getUserDetail(userName);
+	}
 	
 }

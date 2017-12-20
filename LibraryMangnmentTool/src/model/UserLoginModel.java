@@ -20,7 +20,7 @@ public class UserLoginModel {
 	private String user_passwprd;
 	private Date user_lastLogin;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id_info")
 	private UserModel user;
 	public int getUser_id() {
