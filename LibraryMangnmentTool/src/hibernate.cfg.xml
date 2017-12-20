@@ -13,14 +13,13 @@
         <property name="connection.password">root</property>  
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property> 
         <property name="show_sql">true</property>
-        <mapping class="model.LoginModel"/>
+        <mapping class="model.UserLoginModel"/>
          <mapping class="model.CustomerModel"/>
          <mapping class="model.BookModel"/>
-         <mapping class="model.UserModel"/>
          <mapping class="model.StudentHistoryModel"/>
           <mapping class="model.BookTypeModel"/>
           <mapping class="model.GetStudentModel"/>
-          <mapping class="model.LoginUserDetail"/>
+          <mapping class="model.UserModel"/>
           <mapping class="model.UserRole"/>
         
     </session-factory>  

@@ -2,15 +2,12 @@ package service;
 
 import java.util.List;
 
-import model.LoginUserDetail;
-import model.UserModel;
+import model.UserLoginModel;
 import model.UserRole;
 
 public interface UserLoginService {
-	public boolean validateUserName(String username ,String password);
-	public LoginUserDetail getUserDetail(String userName);
-	public List<LoginUserDetail> getAllUser();
-	boolean saveUser(LoginUserDetail loginUserDetail);
+	public List<UserLoginModel> getUserDetail(String userName, String password);
+	boolean saveUser(UserLoginModel loginUserDetail);
 	List<UserRole> getUserRoleList();
-	List<LoginUserDetail> getSearchUserList(String searchBy, String value);
+	List<UserLoginModel> getSearchUserList(String searchBy, String value);
 }

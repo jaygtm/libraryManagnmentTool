@@ -5,22 +5,93 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import common.service.Factory;
 import dao.UserLoginDao;
-import model.LoginUserDetail;
-import model.UserModel;
+import model.UserLoginModel;
 import model.UserRole;
 
 public class UserLoginDaoImpl implements UserLoginDao {
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserLoginModel> getUserDetail(String userName,String password) {
+
+		List<UserLoginModel> list=new LinkedList<UserLoginModel>();
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		Criteria c = seession.createCriteria(UserLoginModel.class);
+		c.add(Restrictions.eq("user_name", userName));
+		c.add(Restrictions.eq("user_passwprd", password));
+		list = c.list();
+		seession.close();
+		return list;
+			
+	}
+
+	@Override
+	public boolean saveUser(UserLoginModel loginUserDetail) {
+		Session session = Factory.sessionfactory.openSession();
+		session.beginTransaction();
+		session.saveOrUpdate(loginUserDetail);
+		session.beginTransaction().commit();
+		System.out.println("done..!");
+			return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserLoginModel> getSearchUserList(String searchBy, String value) {
+		String columnName="";
+		List<UserLoginModel> list=new LinkedList<UserLoginModel>();
+		if(searchBy.equals("Name")){
+			columnName="user_name";
+		}else if(searchBy.equals("Mobile")){
+			columnName="user_mobile";
+		}
+		
+		if(columnName.equals("")){
+			return list;
+		}
+		Session seession = Factory.sessionfactory.openSession();
+		seession.beginTransaction();
+		Criteria c = seession.createCriteria(UserLoginModel.class);
+		c.add(Restrictions.eq(columnName, value));
+		list = c.list();
+		seession.close();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserRole> getUserRoleList() {
+
+		Session session = Factory.sessionfactory.openSession();
+		Transaction tx = null;
+		List<UserRole> list=new ArrayList<UserRole>();
+	     try {
+	         tx = session.beginTransaction(); 
+	         Criteria c=session.createCriteria(UserRole.class);  
+	         list=c.list();  
+	     } catch (Exception ex) {
+	         if (tx != null) {
+	             tx.rollback();
+	         }            
+	         ex.printStackTrace(System.err);
+	         return list;
+	     } finally {
+	    	 session.close(); 
+	     }
+	   return list;	
+	   }
+	/*
+
 	@Override
 	public UserModel getUserDetail(String userName) {
-		LoginUserDetail detail= getUsrAllDetail(userName);
+		UserLoginModel detail= getUsrAllDetail(userName);
 		if(detail != null){
 			if(detail.getIdPass().getUser_name().equals(userName))
 				return detail.getIdPass();
@@ -176,4 +247,4 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		
 	}
 
-}
+*/}
