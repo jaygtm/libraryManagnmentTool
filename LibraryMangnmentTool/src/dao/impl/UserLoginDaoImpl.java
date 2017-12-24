@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 import common.service.Factory;
 import dao.UserLoginDao;
+import model.CustomerModel;
 import model.UserLoginModel;
 import model.UserRole;
 
@@ -107,6 +108,20 @@ public class UserLoginDaoImpl implements UserLoginDao {
 	     }
 	   return list;	
 	   }
+	
+	@Override
+	public boolean deleteCustomerDetail(int value) {
+
+		Session session = Factory.sessionfactory.openSession();
+		UserLoginModel deletcustomerId=(UserLoginModel) session.load(UserLoginModel.class,new Integer(value));
+		Transaction tx = session.beginTransaction();
+		session.delete(deletcustomerId);
+        System.out.println("UserLoginModel Object Deleted successfully.....!!");
+        tx.commit();
+        session.close();
+		return true;
+	
+	}
 	/*
 
 	@Override
@@ -267,4 +282,6 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		
 	}
 
-*/}
+*/
+
+	}

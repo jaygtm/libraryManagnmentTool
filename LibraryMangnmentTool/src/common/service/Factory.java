@@ -195,7 +195,17 @@ public class Factory {
 		
 	}
 	
-	
+		public static boolean validateNumber(String number){
+		
+		try{
+			Double.parseDouble(number);
+			return true;
+		}catch(Exception e){
+			e.getMessage();
+			return false;
+		}
+		
+	}	
 	
 	
 	

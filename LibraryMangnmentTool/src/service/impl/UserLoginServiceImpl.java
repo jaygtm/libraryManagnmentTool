@@ -42,5 +42,11 @@ public class UserLoginServiceImpl implements UserLoginService {
 	public List<UserLoginModel> getUserDetail(String userName) {
 		return userLoginDao.getUserDetail(userName);
 	}
+
+	@Override
+	public boolean deleteCustomerDetail(int value) {
+		return userLoginDao.deleteCustomerDetail(value);
+		
+	}
 	
 }

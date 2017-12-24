@@ -15,4 +15,6 @@ public interface UserLoginDao {
 
 	List<UserRole> getUserRoleList();
 
-	List<UserLoginModel> getUserDetail(String userName);}
+	List<UserLoginModel> getUserDetail(String userName);
+
+	boolean deleteCustomerDetail(int value);}

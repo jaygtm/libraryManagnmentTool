@@ -11,4 +11,5 @@ public interface UserLoginService {
 	boolean saveUser(UserLoginModel loginUserDetail);
 	List<UserRole> getUserRoleList();
 	List<UserLoginModel> getSearchUserList(String searchBy, String value);
+	public boolean deleteCustomerDetail(int value);
 }

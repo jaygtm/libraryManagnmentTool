@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import common.service.DialogService;
 import common.service.Factory;
 import model.UserLoginModel;
-import service.CustomerService;
 import service.UserLoginService;
 
 public class UserList extends JPanel implements ActionListener {
@@ -32,6 +31,7 @@ public class UserList extends JPanel implements ActionListener {
 	@SuppressWarnings("rawtypes")
 	JComboBox comboBox;
 	private JScrollPane scrollBar;
+	private UserLoginModel name;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public UserList() {
@@ -119,7 +119,7 @@ public class UserList extends JPanel implements ActionListener {
 	}
 	
 	public String[] columnName() {
-		String columnName[] = {"User Name", "User Mobile", "Addhar/Id No.", "User Address", "User Role","User UserId"};
+		String columnName[] = {"User Id","User Name", "User Mobile", "Addhar/Id No.", "User Address", "User Role","User UserId"};
 		return columnName;
 	}
 	
@@ -137,12 +137,13 @@ public class UserList extends JPanel implements ActionListener {
 		int i=0;
 		while (itr.hasNext()) {
 			UserLoginModel loginUserDetail = (UserLoginModel) itr.next();
-			rowData[i][0] = ""+loginUserDetail.getUser().getUser_name();
-			rowData[i][1] = loginUserDetail.getUser().getUser_mobile();
-			rowData[i][2] = loginUserDetail.getUser().getUser_idNo();
-			rowData[i][3] = loginUserDetail.getUser().getUser_addr();
-			rowData[i][4] = loginUserDetail.getUser().getRole().getRole_name();
-			rowData[i][5] = ""+loginUserDetail.getUser_name();
+			rowData[i][0] = ""+loginUserDetail.getUser().getUser_id();
+			rowData[i][1] = ""+loginUserDetail.getUser().getUser_name();
+			rowData[i][2] = loginUserDetail.getUser().getUser_mobile();
+			rowData[i][3] = loginUserDetail.getUser().getUser_idNo();
+			rowData[i][4] = loginUserDetail.getUser().getUser_addr();
+			rowData[i][5] = loginUserDetail.getUser().getRole().getRole_name();
+			rowData[i][6] = ""+loginUserDetail.getUser_name();
 			i++;
 		}
 		return rowData;
@@ -165,19 +166,19 @@ public class UserList extends JPanel implements ActionListener {
 					if (row == -1) {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
 					} else {
-						String uname = table.getModel().getValueAt(row, 5).toString();
+						String uname = table.getModel().getValueAt(row, 6).toString();
 						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
 						List<UserLoginModel>  userobject=userLoginService.getUserDetail(uname);
-						UserLoginModel name=userobject.get(0);
+						name=userobject.get(0);
 						UserRegistrationPage registrationPage=new UserRegistrationPage();
+						registrationPage.setUserLoginModelobj(name);
 						Factory.getBodyPanal().removeAll();
 						Factory.getBodyPanal().add(registrationPage);
-						
 						registrationPage.getTextField().setText("" +name.getUser().getUser_name());
 						registrationPage.getTextField_1().setText(name.getUser().getUser_mobile());
 						registrationPage.getTextField_2().setText(name.getUser().getUser_idNo());
 						registrationPage.getTextField_3().setText(name.getUser().getUser_addr());
-						registrationPage.getTextField_9().setText(name.getUser_name());
+						registrationPage.getTextField_9().setText(""+name.getUser_id());
 						registrationPage.getTextField_5().setText(name.getUser_passwprd());
 						registrationPage.getTextField_4().setText(name.getUser_name());
 						Factory.refresh();
@@ -194,14 +195,19 @@ public class UserList extends JPanel implements ActionListener {
 				@Override
 				public void run() {
 
-					CustomerService customerService = (CustomerService) Factory.getContext().getBean("customerService");
+					UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
 					int row = table.getSelectedRow();
 
 					if (row == -1) {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please select one row", "Alert");
 					} else {
-						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-						customerService.deleteCustomerDetail(value);
+						String value = table.getModel().getValueAt(row, 6).toString();
+						UserLoginModel role=userLoginService.getUserDetail(value).get(0);
+						role.getUser().setRole(null);
+						role.setUser(null);
+						userLoginService.saveUser(role);
+						
+						//userLoginService.deleteCustomerDetail(value);
 						Factory.getBodyPanal().removeAll();
 						Factory.getBodyPanal().add(new UserList());
 						Factory.refresh();
