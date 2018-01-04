@@ -32,6 +32,10 @@ public class UserList extends JPanel implements ActionListener {
 	JComboBox comboBox;
 	private JScrollPane scrollBar;
 	private UserLoginModel name;
+	public JButton btnNewButton_8;
+	public JButton btnNewButton_9;
+	public JButton btnNewButton_10;
+	public JButton btnNewButton_11;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public UserList() {
@@ -87,7 +91,7 @@ public class UserList extends JPanel implements ActionListener {
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
-		JButton btnNewButton_8 = new JButton("Add");
+		btnNewButton_8 = new JButton("Add");
 		btnNewButton_8.setBounds(10, 514, 109, 34);
 		btnNewButton_8.setForeground(Factory.buttonTextColor);
 		btnNewButton_8.setBackground(Factory.saveBtnColor);
@@ -95,21 +99,21 @@ public class UserList extends JPanel implements ActionListener {
 		add(btnNewButton_8);
 		
 		
-		JButton btnNewButton_9 = new JButton("Modify");
+		btnNewButton_9 = new JButton("Modify");
 		btnNewButton_9.setBackground(Factory.modifyBtnColor);
 		btnNewButton_9.setBounds(750, 514, 109, 34);
 		btnNewButton_9.setForeground(Factory.buttonTextColor);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
-		JButton btnNewButton_10 = new JButton("Delete");
+		btnNewButton_10 = new JButton("Delete");
 		btnNewButton_10.setBackground(Factory.deleteBtnColor);
 		btnNewButton_10.setBounds(865, 514, 109, 34);
 		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		btnNewButton_10.addActionListener(this);
 		add(btnNewButton_10);
 		
-		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(979, 514, 109, 34);
 		btnNewButton_11.setForeground(Factory.buttonTextColor);

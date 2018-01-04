@@ -37,6 +37,10 @@ public class BookListPage extends JPanel implements ActionListener {
 	private JScrollPane scrollBar;
 	private List<BookTypeModel> bookTypeList;
 	private List<BookModel> list;
+	public JButton btnNewButton_8;
+	public JButton btnNewButton_9;
+	public JButton btnNewButton_10;
+	public JButton btnNewButton_11;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public BookListPage() {
 		
@@ -91,7 +95,7 @@ public class BookListPage extends JPanel implements ActionListener {
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
-		JButton btnNewButton_8 = new JButton("Add");
+		btnNewButton_8 = new JButton("Add");
 		btnNewButton_8.setBackground(Factory.saveBtnColor);
 		btnNewButton_8.setBounds(10, 514, 109, 34);
 		btnNewButton_8.setForeground(Factory.buttonTextColor);
@@ -100,21 +104,21 @@ public class BookListPage extends JPanel implements ActionListener {
 		
 		
 		
-		JButton btnNewButton_9 = new JButton("Modify");
+		btnNewButton_9 = new JButton("Modify");
 		btnNewButton_9.setBackground(Factory.modifyBtnColor);
 		btnNewButton_9.setBounds(750, 514, 109, 34);
 		btnNewButton_9.setForeground(Factory.buttonTextColor);
 		btnNewButton_9.addActionListener(this);
 		add(btnNewButton_9);
 		
-		JButton btnNewButton_10 = new JButton("Delete");
+		btnNewButton_10 = new JButton("Delete");
 		btnNewButton_10.setBackground(Factory.deleteBtnColor);
 		btnNewButton_10.setBounds(865, 514, 109, 34);
 		btnNewButton_10.addActionListener(this);
 		btnNewButton_10.setForeground(Factory.buttonTextColor);
 		add(btnNewButton_10);
 		
-		JButton btnNewButton_11 = new JButton("Cancel");
+		btnNewButton_11 = new JButton("Cancel");
 		btnNewButton_11.setBackground(Factory.cancleBtnColor);
 		btnNewButton_11.setBounds(979, 514, 109, 34);
 		btnNewButton_11.addActionListener(this);

@@ -1,6 +1,7 @@
 package page;
 
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import common.service.Factory;
 
@@ -35,7 +37,7 @@ public class DashboardPage implements ActionListener {
 				ImageIcon img = new ImageIcon(fileUrl);
 				MainFrame.setContentPane(new JLabel(img));
 			}
-			FirstTimeDbConfig loginDialog = new FirstTimeDbConfig(MainFrame);
+			LoginDialog loginDialog = new LoginDialog(MainFrame);
 			MainFrame.getContentPane().setLayout(null);
 			MainFrame.setJMenuBar(getMenuBar());
 			MainFrame.setVisible(true);
@@ -79,6 +81,150 @@ public class DashboardPage implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		new LoginDialog(MainFrame);
+		String cmd = e.getActionCommand();
+		DashboardPage d= this;
+		JPanel bodyPanel=Factory.getBodyPanal();
+		switch(cmd){
+				case "Add Book":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						AddBookPage addbook=new AddBookPage(false,null);
+						bodyPanel.add(addbook);	
+						Factory.refresh();						
+					}
+				});
+				break;
+				case "Edit Book Details":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						BookListPage booklist=new BookListPage();
+						bodyPanel.add(booklist);
+						booklist.btnNewButton_8.setEnabled(false);
+						booklist.btnNewButton_10.setEnabled(false);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "Delete Book":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						BookListPage booklist=new BookListPage();
+						bodyPanel.add(booklist);
+						booklist.btnNewButton_8.setEnabled(false);
+						booklist.btnNewButton_9.setEnabled(false);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "View Books":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						BookListPage booklist=new BookListPage();
+						bodyPanel.add(booklist);
+						booklist.btnNewButton_8.setEnabled(false);
+						booklist.btnNewButton_10.setEnabled(false);
+						booklist.btnNewButton_9.setEnabled(false);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "View Issue Book":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						
+					}
+				});
+				break;
+				case "View Available Book":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						
+					}
+				});
+				break;
+				case "View Book History":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						
+					}
+				});
+				break;
+				case "Add Student":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						RegistrationPage registrationPage=new RegistrationPage();
+						registrationPage.registrationPage(bodyPanel);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "Edit Student Details":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						bodyPanel.add(new StudentList());
+						Factory.refresh();
+					}
+				});
+				break;
+				case "Delete Student":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						bodyPanel.add(new StudentList());
+						Factory.refresh();
+					}
+				});
+				break;
+				case "ShowAll Student":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						bodyPanel.removeAll();
+						bodyPanel.add(new StudentList());
+						Factory.refresh();
+					}
+				});
+				break;
+				case "User Delete":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						UserList uslist=new UserList();
+						bodyPanel.removeAll();
+						bodyPanel.add(uslist);
+						uslist.btnNewButton_9.setEnabled(false);
+						uslist.btnNewButton_8.setEnabled(false);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "User Creation":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						Factory.homePage();
+						UserRegistrationPage registrationPage=new UserRegistrationPage();
+						Factory.getBodyPanal().removeAll();
+						Factory.getBodyPanal().add(registrationPage);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "User Modify":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						UserList uslist=new UserList();
+						bodyPanel.removeAll();
+						bodyPanel.add(uslist);
+						uslist.btnNewButton_10.setEnabled(false);
+						uslist.btnNewButton_8.setEnabled(false);
+						Factory.refresh();
+					}
+				});
+				break;
+				case "View All User":	EventQueue.invokeLater( new Runnable() {
+					public void run() {
+						UserList uslist=new UserList();
+						bodyPanel.removeAll();
+						bodyPanel.add(uslist);
+						uslist.btnNewButton_9.setEnabled(false);
+						uslist.btnNewButton_8.setEnabled(false);
+						uslist.btnNewButton_10.setEnabled(false);
+						Factory.refresh();
+					}
+				});
+				break;
+		
+	}
 		
 	}
 
