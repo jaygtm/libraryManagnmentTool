@@ -1,5 +1,7 @@
 package page;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -20,17 +22,20 @@ public class DashboardPage implements ActionListener {
 	public DashboardPage(String ProjectName){
 		MainFrame = new JFrame(ProjectName);
 		try{
-			MainFrame.setSize(700, 600);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+			int width = (int) screenSize.getWidth();
+
+			int height = (int) screenSize.getHeight();
+			MainFrame.setSize(width, height);
 			MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			//final JButton btnLogin = new JButton("Click to login");
-			//MainFrame.setLayout(new FlowLayout());
-			URL fileUrl = getClass().getResource("..//img//books_vintage_paper_cards_notebook_retro_74362_2560x1600.jpg");
+			URL fileUrl = DashboardPage.class.getResource("/books_vintage_paper_cards_notebook_retro_74362_2560x1600.jpg");
 			if(fileUrl != null){
 				ImageIcon img = new ImageIcon(fileUrl);
 				MainFrame.setContentPane(new JLabel(img));
 			}
-			LoginDialog loginDialog = new LoginDialog(MainFrame);
+			FirstTimeDbConfig loginDialog = new FirstTimeDbConfig(MainFrame);
 			MainFrame.getContentPane().setLayout(null);
 			MainFrame.setJMenuBar(getMenuBar());
 			MainFrame.setVisible(true);
@@ -41,10 +46,7 @@ public class DashboardPage implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		
-		//MainFrame.getContentPane().add(btnLogin);
-		//btnLogin.addActionListener(this);
-		
+				
 	}
 	private JMenuBar getMenuBar() {
 		String menu[] = {"Books Menu","Student","User","Action","Security","More","AboutUs"};
