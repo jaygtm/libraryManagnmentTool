@@ -17,7 +17,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,14 +24,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import common.service.DialogService;
 import common.service.Factory;
-import model.UserLoginModel;
-import service.UserLoginService;
 
 
 public class FirstTimeDbConfig extends JDialog implements ActionListener {
@@ -50,14 +45,12 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
  
     public FirstTimeDbConfig(JFrame parent) {
         super(parent, "Database Configuration", true);
-        //
         this.parent = parent; 
       
         InetAddress localhost = null;
       		try {
       			localhost = InetAddress.getLocalHost();
       		} catch (UnknownHostException e1) {
-      			// TODO Auto-generated catch block
       			e1.printStackTrace();
       		}
               System.out.println("System IP Address : " +
@@ -130,7 +123,7 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
         panel.add(port, cs);
         panel.setBorder(new LineBorder(Color.GRAY));
  
-        Submit = new JButton("Save");
+        Submit = new JButton("Submit");
         Submit.setBackground(Factory.loginBtnColor);
         Submit.addActionListener(this);
         
@@ -156,7 +149,7 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				System.out.println("key Code"+e.getKeyCode());
-				loginProcess();
+				submitProcess();
 			}
 		});
         
@@ -178,7 +171,6 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
         	}
         	
 		});
-        lockMode();
     }
  
     public String getUsername() {
@@ -199,28 +191,9 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 		System.out.println("Action for "+cmd);
 		FirstTimeDbConfig d= this;
 		switch(cmd){
-			case "Login":	EventQueue.invokeLater( new Runnable() {
+			case "Submit":	EventQueue.invokeLater( new Runnable() {
 				public void run() {
-					String uname = getUsername();
-					String pass = getPassword();
-					if(uname.trim().equals("") || pass.trim().equals("")){
-						DialogService.showErrorMgs(Factory.getMainFrame(), "Username and Password can't be blank..!", "Invaild User");
-					}else{
-						UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
-						List<UserLoginModel> result = userLoginService.getUserDetail(uname,pass);
-						if(result.size()==1){
-							Factory.UserLoginModel=result.get(0);
-							if(!Factory.lockModeOn){
-								Factory.lockModeOn=false;
-								NevigationMenueBar n =new NevigationMenueBar(Factory.UserLoginModel.getUser().getUser_name());
-								n.manueBar(parent);
-								parent.revalidate();
-								parent.repaint();
-							}
-							dispose();
-						}else
-							DialogService.showErrorMgs(Factory.getMainFrame(), "Please Enter valid Username and password .!", "Invaild User");
-					}
+					
 					
 				}
 			});
@@ -240,36 +213,11 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 	}
 	
 	
-	private void loginProcess(){
+	private void submitProcess(){
 		EventQueue.invokeLater( new Runnable() {
 			public void run() {
-				String uname = getUsername();
-				String pass = getPassword();
-				if(uname.trim().equals("") || pass.trim().equals("")){
-					DialogService.showErrorMgs(Factory.getMainFrame(), "Username and Password can't be blank..!", "Invaild User");
-				}else{
-					UserLoginService userLoginService = (UserLoginService) Factory.getContext().getBean("loginService");
-					List<UserLoginModel> result = userLoginService.getUserDetail(uname,pass);
-					if(result.size()==1){
-						Factory.UserLoginModel=result.get(0);
-						NevigationMenueBar n =new NevigationMenueBar(result.get(0).getUser().getUser_name());
-						n.manueBar(parent);
-						parent.revalidate();
-						parent.repaint();
-						dispose();
-					}else
-						DialogService.showErrorMgs(Factory.getMainFrame(), "Please Enter valid Username and password .!", "Invaild User");
-				}
 				
 			}
 		});
-	}
-	public void lockMode(){
-		if(Factory.lockModeOn){
-        	btnCancel.setEnabled(false);
-			tfUsername.setText(Factory.UserLoginModel.getUser_name());
-			tfUsername.setEditable(false);
-			setVisible(true);
-        }
 	}
 }
