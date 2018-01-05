@@ -54,7 +54,8 @@ public class Factory {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		System.out.println("Spring Factory Ready...!");
 		try{
-			sessionfactory = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory();
+			sessionfactory=HibernateUtil.getSessionFactory();
+			//sessionfactory = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory();
 			System.out.println("HB Factory Ready...!");
 			
 		}
