@@ -15,13 +15,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import org.hibernate.Session;
+
+import common.service.DialogService;
 import common.service.Factory;
 
 
 public class DashboardPage implements ActionListener {
 	final JFrame MainFrame;
 	
-	public DashboardPage(String ProjectName){
+	public DashboardPage(String ProjectName,String newUser){
 		MainFrame = new JFrame(ProjectName);
 		try{
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,12 +40,30 @@ public class DashboardPage implements ActionListener {
 				ImageIcon img = new ImageIcon(fileUrl);
 				MainFrame.setContentPane(new JLabel(img));
 			}
-			LoginDialog loginDialog = new LoginDialog(MainFrame);
-			MainFrame.getContentPane().setLayout(null);
-			MainFrame.setJMenuBar(getMenuBar());
-			MainFrame.setVisible(true);
-			loginDialog.setVisible(true);
-			Factory.setMainFrame(MainFrame);
+			
+			try{
+				Session seession = Factory.sessionfactory.openSession();
+				seession.beginTransaction();
+				MainFrame.getContentPane().setLayout(null);
+				MainFrame.setJMenuBar(getMenuBar());
+				MainFrame.setVisible(true);
+				if(newUser.equals("newUser")){
+					FirstTimeDbConfig loginDialog = new FirstTimeDbConfig(MainFrame);
+					loginDialog.setVisible(true);
+					Factory.setMainFrame(MainFrame);
+				}else{
+					LoginDialog loginDialog = new LoginDialog(MainFrame);
+					loginDialog.setVisible(true);
+					Factory.setMainFrame(MainFrame);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				MainFrame.getContentPane().setLayout(null);
+				MainFrame.setJMenuBar(getMenuBar());
+				MainFrame.setVisible(true);
+				DialogService.showErrorMgs(Factory.getMainFrame(), "Check your lan connection try again", "Error");
+				MainFrame.dispose();
+			}
 			
 		}catch(Exception e){
 			e.printStackTrace();

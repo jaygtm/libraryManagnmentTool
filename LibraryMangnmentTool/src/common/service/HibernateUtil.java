@@ -7,9 +7,9 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 public class HibernateUtil {
 
-private static final SessionFactory sessionFactory = buildSessionFactory();
+private static SessionFactory sessionFactory =null;
 
-private static SessionFactory buildSessionFactory() {
+public static SessionFactory buildSessionFactory() {
     try {
 
         Properties dbConnectionProperties = new Properties();
@@ -17,13 +17,17 @@ private static SessionFactory buildSessionFactory() {
             dbConnectionProperties.load(HibernateUtil.class.getClassLoader().getSystemClassLoader().getResourceAsStream("hibernate.properties"));
         } catch(Exception e) {
             e.printStackTrace();
+            DialogService.showErrorMgs(Factory.getMainFrame(), "Configuration file not loading please try again!!!!", "Error");
         }           
-
-        return new AnnotationConfiguration().mergeProperties(dbConnectionProperties).configure("hibernate.cfg.xml").buildSessionFactory();          
+        sessionFactory=new AnnotationConfiguration().mergeProperties(dbConnectionProperties).configure("hibernate.cfg.xml").buildSessionFactory();
+        return sessionFactory;          
 
 
     } catch (Throwable ex) {
         ex.printStackTrace();
+        if(sessionFactory==null)
+        	DialogService.showErrorMgs(Factory.getMainFrame(), "Connection not opening with database check LAN connection!!!!", "Error");
+
     }
     return null;
 }

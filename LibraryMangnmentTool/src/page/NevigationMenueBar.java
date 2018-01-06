@@ -224,7 +224,7 @@ public class NevigationMenueBar implements ActionListener {
 														public void run() {
 															mainframe.dispose();
 															Factory.lockModeOn=false;
-															new DashboardPage("LibraryManagnmentTool");
+															new DashboardPage("LibraryManagnmentTool","");
 															
 														}
 													});

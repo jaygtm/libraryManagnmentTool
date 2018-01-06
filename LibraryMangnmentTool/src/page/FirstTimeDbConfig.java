@@ -27,12 +27,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import common.service.DialogService;
 import common.service.Factory;
 
 
 public class FirstTimeDbConfig extends JDialog implements ActionListener {
 	 
-    private JTextField tfUsername;
     private JTextField pfPassword;
     private JTextField port;
     private JLabel UserType;
@@ -40,8 +40,8 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
     private JLabel AdminPort;
     private JButton Submit;
     private JButton btnCancel;
-    private boolean succeeded;
     private JFrame parent;
+    private JComboBox cb;
  
     public FirstTimeDbConfig(JFrame parent) {
         super(parent, "Database Configuration", true);
@@ -67,7 +67,7 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
  
         
         String type[]={"Admin","User"};        
-        JComboBox cb=new JComboBox(type);    
+        cb=new JComboBox(type);    
         cb.setPreferredSize(new Dimension(200,25));
         cb.addItemListener(new ItemListener() {
 
@@ -173,18 +173,11 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 		});
     }
  
-    public String getUsername() {
-        return tfUsername.getText().trim();
-    }
- 
     public String getPassword() {
         return new String(pfPassword.getText());
     }
  
-    public boolean isSucceeded() {
-        return succeeded;
-    }
-
+  
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
@@ -193,8 +186,12 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 		switch(cmd){
 			case "Submit":	EventQueue.invokeLater( new Runnable() {
 				public void run() {
-					
-					
+					boolean status=Factory.WriteProperties(d.cb.getSelectedItem().toString(),d.getPassword(),d.port.getText());
+					if(status)
+						DialogService.showMgs(Factory.getMainFrame(), "Configuration Successfully please start software again", "Success");	
+					else
+						DialogService.showErrorMgs(Factory.getMainFrame(), "Configuration UnSuccessfully please try again", "Error");
+					parent.dispose();
 				}
 			});
 				
@@ -214,8 +211,15 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 	
 	
 	private void submitProcess(){
+		FirstTimeDbConfig d= this;
 		EventQueue.invokeLater( new Runnable() {
 			public void run() {
+				boolean status=Factory.WriteProperties(d.cb.getSelectedItem().toString(),d.getPassword(),d.port.getText());
+				if(status)
+					DialogService.showMgs(Factory.getMainFrame(), "Configuration Successfully please start software again", "Success");	
+				else
+					DialogService.showErrorMgs(Factory.getMainFrame(), "Configuration UnSuccessfully please try again", "Error");
+				parent.dispose();
 				
 			}
 		});

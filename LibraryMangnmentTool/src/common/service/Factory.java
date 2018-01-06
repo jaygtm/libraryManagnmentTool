@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFileChooser;
@@ -25,7 +26,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -46,15 +46,14 @@ public class Factory {
 	public static final Color buttonTextColor	= Color.white;
 	public static UserLoginModel UserLoginModel=null;
 	public static boolean lockModeOn=false;
-	//login user
-	//height 35,width 135
 	
-	
-	static {
+	{
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		System.out.println("Spring Factory Ready...!");
 		try{
-			sessionfactory=HibernateUtil.getSessionFactory();
+			sessionfactory=HibernateUtil.buildSessionFactory();
+			if(sessionfactory==null)
+	        	DialogService.showErrorMgs(Factory.getMainFrame(), "Connection not opening with database check LAN connection!!!!", "Error");
 			//sessionfactory = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory();
 			System.out.println("HB Factory Ready...!");
 			
@@ -66,19 +65,7 @@ public class Factory {
 	}
 	
 	public Factory(){
-		/*File errorFile = new File(getClass().getResource("..//extra//errorLog.txt").getPath());
-		File logFile = new File(getClass().getResource("..//extra//Log.txt").getPath());
-		try {
-			if(!errorFile.exists())
-				errorFile.createNewFile();
-			if(!logFile.exists())
-				logFile.createNewFile();
-			System.setErr(new PrintStream(errorFile));
-			System.setOut(new PrintStream(logFile));
-			System.out.println("Error File And Log File Make Done");
-		} catch ( IOException e) {
-			e.printStackTrace();
-		}*/
+		
 	}
 	
 	public static ApplicationContext getContext() {
@@ -208,6 +195,37 @@ public class Factory {
 		
 	}	
 	
+		public static boolean WriteProperties(String userType,String ipAddress,String port) {
+			File f=null;
+			try {
+				Properties properties=new Properties();
+				if(userType.equals("Admin"))
+					properties.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/librartmanagement");
+				else
+					properties.setProperty("hibernate.connection.url", "jdbc:mysql://"+ipAddress+":"+port+"/librartmanagement");
+				properties.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+				properties.setProperty("hibernate.connection.username", "root");
+				properties.setProperty("hibernate.connection.password", "root");
+
+				File file = new File("resources/hibernate.properties");
+				FileOutputStream fileOut = new FileOutputStream(file);
+				properties.store(fileOut, "Dynamic Connection");
+				fileOut.close();
+				f=new File("resources/hibernate.json");
+				f.createNewFile();
+				return true;
+			} catch (FileNotFoundException e) {
+				if(f!=null)
+					f.delete();
+				e.printStackTrace();
+				return false;
+			} catch (IOException e) {
+				if(f!=null)
+					f.delete();
+				e.printStackTrace();
+				return false;
+			}
+		}
 	
 	
 }
