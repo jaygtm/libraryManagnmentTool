@@ -42,16 +42,19 @@ public class DashboardPage implements ActionListener {
 			}
 			
 			try{
-				Session seession = Factory.sessionfactory.openSession();
-				seession.beginTransaction();
-				MainFrame.getContentPane().setLayout(null);
-				MainFrame.setJMenuBar(getMenuBar());
-				MainFrame.setVisible(true);
 				if(newUser.equals("newUser")){
 					FirstTimeDbConfig loginDialog = new FirstTimeDbConfig(MainFrame);
+					MainFrame.getContentPane().setLayout(null);
+					MainFrame.setJMenuBar(getMenuBar());
+					MainFrame.setVisible(true);
 					loginDialog.setVisible(true);
 					Factory.setMainFrame(MainFrame);
 				}else{
+					Session seession = Factory.sessionfactory.openSession();
+					seession.beginTransaction();
+					MainFrame.getContentPane().setLayout(null);
+					MainFrame.setJMenuBar(getMenuBar());
+					MainFrame.setVisible(true);
 					LoginDialog loginDialog = new LoginDialog(MainFrame);
 					loginDialog.setVisible(true);
 					Factory.setMainFrame(MainFrame);
@@ -68,8 +71,6 @@ public class DashboardPage implements ActionListener {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
-				
 	}
 	private JMenuBar getMenuBar() {
 		String menu[] = {"Books Menu","Student","User","Action","Security","More","AboutUs"};
