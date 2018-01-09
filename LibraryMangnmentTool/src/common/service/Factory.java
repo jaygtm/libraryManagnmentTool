@@ -8,6 +8,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,13 +28,17 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.SessionFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.UserLoginModel;
+import run.Run;
 
 public class Factory {
 	private static  ApplicationContext context;
@@ -206,13 +215,22 @@ public class Factory {
 				properties.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 				properties.setProperty("hibernate.connection.username", "root");
 				properties.setProperty("hibernate.connection.password", "root");
-
-				File file = new File("resources/hibernate.properties");
-				FileOutputStream fileOut = new FileOutputStream(file);
-				properties.store(fileOut, "Dynamic Connection");
-				fileOut.close();
-				f=new File("resources/hibernate.json");
-				f.createNewFile();
+				
+				
+				File folder = new File("config"+File.separator+"db");
+				if(!folder.exists())
+					folder.mkdirs();
+				File hbProperty = new File("config"+File.separator+"db"+File.separator+"hibernate.properties");
+				if(!hbProperty.exists())
+					hbProperty.createNewFile();
+				
+				FileOutputStream out = new FileOutputStream(hbProperty);
+					
+				properties.store(out, "Dynamic Connection");
+				out.close();
+					
+				
+				
 				return true;
 			} catch (FileNotFoundException e) {
 				if(f!=null)
@@ -226,6 +244,43 @@ public class Factory {
 				return false;
 			}
 		}
+		public static boolean getFirstTimeDetails(){
+			File current = new File("config");
+			System.out.println(current.getAbsolutePath());
+			
+			File hbProperty = new File("config"+File.separator+"db"+File.separator+"hibernate.properties");
+			if(hbProperty.exists()){
+					return false;
+			}else
+				return true;
+		}
+		public static boolean setLogFile(){
+			File current = new File("config"+File.separator+"log");
+			System.out.println(current.getAbsolutePath());
+			try{
+				File log = new File("config"+File.separator+"log"+File.separator+"log.txt");
+				File error = new File("config"+File.separator+"log"+File.separator+"logErrorlog.txt");
+				if(!current.exists()){
+					current.mkdirs();
+					error.createNewFile();
+					log.createNewFile();
+				}else{
+					if(!log.exists())
+						log.createNewFile();
+					if(!error.exists())
+						error.createNewFile();
+				}
+				FileOutputStream outLog = new FileOutputStream(log);
+				FileOutputStream outErrorLog = new FileOutputStream(error);
+				System.setOut(new PrintStream(outLog));
+				System.setErr(new PrintStream(outErrorLog));
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+			return true;
+		}	
+		
+		
 	
 	
 }

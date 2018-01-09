@@ -2,41 +2,32 @@ package run;
 
 
 import java.awt.EventQueue;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-import org.hibernate.Session;
-
-import common.service.DialogService;
 import common.service.Factory;
 import page.DashboardPage;
 
 public class Run {
 
 	public static void main(String[] args) {
-		try {
-			if(new FileReader("resources/hibernate.json")!=null){
-			Factory factory =  new Factory();
+		Factory.setLogFile();
+	
+		Boolean firstTime = Factory.getFirstTimeDetails();
+		if (firstTime == true) {
+			// Its First time then
 			EventQueue.invokeLater(new Runnable() {
-				
 				@Override
 				public void run() {
-					new DashboardPage("LibraryManagnmentTool","");
+					new DashboardPage("LibraryManagnmentTool", "newUser");
 				}
 			});
-			}
-		} catch (FileNotFoundException e) {
-				EventQueue.invokeLater(new Runnable() {
-					
-					@Override
-					public void run() {
-						new DashboardPage("LibraryManagnmentTool","newUser");
-					}
-				});
+		} else {
+			new Factory();
+			EventQueue.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					new DashboardPage("LibraryManagnmentTool", "");
+				}
+			});
 		}
-		
 	}
 
 }

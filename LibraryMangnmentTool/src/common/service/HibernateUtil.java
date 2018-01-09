@@ -1,5 +1,7 @@
 package common.service;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
@@ -14,7 +16,10 @@ public static SessionFactory buildSessionFactory() {
 
         Properties dbConnectionProperties = new Properties();
         try {
-            dbConnectionProperties.load(HibernateUtil.class.getClassLoader().getSystemClassLoader().getResourceAsStream("hibernate.properties"));
+           // dbConnectionProperties.load(HibernateUtil.class.getClassLoader().getSystemClassLoader().getResourceAsStream("hibernate.properties"));
+        	File hbProperty = new File("config"+File.separator+"db"+File.separator+"hibernate.properties");
+        	FileInputStream in = new FileInputStream(hbProperty);
+            dbConnectionProperties.load(in);
         } catch(Exception e) {
             e.printStackTrace();
             DialogService.showErrorMgs(Factory.getMainFrame(), "Configuration file not loading please try again!!!!", "Error");
