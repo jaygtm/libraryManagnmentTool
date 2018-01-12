@@ -17,6 +17,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,8 +29,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
 import common.service.DialogService;
 import common.service.Factory;
+import model.BookTypeModel;
+import model.UserLoginModel;
+import model.UserModel;
+import model.UserRole;
+import service.impl.UserLoginServiceImpl;
 
 
 public class FirstTimeDbConfig extends JDialog implements ActionListener {
@@ -224,4 +236,94 @@ public class FirstTimeDbConfig extends JDialog implements ActionListener {
 			}
 		});
 	}
+	
+	public static List<UserRole> getUserRoleList(){
+		UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
+		List<UserRole> roleobject=userLoginServiceImpl.getUserRoleList();
+		return roleobject;
+	}
+	
+	public static boolean createMaster(){
+		UserRole role=new UserRole();
+		role.setRole_id(1);
+		role.setRole_code("admin");
+		role.setRole_name("Admin");
+		
+		UserRole role2=new UserRole();
+		role2.setRole_id(2);
+		role2.setRole_code("usr");
+		role2.setRole_name("User");
+		
+		BookTypeModel booktype=new BookTypeModel();
+		booktype.setBookType_code("Referance");
+		booktype.setBookType_id(1);
+		
+		BookTypeModel booktype2=new BookTypeModel();
+		booktype2.setBookType_code("Study book");
+		booktype2.setBookType_id(2);
+		
+		Session session = Factory.sessionfactory.openSession();
+		session.beginTransaction();
+		session.save(role);
+		session.save(role2);
+		session.save(booktype);
+		session.save(booktype2);
+		session.beginTransaction().commit();
+		
+		UserLoginModel loginUserDetail =createAdminUser();
+		if(loginUserDetail != null){
+			UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
+			boolean status = userLoginServiceImpl.saveUser(loginUserDetail);
+			System.out.println("Status of Save");
+			if(status){
+				DialogService.showMgs(Factory.getMainFrame(), "your admin user id is admin and password is 123#", "Success");
+				return true;
+			}else{ 
+				DialogService.showErrorMgs(Factory.getMainFrame(), "Error to create admin ..!", "Error");
+				Session s = Factory.sessionfactory.openSession();
+		        Transaction tx = null;
+
+		        try {
+		            tx = s.beginTransaction();
+		            s.createSQLQuery("SET FOREIGN_KEY_CHECKS = 0").executeUpdate();
+		            s.createSQLQuery("DROP DATABASE librartmanagement").executeUpdate();
+		            tx.commit();
+		            return false;
+		        } catch (Exception e) {
+		            if (tx != null) {
+		                tx.rollback();
+		            }
+		            e.printStackTrace();
+		            return false;
+		        } finally {
+		            s.close();
+		        }
+
+			}	
+		}else
+			return false;
+	}
+	private static UserLoginModel createAdminUser(){
+		
+				UserRole role= new UserRole();
+				role.setRole_id(1);
+				role.setRole_code("admin");
+				role.setRole_name("Admin");
+				
+				UserModel user=new UserModel();
+				user.setUser_addr("A&J Company");
+				user.setUser_name("AviJay");
+				user.setUser_mobile("7857009840");
+				user.setUser_idNo("7857009840");
+				user.setRole(role);
+				
+				UserLoginModel loginUserDetail=new UserLoginModel();
+				loginUserDetail.setUser_passwprd("123#");
+				loginUserDetail.setUser_lastLogin(new Date());
+				loginUserDetail.setUser_name("admin");
+				loginUserDetail.setUser(user);
+				return loginUserDetail; 
+		
+}
+
 }

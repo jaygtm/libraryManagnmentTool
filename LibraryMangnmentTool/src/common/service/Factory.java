@@ -8,11 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,17 +24,13 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.SessionFactory;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.UserLoginModel;
-import run.Run;
 
 public class Factory {
 	private static  ApplicationContext context;
@@ -209,7 +201,7 @@ public class Factory {
 			try {
 				Properties properties=new Properties();
 				if(userType.equals("Admin"))
-					properties.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/librartmanagement");
+					properties.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/librartmanagement?createDatabaseIfNotExist=true");
 				else
 					properties.setProperty("hibernate.connection.url", "jdbc:mysql://"+ipAddress+":"+port+"/librartmanagement");
 				properties.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");

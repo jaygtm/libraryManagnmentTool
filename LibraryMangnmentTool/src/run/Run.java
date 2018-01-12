@@ -4,6 +4,7 @@ package run;
 import java.awt.EventQueue;
 import common.service.Factory;
 import page.DashboardPage;
+import page.FirstTimeDbConfig;
 
 public class Run {
 
@@ -21,6 +22,10 @@ public class Run {
 			});
 		} else {
 			new Factory();
+			boolean statusCreate=true;
+			if(FirstTimeDbConfig.getUserRoleList().isEmpty())
+				 statusCreate=FirstTimeDbConfig.createMaster();
+			if(statusCreate)
 			EventQueue.invokeLater(new Runnable() {
 				@Override
 				public void run() {
