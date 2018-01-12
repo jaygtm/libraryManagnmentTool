@@ -3,6 +3,7 @@ package run;
 
 import java.awt.EventQueue;
 import common.service.Factory;
+import common.service.Splash;
 import page.DashboardPage;
 import page.FirstTimeDbConfig;
 
@@ -21,10 +22,19 @@ public class Run {
 				}
 			});
 		} else {
-			new Factory();
 			boolean statusCreate=true;
-			if(FirstTimeDbConfig.getUserRoleList().isEmpty())
-				 statusCreate=FirstTimeDbConfig.createMaster();
+			Splash splash=new Splash();
+			splash.setVisible(true);
+	        Thread thrad=Thread.currentThread();
+	        try {
+	        	new Factory();
+	        	if(FirstTimeDbConfig.getUserRoleList().isEmpty())
+					 statusCreate=FirstTimeDbConfig.createMaster();
+	        	thrad.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	        splash.dispose();
 			if(statusCreate)
 			EventQueue.invokeLater(new Runnable() {
 				@Override
