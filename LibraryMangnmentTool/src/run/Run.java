@@ -30,7 +30,7 @@ public class Run {
 	        	new Factory();
 	        	if(FirstTimeDbConfig.getUserRoleList().isEmpty())
 					 statusCreate=FirstTimeDbConfig.createMaster();
-	        	thrad.sleep(10000);
+	        	thrad.sleep(6500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
