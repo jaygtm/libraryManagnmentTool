@@ -17,7 +17,6 @@ import javax.swing.JTable;
 
 import com.toedter.calendar.JDateChooser;
 
-import common.service.DialogService;
 import common.service.Factory;
 import model.BookModel;
 import model.BookTypeModel;
@@ -191,7 +190,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 		}
 	}
 	public String[] columnName() {
-		String columnName[] = { "Serial no.","Student Name","Receiver Name", "Amount Received"};
+		String columnName[] = { "Serial no.","Student Name","Receiver Name","Date", "Amount Received"};
 		return columnName;
 	}
 	
@@ -211,6 +210,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 			rowData[i][2] = "";
 			rowData[i][3] = "";
 			rowData[i][4] = "";
+			rowData[i][5] = "";
 			total=total+0;//rowData[i][4] 
 			i++;
 		}
