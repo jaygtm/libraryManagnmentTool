@@ -201,7 +201,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 			list = bookService.getSearchBookList(searchBy, value);
 		else
 			list = bookService.getBookaList();
-		String rowData[][] =new String[list.size()][4]; ;
+		String rowData[][] =new String[list.size()][5]; ;
 		Iterator<BookModel> itr =  list.iterator();
 		int i=0;
 		while (itr.hasNext()) {
