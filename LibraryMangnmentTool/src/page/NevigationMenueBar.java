@@ -38,7 +38,9 @@ public class NevigationMenueBar implements ActionListener {
 		panel.setBounds(10, 63, 195, 593);
 		mainframe.getContentPane().add(panel);
 		
-		JButton btnNewButton_1 = new JButton("Add Book                            ");
+		//JButton btnNewButton_1 = new JButton("Add Book                            ");
+		JButton btnNewButton_1 = new JButton("Add Book");
+		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
 		//btnNewButton_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("../img/java_jar.gif")));
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -48,7 +50,9 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_1.addActionListener(this);
 		panel.add(btnNewButton_1);
 		
-		JButton viewBookBtn = new JButton("Book List                            ");
+		//JButton viewBookBtn = new JButton("Book List                            ");
+		JButton viewBookBtn = new JButton("Book List");
+		viewBookBtn.setHorizontalAlignment(SwingConstants.LEFT);
 		viewBookBtn.setForeground(Color.WHITE);
 		viewBookBtn.setBackground(new Color(105, 105, 105));
 		viewBookBtn.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -58,7 +62,9 @@ public class NevigationMenueBar implements ActionListener {
 		
 		
 		
-		JButton btnNewButton = new JButton("Add Student                      ");
+		//JButton btnNewButton = new JButton("Add Student                      ");
+		JButton btnNewButton = new JButton("Add Student");
+		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(new Color(105, 105, 105));
 		btnNewButton.setBounds(0, 88, 205, 44);
@@ -66,7 +72,9 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton.addActionListener(this);
 		panel.add(btnNewButton);
 		
-		JButton StudentlistButton = new JButton("Student List                      ");
+		//JButton StudentlistButton = new JButton("Student List                      ");
+		JButton StudentlistButton = new JButton("Student List");
+		StudentlistButton.setHorizontalAlignment(SwingConstants.LEFT);
 		StudentlistButton.setForeground(Color.WHITE);
 		StudentlistButton.setBackground(new Color(105, 105, 105));
 		StudentlistButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -74,7 +82,9 @@ public class NevigationMenueBar implements ActionListener {
 		StudentlistButton.setBounds(0, 131, 205, 44);
 		panel.add(StudentlistButton);
 		
-		JButton btnNewButton_4 = new JButton("User Creation                   ");
+		//JButton btnNewButton_4 = new JButton("User Creation                   ");
+		JButton btnNewButton_4 = new JButton("User Creation");
+		btnNewButton_4.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_4.setForeground(Color.WHITE);
 		btnNewButton_4.setBackground(new Color(105, 105, 105));
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -82,20 +92,46 @@ public class NevigationMenueBar implements ActionListener {
 		btnNewButton_4.setBounds(0, 173, 205, 44);
 		panel.add(btnNewButton_4);
 		
-		JButton btnNewButton_3 = new JButton("Lock                                    ");
+		//JButton transection = new JButton("View transection               ");
+		JButton transection = new JButton("View transection");
+		transection.setHorizontalAlignment(SwingConstants.LEFT);
+		transection.setForeground(Color.WHITE);
+		transection.setBackground(new Color(105, 105, 105));
+		transection.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		transection.addActionListener(this);
+		transection.setBounds(0, 216, 205, 44);
+		panel.add(transection);
+		
+		JButton Contact = new JButton("Contact us");
+		//JButton Contact = new JButton("Contact us                           ");
+		Contact.setHorizontalAlignment(SwingConstants.LEFT);
+		Contact.setForeground(Color.WHITE);
+		Contact.setBackground(new Color(105, 105, 105));
+		Contact.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		Contact.addActionListener(this);
+		Contact.setBounds(0, 259, 205, 44);
+		panel.add(Contact);
+		
+	//	JButton btnNewButton_3 = new JButton("Lock                                    ");
+		JButton btnNewButton_3 = new JButton("Lock");
+		//btnNewButton_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lock.ico")));
+		btnNewButton_3.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_3.setForeground(Color.WHITE);
 		btnNewButton_3.setBackground(new Color(105, 105, 105));
 		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		//btnNewButton_3.setBorder(null);
-		btnNewButton_3.setBounds(0, 216, 205, 44);
+		btnNewButton_3.setBounds(0, 302, 205, 44);
 		btnNewButton_3.addActionListener(this);
 		panel.add(btnNewButton_3);
 		
-		JButton btnNewButton_2 = new JButton("Exit                                     ");
+		//JButton btnNewButton_2 = new JButton("Exit                                     ");
+		JButton btnNewButton_2 = new JButton("Exit");
+		//btnNewButton_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit2.png")));
+		btnNewButton_2.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setBackground(new Color(105, 105, 105));
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btnNewButton_2.setBounds(0, 259, 205, 44);
+		btnNewButton_2.setBounds(0, 345, 205, 44);
 		btnNewButton_2.addActionListener(this);
 		panel.add(btnNewButton_2);
 		
@@ -246,6 +282,26 @@ public class NevigationMenueBar implements ActionListener {
 														mainframe.dispose();
 													}
 												});
+		break;
+		case "Contact us" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				bodyPanel.removeAll();
+				bodyPanel.add(new Email());
+				Factory.refresh();			}
+		});
+		break;
+		
+		case "View transection" :EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				bodyPanel.removeAll();
+				bodyPanel.add(new TransectionHistory());
+				Factory.refresh();	
+			}
+		});
 		break;
 		case "Lock" :EventQueue.invokeLater(new Runnable() {
 			
