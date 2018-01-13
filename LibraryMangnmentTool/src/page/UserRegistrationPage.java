@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
@@ -27,7 +28,24 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	private JTextField name;
 	private JTextField mobile;
 	private JTextField aadhar;
+	private JTextField email;
 	private JTextField address;
+	public JTextField getEmail() {
+		return email;
+	}
+
+	public void setEmail(JTextField email) {
+		this.email = email;
+	}
+
+	public JPasswordField getEmailPass() {
+		return emailPass;
+	}
+
+	public void setEmailPass(JPasswordField emailPass) {
+		this.emailPass = emailPass;
+	}
+	private JPasswordField emailPass;
 	private List<UserRole> roleobject=new ArrayList<>();
 	private UserLoginModel UserLoginModelobj;
 	
@@ -103,12 +121,12 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	public JTextField getTextField_5() {
 		return password;
 	}
-	public void setTextField_5(JTextField textField_5) {
+	public void setTextField_5(JPasswordField textField_5) {
 		this.password = textField_5;
 	}
 	private JTextField loginId;
 	private JTextField userLoginId;
-	private JTextField password;
+	private JPasswordField password;
 	private JComboBox role;
 	public UserRegistrationPage(){
 		setBounds(10, 11, 1129, 571);
@@ -206,7 +224,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	lblPassword.setBounds(126, 327, 98, 14);
 	add(lblPassword);
 	
-	password = new JTextField();
+	password = new JPasswordField();
 	password.setBounds(275, 326, 243, 20);
 	add(password);
 	password.setColumns(10);
@@ -221,6 +239,27 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	userLoginId.setBounds(722, 110, 243, 20);
 	add(userLoginId);
 	userLoginId.setColumns(10);
+	
+	JLabel emailId = new JLabel("Email Id:-");
+	emailId.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+	emailId.setBounds(126, 398, 98, 14);
+	add(emailId);
+	
+	email = new JTextField();
+	email.setBounds(275, 398, 243, 20);
+	add(email);
+	email.setColumns(10);
+
+	JLabel emailPasslable = new JLabel("Email Password:-");
+	emailPasslable.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+	emailPasslable.setBounds(578, 398, 125, 17);
+	add(emailPasslable);
+	
+	emailPass = new JPasswordField();
+	emailPass.setBounds(722, 398, 243, 20);
+	add(emailPass);
+	emailPass.setColumns(10);
+
 	
 	}
 	@Override
@@ -271,7 +310,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	
 	private UserLoginModel validateForm(){
 		
-			if(!address.getText().equals("") && !name.getText().equals("") && !mobile.getText().equals("") && !loginId.getText().equals("")
+			if(!email.getText().equals("") && !address.getText().equals("") && !name.getText().equals("") && !mobile.getText().equals("") && !loginId.getText().equals("")
 					&& Factory.validateNumber(mobile.getText())	&& !aadhar.getText().equals("") && !password.getText().equals("")){
 					UserRole roleSelected=null;
 					for(int j=0;j<this.getRole().size();j++){
@@ -285,6 +324,8 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 					user.setUser_name(name.getText());
 					user.setUser_mobile(mobile.getText());
 					user.setUser_idNo(aadhar.getText());
+					user.setUser_email(email.getText());
+					user.setUser_emailpass(emailPass.getText());
 					if(UserLoginModelobj!=null)
 						user.setUser_id(UserLoginModelobj.getUser().getUser_id());
 					user.setRole(roleSelected);

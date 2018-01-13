@@ -18,7 +18,21 @@ public class UserModel {
 	private String user_mobile;
 	private String user_idNo;
 	private String user_addr;
+	private String user_email;
+	private String user_emailpass;
 	
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+	public String getUser_emailpass() {
+		return user_emailpass;
+	}
+	public void setUser_emailpass(String user_emailpass) {
+		this.user_emailpass = user_emailpass;
+	}
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="user_roleId")
 	private UserRole role;

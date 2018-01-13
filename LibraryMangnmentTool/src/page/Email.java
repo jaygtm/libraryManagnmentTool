@@ -60,6 +60,7 @@ public class Email extends JPanel implements ActionListener {
 		
 		from = new JTextField();
 		from.setBounds(338, 50, 672, 30);
+		from.setText(Factory.UserLoginModel.getUser().getUser_email());
 		add(from);
 		from.setColumns(10);
 		

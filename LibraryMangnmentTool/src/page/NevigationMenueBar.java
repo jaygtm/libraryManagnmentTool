@@ -179,6 +179,12 @@ public class NevigationMenueBar implements ActionListener {
 		mainframe.getContentPane().add(panel_4);
 		panel_4.setLayout(null);
 		
+		JLabel version = new JLabel("Version :- "+Factory.version);
+		version.setHorizontalAlignment(SwingConstants.CENTER);
+		version.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		version.setBounds(10, 0, 110, 25);
+		panel_4.add(version);
+		
 		JLabel lblDate = new JLabel("Date :");
 		lblDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));

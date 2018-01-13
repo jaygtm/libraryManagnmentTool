@@ -123,7 +123,7 @@ public class UserList extends JPanel implements ActionListener {
 	}
 	
 	public String[] columnName() {
-		String columnName[] = {"User Id","User Name", "User Mobile", "Addhar/Id No.", "User Address", "User Role","User UserId"};
+		String columnName[] = {"User Id","User Name", "User Mobile", "Addhar/Id No.", "User Address", "User Role","User UserId","Email Id"};
 		return columnName;
 	}
 	
@@ -148,6 +148,7 @@ public class UserList extends JPanel implements ActionListener {
 			rowData[i][4] = loginUserDetail.getUser().getUser_addr();
 			rowData[i][5] = loginUserDetail.getUser().getRole().getRole_name();
 			rowData[i][6] = ""+loginUserDetail.getUser_name();
+			rowData[i][7] = ""+loginUserDetail.getUser().getUser_email();
 			i++;
 		}
 		return rowData;
@@ -185,6 +186,8 @@ public class UserList extends JPanel implements ActionListener {
 						registrationPage.getTextField_9().setText(""+name.getUser_id());
 						registrationPage.getTextField_5().setText(name.getUser_passwprd());
 						registrationPage.getTextField_4().setText(name.getUser_name());
+						registrationPage.getEmail().setText(name.getUser().getUser_email());
+						registrationPage.getEmailPass().setText(name.getUser().getUser_emailpass());
 						Factory.refresh();
 					}
 
