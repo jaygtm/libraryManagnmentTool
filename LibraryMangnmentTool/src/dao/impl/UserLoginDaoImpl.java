@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import common.service.Factory;
 import dao.UserLoginDao;
+import model.TransectionHistoryModel;
 import model.UserLoginModel;
 import model.UserRole;
 
@@ -144,6 +146,33 @@ public class UserLoginDaoImpl implements UserLoginDao {
 			if(tx!=null)
 				tx.rollback();
 			return false;
+		}finally{
+			session.close();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TransectionHistoryModel> getTxnhistoryList(Date fromDate, Date toDate) {
+		List<TransectionHistoryModel> transectionHistoryObject=new ArrayList();
+		Session session = Factory.sessionfactory.openSession();
+		Transaction tx = null;
+		try{
+			tx=session.beginTransaction();
+			Criteria c=session.createCriteria(TransectionHistoryModel.class); 
+			c.add(Restrictions.between("txn_date", fromDate, toDate));
+			transectionHistoryObject=c.list();  
+		/*transectionHistoryObject = session.createSQLQuery("select idtxn_amount_his,txn_amount_his.submited_by,mst_customer.customer_name"
+								+ " ,txn_amount_his.Recived_by,mst_user.user_name,txn_amount_his.txn_date ,"
+								+ " txn_amount_his.txn_type, txn_amount_his.amount  "
+								+ " from txn_amount_his"
+								+ " inner join mst_customer on mst_customer.customer_id=txn_amount_his.submited_by "
+								+ " inner join mst_user on mst_user.user_id=txn_amount_his.Recived_by "
+								+ " where (txn_amount_his.txn_date BETWEEN '"+fromDate+"'AND '"+toDate+"') ").list();*/
+			return transectionHistoryObject;
+		}catch(Exception e){
+			e.printStackTrace();
+			return transectionHistoryObject;
 		}finally{
 			session.close();
 		}

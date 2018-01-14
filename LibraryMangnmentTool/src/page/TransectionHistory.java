@@ -4,8 +4,10 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -17,21 +19,20 @@ import javax.swing.JTable;
 
 import com.toedter.calendar.JDateChooser;
 
+import common.service.DialogService;
 import common.service.Factory;
-import model.BookModel;
-import model.BookTypeModel;
-import service.BookService;
+import model.TransectionHistoryModel;
+import service.impl.UserLoginServiceImpl;
 
 @SuppressWarnings("serial")
 public class TransectionHistory extends JPanel implements ActionListener {
 	
-	int total=0;
+	Double total=0.00;
 	JTable table;
 	JDateChooser to;
 	JDateChooser from;
 	private JScrollPane scrollBar;
-	private List<BookTypeModel> bookTypeList;
-	private List<BookModel> list;
+	private List<TransectionHistoryModel> list;
 	public JButton btnNewButton_8;
 	public JButton btnNewButton_9;
 	public JButton btnNewButton_10;
@@ -84,7 +85,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 		scrollBar.setBounds(10, 75, 1109, 420);
 		add(scrollBar);
 		
-		table = new JTable(getBookList(null,null),columnName());
+		table = new JTable(new String[0][7],columnName());
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
@@ -144,19 +145,22 @@ public class TransectionHistory extends JPanel implements ActionListener {
 			EventQueue.invokeLater(new Runnable() {
 
 				@Override
-				public void run() {/*
-					String columnType=comboBox.getSelectedItem().toString();
-					String columnValue=textField.getText();
-					if(columnValue.equals("") || columnValue==null) {
+				public void run() {
+					 
+					if(from.getDate()==null || from.getDate().equals("") || to.getDate()==null ||  to.getDate().equals("") ) {
 						DialogService.showErrorMgs(Factory.getMainFrame(), "Please fill search Content", "Alert");
-						scrollBar.remove(table);
-						table = new JTable(getBookList(null, null),columnName());
+						table = new JTable(new String[0][7],columnName());
 						table.setBounds(163, 235, 1, 1);
 						scrollBar.getViewport ().add(table);
+						Factory.refresh();
 					}else{
-						String[][]  list=getBookList(columnType, columnValue);
+						String[][]  list=getBookList(from.getDate(), to.getDate());
 						if(list.length==0){
 							DialogService.showErrorMgs(Factory.getMainFrame(), "No record found", "Alert");
+							table = new JTable(list,columnName());
+							table.setBounds(163, 235, 1, 1);
+							scrollBar.getViewport ().add(table);
+							Factory.refresh();
 						}else{
 							scrollBar.remove(table);
 							table = new JTable(list,columnName());
@@ -165,7 +169,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 						}
 					}
 					Factory.refresh();
-				*/}
+				}
 			});
 			break;
 		case "Clear":
@@ -175,7 +179,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 				public void run() {
 					from.setCalendar(null);
 					to.setCalendar(null);
-					table = new JTable(getBookList(null, null),columnName());
+					table = new JTable(new String[0][7],columnName());
 					table.setBounds(163, 235, 1, 1);
 					scrollBar.getViewport ().add(table);
 					Factory.refresh();
@@ -190,29 +194,27 @@ public class TransectionHistory extends JPanel implements ActionListener {
 		}
 	}
 	public String[] columnName() {
-		String columnName[] = { "Serial no.","Student Name","Receiver Name","Date", "Amount Received"};
+		String columnName[] = { "Serial no.","Student Id","Student Name","Receiver Id","Receiver Name","Date", "Amount Received"};
 		return columnName;
 	}
 	
-	public String[][] getBookList(String searchBy, String value){
-		BookService bookService = (BookService) Factory.getContext().getBean("bookService");
-		list = new ArrayList<BookModel>();
+	public String[][] getBookList(Date searchBy, Date value){
+		UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
+		list = new ArrayList<TransectionHistoryModel>();
 		if(searchBy!=null && value!=null)
-			list = bookService.getSearchBookList(searchBy, value);
-		else
-			list = bookService.getBookaList();
-		String rowData[][] =new String[list.size()][5]; ;
-		Iterator<BookModel> itr =  list.iterator();
-		int i=0;
-		while (itr.hasNext()) {
-			rowData[i][0] = ""+i;
-			rowData[i][1] = "";
-			rowData[i][2] = "";
-			rowData[i][3] = "";
-			rowData[i][4] = "";
-			rowData[i][5] = "";
-			total=total+0;//rowData[i][4] 
-			i++;
+			list = userLoginServiceImpl.getTxnhistoryList(searchBy, value);
+		String rowData[][] =new String[list.size()][7] ;
+		
+		for(int i=0;i<list.size();i++){
+			TransectionHistoryModel transectionHistoryModel=(TransectionHistoryModel) list.get(i);
+			rowData[i][0] = ""+(i+1);
+			rowData[i][1] = ""+transectionHistoryModel.getCustomerModel().getCustomer_id();
+			rowData[i][2] = ""+transectionHistoryModel.getCustomerModel().getCustomer_name();
+			rowData[i][3] = ""+transectionHistoryModel.getUserModel().getUser_id();
+			rowData[i][4] = ""+transectionHistoryModel.getUserModel().getUser_name();
+			rowData[i][5] = ""+transectionHistoryModel.getTxn_date();
+			rowData[i][6] = ""+transectionHistoryModel.getAmount();
+			total=total+transectionHistoryModel.getAmount(); 
 		}
 		return rowData;
 	}

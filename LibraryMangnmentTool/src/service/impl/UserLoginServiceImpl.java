@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import dao.UserLoginDao;
@@ -49,4 +50,9 @@ public class UserLoginServiceImpl implements UserLoginService {
 		
 	}
 	
+	@Override
+	public List getTxnhistoryList(Date fromDate, Date toDate){
+		return userLoginDao.getTxnhistoryList(fromDate, toDate);
+	}
+
 }

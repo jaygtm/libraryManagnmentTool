@@ -1,7 +1,9 @@
 package service;
 
+import java.util.Date;
 import java.util.List;
 
+import model.TransectionHistoryModel;
 import model.UserLoginModel;
 import model.UserRole;
 
@@ -12,4 +14,5 @@ public interface UserLoginService {
 	List<UserRole> getUserRoleList();
 	List<UserLoginModel> getSearchUserList(String searchBy, String value);
 	public boolean deleteCustomerDetail(int value);
+	List<TransectionHistoryModel> getTxnhistoryList(Date fromDate, Date toDate);
 }

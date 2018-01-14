@@ -25,6 +25,7 @@
          <mapping class="model.StudentHistoryModel"/>
           <mapping class="model.BookTypeModel"/>
           <mapping class="model.GetStudentModel"/>
+          <mapping class="model.TransectionHistoryModel"/>
           <mapping class="model.UserModel"/>
           <mapping class="model.UserRole"/>
         
