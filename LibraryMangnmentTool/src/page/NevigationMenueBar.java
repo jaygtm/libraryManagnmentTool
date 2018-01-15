@@ -169,7 +169,7 @@ public class NevigationMenueBar implements ActionListener {
 		lblNewLabel_1.setBounds(1086, 15, 133, 14);
 		panel_3.add(lblNewLabel_1);
 		
-		JLabel lblPatnaCentralSchool = new JLabel("Patna Central School");
+		JLabel lblPatnaCentralSchool = new JLabel(Factory.organizationName);
 		lblPatnaCentralSchool.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
 		lblPatnaCentralSchool.setBounds(543, 11, 318, 18);
 		panel_3.add(lblPatnaCentralSchool);

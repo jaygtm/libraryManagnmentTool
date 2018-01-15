@@ -37,7 +37,10 @@ public class Factory {
 	public static SessionFactory sessionfactory;
 	private static JFrame mainFrame;
 	private static JPanel bodyPanal;
+	
 	public static final String version="1.0";
+	public static final String organizationName="Patna Central School";
+	
 	public static final Color cancleBtnColor= new Color(255, 51, 0);
 	public static final Color deleteBtnColor= new Color(178, 34, 34);
 	public static final Color modifyBtnColor= new Color(51, 153, 102);
@@ -48,6 +51,7 @@ public class Factory {
 	public static final Color buttonTextColor	= Color.white;
 	public static UserLoginModel UserLoginModel=null;
 	public static boolean lockModeOn=false;
+	
 	
 	{
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
