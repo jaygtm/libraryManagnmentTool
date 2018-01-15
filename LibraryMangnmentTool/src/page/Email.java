@@ -1,6 +1,7 @@
 
 package page;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import common.service.DialogService;
@@ -35,7 +37,7 @@ public class Email extends JPanel implements ActionListener {
 	private JTextField to;
 	private JTextField from;
 	private JTextField subject;
-	private JTextField composemain;
+	private JTextArea composemain;
 	public Email() {
 		
 		setBounds(10, 11, 1129, 571);
@@ -91,7 +93,12 @@ public class Email extends JPanel implements ActionListener {
 		lblComposeEmail.setBounds(101, 225, 209, 25);
 		add(lblComposeEmail);
 		
-		composemain = new JTextField();
+		//composemain = new JTextField();
+		composemain = new JTextArea(25, 50);
+		composemain.setLineWrap(true);
+		JScrollPane scrollPane = new JScrollPane(composemain); 
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		//scrollPane.setPreferredSize(new Dimension(25, 25));
 		composemain.setBounds(338, 224, 672, 270);
 		add(composemain);
 		composemain.setColumns(10);
