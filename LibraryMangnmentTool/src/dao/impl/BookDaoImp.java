@@ -29,18 +29,27 @@ public class BookDaoImp implements BookDao {
 	}
 
 	@Override
-	public boolean addBook(BookModel bookModel) {
+	public Serializable addBook(BookModel bookModel) {
 		Session session = Factory.sessionfactory.openSession();
-		session.beginTransaction();
+		Transaction tx=null;
+		try{
+			tx=session.beginTransaction();
 		Serializable id= session.save(bookModel);
+		System.out.println("bookid::"+id);
 		session.beginTransaction().commit();
-		session.close();
+		return id;
+		}catch(Exception e){
+			if(tx!=null)
+				tx.rollback();
+			return null;
+		}finally{
+			session.close();	
+		}
 		
-		System.out.println("Commit done");
-		if(id !=null)
+		/*if(id !=null)
 			return true;
 		else
-			return false;
+			return false;*/
 	}
 
 	@Override

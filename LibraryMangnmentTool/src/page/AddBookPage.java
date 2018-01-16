@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -234,10 +235,11 @@ public class AddBookPage extends JPanel implements ActionListener {
 							m.setBook_aval(1);
 							
 							
-							boolean status = bookService.addBook(m);
-							
-							DialogService.showMgs(Factory.getMainFrame(), "Book Add Successfully", "Success");
-						
+							Serializable status = bookService.addBook(m);
+							if(status!=null)
+								DialogService.showMgs(Factory.getMainFrame(), "Book Add Successfully your book id :: "+status, "Success");
+							else
+								DialogService.showErrorMgs(Factory.getMainFrame(), "Error While saving book please try again", "Error");
 						}else
 							DialogService.showErrorMgs(Factory.getMainFrame(), "Please Select Book Type", "Error");
 					}

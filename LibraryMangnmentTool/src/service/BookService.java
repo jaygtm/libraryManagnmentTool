@@ -1,5 +1,6 @@
 package service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import model.BookModel;
@@ -9,7 +10,7 @@ import model.StudentHistoryModel;
 public interface BookService {
 	public List<BookModel> getBookaList();
 	public BookModel getBook(int bookId);
-	public boolean addBook(BookModel bookModel);
+	public Serializable addBook(BookModel bookModel);
 	public boolean editBook(BookModel bookModel);
 	public boolean delteBook(BookModel bookModel);
 	public List<BookModel> getAvailableBookList();

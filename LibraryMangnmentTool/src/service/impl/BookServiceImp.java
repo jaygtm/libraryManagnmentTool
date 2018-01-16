@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import dao.BookDao;
@@ -27,7 +28,7 @@ public class BookServiceImp implements BookService {
 	}
 
 	@Override
-	public boolean addBook(BookModel bookModel) {
+	public Serializable addBook(BookModel bookModel) {
 		return bookDao.addBook(bookModel);
 	}
 
