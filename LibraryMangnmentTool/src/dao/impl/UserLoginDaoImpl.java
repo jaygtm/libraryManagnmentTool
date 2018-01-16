@@ -160,7 +160,10 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		try{
 			tx=session.beginTransaction();
 			Criteria c=session.createCriteria(TransectionHistoryModel.class); 
-			c.add(Restrictions.between("txn_date", fromDate, toDate));
+			//c.add(Restrictions.between("txn_date", fromDate, toDate));
+			c.add(Restrictions.ge("txn_date", Factory.getNextDate(fromDate))); 
+			c.add(Restrictions.lt("txn_date", toDate));
+			System.out.println(fromDate+"   "+Factory.getNextDate(toDate));
 			transectionHistoryObject=c.list();  
 		/*transectionHistoryObject = session.createSQLQuery("select idtxn_amount_his,txn_amount_his.submited_by,mst_customer.customer_name"
 								+ " ,txn_amount_his.Recived_by,mst_user.user_name,txn_amount_his.txn_date ,"

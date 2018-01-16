@@ -37,6 +37,7 @@ public class TransectionHistory extends JPanel implements ActionListener {
 	public JButton btnNewButton_9;
 	public JButton btnNewButton_10;
 	public JButton btnNewButton_11;
+	public JLabel totalLabel;
 	public TransectionHistory() {
 		
 		setBounds(10, 11, 1129, 571);
@@ -89,9 +90,9 @@ public class TransectionHistory extends JPanel implements ActionListener {
 		table.setBounds(163, 235, 1, 1);
 		scrollBar.getViewport ().add(table);
 		
-		JLabel totalLabel = new JLabel("Total:- "+total);
+		totalLabel = new JLabel("Total = "+total);
 		totalLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		totalLabel.setBounds(10, 514, 109, 34);
+		totalLabel.setBounds(10, 500, 159, 60);
 		add(totalLabel);
 		
 		/*btnNewButton_8 = new JButton("Add");
@@ -194,16 +195,17 @@ public class TransectionHistory extends JPanel implements ActionListener {
 		}
 	}
 	public String[] columnName() {
-		String columnName[] = { "Serial no.","Student Id","Student Name","Receiver Id","Receiver Name","Date", "Amount Received"};
+		String columnName[] = { "Serial no.","Student Id","Student Name","Receiver Id","Receiver Name","Date", "Amount Received" ,"Transection Type"};
 		return columnName;
 	}
 	
-	public String[][] getBookList(Date searchBy, Date value){
+	public String[][] getBookList(Date fromDate, Date toDate){
+		total=0.00;
 		UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
 		list = new ArrayList<TransectionHistoryModel>();
-		if(searchBy!=null && value!=null)
-			list = userLoginServiceImpl.getTxnhistoryList(searchBy, value);
-		String rowData[][] =new String[list.size()][7] ;
+		if(fromDate!=null && toDate!=null)
+			list = userLoginServiceImpl.getTxnhistoryList(fromDate, toDate);
+		String rowData[][] =new String[list.size()][8] ;
 		
 		for(int i=0;i<list.size();i++){
 			TransectionHistoryModel transectionHistoryModel=(TransectionHistoryModel) list.get(i);
@@ -214,8 +216,15 @@ public class TransectionHistory extends JPanel implements ActionListener {
 			rowData[i][4] = ""+transectionHistoryModel.getUserModel().getUser_name();
 			rowData[i][5] = ""+transectionHistoryModel.getTxn_date();
 			rowData[i][6] = ""+transectionHistoryModel.getAmount();
-			total=total+transectionHistoryModel.getAmount(); 
+			rowData[i][7] = ""+transectionHistoryModel.getTxn_type();
+			if(transectionHistoryModel.getTxn_type().equals("W"))
+				total=total-transectionHistoryModel.getAmount();
+			else
+				total=total+transectionHistoryModel.getAmount();
+			
+			 
 		}
+		totalLabel.setText("Total = "+total);
 		return rowData;
 	}
 	

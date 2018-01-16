@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -125,6 +126,16 @@ public class Factory {
 		Date startDate = df.parse(addedDate.format(c.getTime()));
 		return startDate;
 	}
+	
+	public static Date getNextDate(final Date date) throws ParseException {
+		  final SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		 // final Date date = format.parse(curDate);
+		  final Calendar calendar = Calendar.getInstance();
+		  calendar.setTime(date);
+		  calendar.add(Calendar.DAY_OF_YEAR, -1);
+		  DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		  return df.parse(format.format(calendar.getTime())); 
+		}
 	
 	public static long dateDifference(Date toDate,Date fromDate) {
 	    long daysBetween = 0;
@@ -267,10 +278,10 @@ public class Factory {
 					if(!error.exists())
 						error.createNewFile();
 				}
-				FileOutputStream outLog = new FileOutputStream(log);
+				/*FileOutputStream outLog = new FileOutputStream(log);
 				FileOutputStream outErrorLog = new FileOutputStream(error);
 				System.setOut(new PrintStream(outLog));
-				System.setErr(new PrintStream(outErrorLog));
+				System.setErr(new PrintStream(outErrorLog));*/
 			}catch(IOException e){
 				e.printStackTrace();
 			}
