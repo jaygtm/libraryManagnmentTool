@@ -18,6 +18,11 @@ import javax.swing.SwingConstants;
 
 import common.service.DialogService;
 import common.service.Factory;
+import common.service.Validation;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 import model.BookModel;
 import model.BookTypeModel;
 import service.BookService;
@@ -93,6 +98,7 @@ public class AddBookPage extends JPanel implements ActionListener {
 		textField.setBounds(432, 117, 261, 20);
 		 add(textField);
 		textField.setColumns(10);
+		Validation.validateString(textField);
 		
 		comboBox = new JComboBox<String>(getBookType());
 		comboBox.setBounds(432, 160, 261, 20);
@@ -103,26 +109,31 @@ public class AddBookPage extends JPanel implements ActionListener {
 		textField_1.setBounds(432, 203, 262, 20);
 		 add(textField_1);
 		textField_1.setColumns(10);
+		Validation.validateDecimal(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(432, 246, 261, 20);
 		 add(textField_2);
 		textField_2.setColumns(10);
+		Validation.validateNumber(textField_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setBounds(432, 289, 261, 20);
 		 add(textField_3);
 		textField_3.setColumns(10);
+		Validation.validateNumber(textField_4);
 		
 		textField_4 = new JTextField();
 		textField_4.setBounds(432, 331, 261, 23);
 		 add(textField_4);
 		textField_4.setColumns(10);
+		Validation.validateString(textField_4);
 		
 		textField_5 = new JTextField();
 		textField_5.setBounds(432, 374, 261, 23);
 		 add(textField_5);
 		textField_5.setColumns(10);
+		Validation.validateString(textField_5);
 		
 		btnNewButton_6 = new JButton("Save");
 		btnNewButton_6.setBounds(850, 516, 115, 32);
