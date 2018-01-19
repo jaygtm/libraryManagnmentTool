@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import common.service.DialogService;
 import common.service.Factory;
+import common.service.Validation;
 import model.CustomerModel;
 import service.CustomerService;
 
@@ -59,6 +60,7 @@ public class RegistrationPage implements ActionListener {
 		textField.setBounds(434, 75, 242, 20);
 		Reg_panel.add(textField);
 		textField.setColumns(10);
+		Validation.validateString(textField);
 
 		JLabel lblMobileNumber = new JLabel("Mobile Number");
 		lblMobileNumber.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -69,6 +71,7 @@ public class RegistrationPage implements ActionListener {
 		textField_1.setBounds(434, 135, 242, 20);
 		Reg_panel.add(textField_1);
 		textField_1.setColumns(10);
+		Validation.validateNumber(textField_1);
 
 		JLabel lblEmainId = new JLabel("Emain Id");
 		lblEmainId.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -79,6 +82,7 @@ public class RegistrationPage implements ActionListener {
 		textField_2.setBounds(434, 200, 242, 20);
 		Reg_panel.add(textField_2);
 		textField_2.setColumns(10);
+		Validation.validateEmail(textField_2);
 
 		JLabel lblStudentId = new JLabel("Student Id");
 		lblStudentId.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -99,6 +103,7 @@ public class RegistrationPage implements ActionListener {
 		textField_4.setBounds(434, 335, 242, 20);
 		Reg_panel.add(textField_4);
 		textField_4.setColumns(10);
+		Validation.validateDecimal(textField_4);
 
 		JButton btnNewButton_6 = new JButton("Save");
 		btnNewButton_6.setForeground(Factory.buttonTextColor);
