@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 import common.service.DialogService;
 import common.service.Factory;
+import common.service.Validation;
 import model.BookModel;
 import model.BookTypeModel;
 import service.BookService;
@@ -65,6 +66,7 @@ public class Email extends JPanel implements ActionListener {
 		from.setText(Factory.UserLoginModel.getUser().getUser_email());
 		add(from);
 		from.setColumns(10);
+		Validation.validateEmail(from);
 		
 		JLabel lblTo = new JLabel("To:-");
 		lblTo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
@@ -77,6 +79,7 @@ public class Email extends JPanel implements ActionListener {
 		to.setText("kumar0112avinash@gmail.com");
 		add(to);
 		to.setColumns(10);
+		Validation.validateEmail(to);
 		
 		JLabel lblSubject = new JLabel("Subject:-");
 		lblSubject.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
