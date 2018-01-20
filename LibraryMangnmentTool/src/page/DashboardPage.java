@@ -102,7 +102,7 @@ public class DashboardPage implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new LoginDialog(MainFrame);
+		//new LoginDialog(MainFrame);
 		String cmd = e.getActionCommand();
 		DashboardPage d= this;
 		JPanel bodyPanel=Factory.getBodyPanal();
