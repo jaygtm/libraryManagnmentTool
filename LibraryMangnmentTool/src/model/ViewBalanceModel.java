@@ -4,10 +4,10 @@ public class ViewBalanceModel {
 	
 	String customer_name ;
 	Float opening_balance;
-	Float charge;
-	Float late_charge;
-	Float deposit;
-	Float widhral;
+	Float charge=0.0F;
+	Float late_charge=0.0F;
+	Float deposit=0.0F;
+	Float widhral=0.0F;
 	public String getCustomer_name() {
 		return customer_name;
 	}
