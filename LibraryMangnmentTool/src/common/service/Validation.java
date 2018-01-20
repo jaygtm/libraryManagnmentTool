@@ -39,6 +39,22 @@ public class Validation {
 			});
 		}		
 
+			public static void validateMobileNumber(JTextField textfield){
+				textfield.addKeyListener(new KeyAdapter(){
+			    public void keyPressed(KeyEvent e){
+			
+			        char ch = e.getKeyChar();
+			        if(Character.isDigit(ch) || textfield.getText().length()<=10){
+			        }
+			        else{
+			        	String content=textfield.getText();
+			        	JOptionPane.showMessageDialog(null, "Only numbers or 10 Digits are allowed!");
+			        	textfield.setText(content);
+			        }
+			    }
+			});
+		}	
+			
 			public static void validateEmail(JTextField textfield){
 				textfield.addKeyListener(new KeyAdapter(){
 			    public void keyPressed(KeyEvent e){

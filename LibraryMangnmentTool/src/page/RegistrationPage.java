@@ -71,7 +71,7 @@ public class RegistrationPage implements ActionListener {
 		textField_1.setBounds(434, 135, 242, 20);
 		Reg_panel.add(textField_1);
 		textField_1.setColumns(10);
-		Validation.validateNumber(textField_1);
+		Validation.validateMobileNumber(textField_1);
 
 		JLabel lblEmainId = new JLabel("Emain Id");
 		lblEmainId.setFont(new Font("Tahoma", Font.PLAIN, 18));

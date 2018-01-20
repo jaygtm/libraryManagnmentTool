@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import common.service.DialogService;
 import common.service.Factory;
+import common.service.Validation;
 import model.UserLoginModel;
 import model.UserModel;
 import model.UserRole;
@@ -166,7 +167,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	name.setBounds(274, 110, 243, 20);
 	add(name);
 	name.setColumns(10);
-	
+	Validation.validateString(name);
 	
 	JLabel lblUserRole = new JLabel("User Role:-");
 	lblUserRole.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
@@ -187,6 +188,7 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	mobile = new JTextField();
 	mobile.setBounds(274, 186, 244, 20);
 	add(mobile);
+	Validation.validateMobileNumber(mobile);
 	mobile.setColumns(10);
 	
 	JLabel lblAdharid = new JLabel("Adhar/Id No.:-");
@@ -245,11 +247,13 @@ public class UserRegistrationPage extends JPanel implements ActionListener {
 	emailId.setBounds(126, 398, 98, 14);
 	add(emailId);
 	
+	
 	email = new JTextField();
 	email.setBounds(275, 398, 243, 20);
 	add(email);
 	email.setColumns(10);
-
+	Validation.validateEmail(email);
+	
 	JLabel emailPasslable = new JLabel("Email Password:-");
 	emailPasslable.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 	emailPasslable.setBounds(578, 398, 125, 17);
