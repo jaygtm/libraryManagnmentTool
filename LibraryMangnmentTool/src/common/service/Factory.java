@@ -42,6 +42,10 @@ public class Factory {
 	public static final String version="1.0";
 	public static final String organizationName="Patna Central School";
 	
+	public static final Color backGroundColor=new Color(105, 105, 105);
+//	public static final Color onClickColor=new Color(51, 153, 102);
+	public static final Color onClickColor=new Color(0, 204, 204);
+	
 	public static final Color cancleBtnColor= new Color(255, 51, 0);
 	public static final Color deleteBtnColor= new Color(178, 34, 34);
 	public static final Color modifyBtnColor= new Color(51, 153, 102);
