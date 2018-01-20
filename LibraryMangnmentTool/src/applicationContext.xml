@@ -37,6 +37,13 @@
 	<!-- <bean name="MainFrame" class="page.DashboardPage" >  
 		<constructor-arg value="LibraryManagnmentTool"></constructor-arg>
 	</bean>  -->
+	 <bean name="viewBalanceService" class="service.impl.ViewBalanceServiceImp" >  
+		<property name="viewBalanceDAO" >
+		<bean  class="dao.impl.ViewBalanceDAOImp" >  
+		</bean> 
+		</property>
+	</bean>  
+	
 	
 <context:annotation-config />
 </beans>

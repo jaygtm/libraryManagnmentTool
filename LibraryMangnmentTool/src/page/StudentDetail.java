@@ -6,12 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import common.service.Factory;
+import page.viewBalDialoag;
 
 @SuppressWarnings("serial")
 public class StudentDetail extends JPanel implements ActionListener  {
@@ -146,7 +148,11 @@ public class StudentDetail extends JPanel implements ActionListener  {
 			public void run() {
 				if(innerBodyPane!=null)
 					self.remove(innerBodyPane);
-				//innerBodyPane = new IssueBookPage();
+					Integer studentId = Integer.parseInt(studentIdpKey);
+					//viewBalDialoag dialog = new viewBalDialoag();
+					viewBalDialoag dialog = new viewBalDialoag(studentId);
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
 				
 				Factory.refresh();
 				}
