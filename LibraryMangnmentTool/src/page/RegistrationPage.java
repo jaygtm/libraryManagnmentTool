@@ -66,6 +66,7 @@ public class RegistrationPage implements ActionListener {
 		lblMobileNumber.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblMobileNumber.setBounds(84, 135, 135, 14);
 		Reg_panel.add(lblMobileNumber);
+		
 
 		textField_1 = new JTextField();
 		textField_1.setBounds(434, 135, 242, 20);

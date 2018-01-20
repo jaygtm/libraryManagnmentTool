@@ -12,7 +12,7 @@ public class Validation {
 			    public void keyPressed(KeyEvent e){
 			
 			        char ch = e.getKeyChar();
-			        if(Character.isDigit(ch)|| (ch+"").equals(".")){
+			        if(e.getKeyCode()==8 || Character.isDigit(ch)|| (ch+"").equals(".")){
 			        }
 			        else{
 			        	String content=textfield.getText();
@@ -28,7 +28,7 @@ public class Validation {
 			    public void keyPressed(KeyEvent e){
 			
 			        char ch = e.getKeyChar();
-			        if(Character.isDigit(ch)){
+			        if(e.getKeyCode()==8 || Character.isDigit(ch)){
 			        }
 			        else{
 			        	String content=textfield.getText();
@@ -44,7 +44,7 @@ public class Validation {
 			    public void keyPressed(KeyEvent e){
 			
 			        char ch = e.getKeyChar();
-			        if(Character.isDigit(ch) || textfield.getText().length()<=10){
+			        if((e.getKeyCode()==8 || Character.isDigit(ch)) && textfield.getText().length()<10){
 			        }
 			        else{
 			        	String content=textfield.getText();
@@ -60,7 +60,7 @@ public class Validation {
 			    public void keyPressed(KeyEvent e){
 			
 			        char ch = e.getKeyChar();
-			        if(Character.isAlphabetic(ch) ||Character.isDigit(ch)|| (ch+"").equals(".") || (ch+"").equals("@")){
+			        if(e.getKeyCode()==16 ||e.getKeyCode()==8 || Character.isAlphabetic(ch) ||Character.isDigit(ch)|| (ch+"").equals(".") || (ch+"").equals("@")){
 			        }
 			        else{
 			        	String content=textfield.getText();
@@ -76,7 +76,7 @@ public class Validation {
 			    public void keyPressed(KeyEvent e){
 			
 			        char ch = e.getKeyChar();
-			        if(Character.isAlphabetic(ch)){
+			        if(e.getKeyCode()==8 || Character.isAlphabetic(ch)){
 			        }
 			        else{
 			        	String content=textfield.getText();
