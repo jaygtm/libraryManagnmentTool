@@ -58,5 +58,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return  customerDao.deleteCustomerItem(value);
 		
 	}
+	@Override
+	public CustomerModel getCustomerDetail(int customerId) {
+		return customerDao.getCustomerDetail(customerId);
+	}
 
 }

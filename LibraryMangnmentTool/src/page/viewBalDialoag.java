@@ -1,6 +1,7 @@
 package page;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -9,19 +10,24 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import common.service.Factory;
+import page.WithdrawalAndDeposit;
+import model.TransactionType;
 import model.ViewBalanceModel;
 import service.ViewBalanceService;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
-import javax.swing.JSpinner;
 import javax.swing.JSeparator;
 
-public class viewBalDialoag extends JDialog {
+public class viewBalDialoag extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel openingBalance,widhral,deposit,late_charge,bookCharge,availableBalance;
+	Integer studentId;
 
 	/**
 	 * Launch the application.
@@ -110,17 +116,20 @@ public class viewBalDialoag extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnNewButton_1 = new JButton("Deposit");
+			btnNewButton_1.addActionListener(this);
 			buttonPane.add(btnNewButton_1);
 			
-			JButton btnNewButton = new JButton("widhral");
+			JButton btnNewButton = new JButton("Withdrawal");
+			btnNewButton.addActionListener(this);
 			buttonPane.add(btnNewButton);
 		}
 	}
 	public viewBalDialoag(Integer studentId){
 		this();
-		setBalance(studentId);
+		this.studentId = studentId;
+		setBalance();
 	}
-	private void setBalance(Integer studentId){
+	private void setBalance(){
 		ViewBalanceService viewBalanceService =  (ViewBalanceService) Factory.getContext().getBean("viewBalanceService");
 		ViewBalanceModel dataModel = viewBalanceService.getViewBalance(studentId);
 		openingBalance.setText(dataModel.getOpening_balance().toString());
@@ -130,5 +139,41 @@ public class viewBalDialoag extends JDialog {
 		widhral.setText(dataModel.getWidhral().toString());
 		Float balance  = (dataModel.getOpening_balance()+dataModel.getDeposit()-dataModel.getCharge()-dataModel.getLate_charge()-dataModel.getWidhral());
 		availableBalance.setText(balance.toString());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand().trim();
+		System.out.println(""+action);
+		JDialog balanceDailog = this;
+		switch (action) {
+			case "Deposit" :EventQueue.invokeLater(new Runnable() {
+														
+														@Override
+														public void run() {
+															balanceDailog.dispose();
+															WithdrawalAndDeposit dialog = new WithdrawalAndDeposit(TransactionType.Deposit,studentId,null);
+															dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+															dialog.setVisible(true);
+														}
+															
+													});
+			break;
+			case "Withdrawal" :EventQueue.invokeLater(new Runnable() {
+				
+														@Override
+														public void run() {
+															balanceDailog.dispose();
+															Double avlableBal = Double.parseDouble(availableBalance.getText());
+															WithdrawalAndDeposit dialog = new WithdrawalAndDeposit(TransactionType.Withdrawal,studentId,avlableBal);
+															dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+															dialog.setVisible(true);
+														}
+															
+													});
+			break;
+		}
+	
+		
 	}
 }

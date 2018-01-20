@@ -8,6 +8,7 @@ import model.GetStudentModel;
 public interface CustomerService {
 
 	boolean saveCustomerDetail(CustomerModel customerModel);
+	public CustomerModel getCustomerDetail(int customerId);
 
 	boolean deleteCustomerDetail(int customerId);
 	public List<CustomerModel> getAllCustomerDetail();

@@ -43,6 +43,12 @@
 		</bean> 
 		</property>
 	</bean>  
+	<bean name="transactionService" class="service.impl.TransactionServiceImp" >  
+		<property name="transactionDao" >
+		<bean  class="dao.impl.TransactionDaoImp" >  
+		</bean> 
+		</property>
+	</bean>  
 	
 	
 <context:annotation-config />

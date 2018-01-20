@@ -32,7 +32,14 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public CustomerModel getCustomerDetail(int customerId) {
-		// TODO Auto-generated method stub
+		Session session = Factory.sessionfactory.openSession();
+		session.beginTransaction();
+		try{
+			CustomerModel model = (CustomerModel) session.get(CustomerModel.class,customerId);
+			return model;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
