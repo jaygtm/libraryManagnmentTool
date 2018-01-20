@@ -76,7 +76,7 @@ public class Validation {
 			    public void keyPressed(KeyEvent e){
 			
 			        char ch = e.getKeyChar();
-			        if(e.getKeyCode()==8 || Character.isAlphabetic(ch)){
+			        if(e.getKeyCode()==32 || e.getKeyCode()==8 || Character.isAlphabetic(ch)){
 			        }
 			        else{
 			        	String content=textfield.getText();
