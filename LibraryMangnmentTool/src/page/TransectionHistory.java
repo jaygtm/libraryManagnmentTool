@@ -22,6 +22,7 @@ import com.toedter.calendar.JDateChooser;
 import common.service.DialogService;
 import common.service.Factory;
 import model.TransectionHistoryModel;
+import service.ViewBalanceService;
 import service.impl.UserLoginServiceImpl;
 
 @SuppressWarnings("serial")
@@ -201,10 +202,10 @@ public class TransectionHistory extends JPanel implements ActionListener {
 	
 	public String[][] getBookList(Date fromDate, Date toDate){
 		total=0.00;
-		UserLoginServiceImpl userLoginServiceImpl = (UserLoginServiceImpl) Factory.getContext().getBean("loginService");
+		ViewBalanceService viewBalanceService =  (ViewBalanceService) Factory.getContext().getBean("viewBalanceService");
 		list = new ArrayList<TransectionHistoryModel>();
 		if(fromDate!=null && toDate!=null)
-			list = userLoginServiceImpl.getTxnhistoryList(fromDate, toDate);
+			list = viewBalanceService.getTxnhistoryList(fromDate, toDate);
 		String rowData[][] =new String[list.size()][8] ;
 		
 		for(int i=0;i<list.size();i++){

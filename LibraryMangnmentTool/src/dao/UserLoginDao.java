@@ -1,9 +1,7 @@
 package dao;
 
-import java.util.Date;
 import java.util.List;
 
-import model.TransectionHistoryModel;
 import model.UserLoginModel;
 import model.UserRole;
 
@@ -21,4 +19,4 @@ public interface UserLoginDao {
 
 	boolean deleteCustomerDetail(int value);
 
-	List<TransectionHistoryModel> getTxnhistoryList(Date fromDate, Date toDate);}
+	}

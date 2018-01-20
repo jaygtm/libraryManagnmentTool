@@ -1,5 +1,8 @@
 package service.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import dao.ViewBalanceDAO;
 import model.ViewBalanceModel;
 import service.ViewBalanceService;
@@ -20,5 +23,11 @@ public class ViewBalanceServiceImp implements ViewBalanceService {
 	public void setViewBalanceDAO(ViewBalanceDAO viewBalanceDAO) {
 		this.viewBalanceDAO = viewBalanceDAO;
 	}
+
+	@Override
+	public List getTxnhistoryList(Date fromDate, Date toDate){
+		return viewBalanceDAO.getTxnhistoryList(fromDate, toDate);
+	}
+
 
 }
