@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -292,6 +295,15 @@ public class Factory {
 			return true;
 		}	
 		
+		 public static void downloadUsingNIO(URL urlStr, String file) throws IOException {
+		       // URL url = new URL(urlStr);
+		        ReadableByteChannel rbc = Channels.newChannel(urlStr.openStream());
+		        FileOutputStream fos = new FileOutputStream(file);
+		        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+		        fos.close();
+		        rbc.close();
+		    }
+
 		
 	
 	

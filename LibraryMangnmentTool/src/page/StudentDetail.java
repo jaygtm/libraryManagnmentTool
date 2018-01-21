@@ -146,8 +146,8 @@ public class StudentDetail extends JPanel implements ActionListener  {
 			
 			@Override
 			public void run() {
-				if(innerBodyPane!=null)
-					self.remove(innerBodyPane);
+				//if(innerBodyPane!=null)
+					//self.remove(innerBodyPane);
 					Integer studentId = Integer.parseInt(studentIdpKey);
 					//viewBalDialoag dialog = new viewBalDialoag();
 					viewBalDialoag dialog = new viewBalDialoag(studentId);

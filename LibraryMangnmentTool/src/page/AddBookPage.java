@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -37,6 +39,7 @@ public class AddBookPage extends JPanel implements ActionListener {
 	private JTextField textField_5;
 	private JComboBox comboBox;
 	JButton btnNewButton_6;//Save Button
+	JButton downloadTemplet,imports;
 	BookModel bookModel;
 	private boolean backOnList =true;
 	
@@ -141,6 +144,20 @@ public class AddBookPage extends JPanel implements ActionListener {
 		btnNewButton_6.addActionListener(this);
 		btnNewButton_6.setForeground(Factory.buttonTextColor);
 		 add(btnNewButton_6);
+		 
+		 downloadTemplet = new JButton("Download Template");
+		 downloadTemplet.setBounds(10, 516, 180, 32);
+		 downloadTemplet.setBackground(Factory.saveBtnColor);
+		 downloadTemplet.addActionListener(this);
+		 downloadTemplet.setForeground(Factory.buttonTextColor);
+			 add(downloadTemplet);
+		
+		imports = new JButton("Import Excel");
+		imports.setBounds(200, 516, 115, 32);
+		imports.setBackground(Factory.saveBtnColor);
+		imports.addActionListener(this);
+		imports.setForeground(Factory.buttonTextColor);
+				 add(imports);
 		
 		JButton btnSave = new JButton("Cancel");
 		btnSave.setBackground(Factory.cancleBtnColor);
@@ -275,6 +292,32 @@ public class AddBookPage extends JPanel implements ActionListener {
 							}
 						});
 			break;
+			
+		case "Download Template": EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					URL fileUrl = DashboardPage.class.getResource("/AddBook.xlsx");
+					String home = System.getProperty("user.home");
+					Factory.downloadUsingNIO(fileUrl, home+"/Desktop/AddBook.xlsx");
+					DialogService.showMgs(Factory.getMainFrame(), "Book Add Template Download Successfully on Desktop", "Success");
+				} catch (IOException e) {
+					e.printStackTrace();
+					DialogService.showErrorMgs(Factory.getMainFrame(), "Error While Download please try again", "Error");
+				}
+			}
+		});
+		break;
+		
+		case "Import Excel": EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+			}
+		});
+		break;
 		case "Update": EventQueue.invokeLater(new Runnable() {
 							
 							@Override
