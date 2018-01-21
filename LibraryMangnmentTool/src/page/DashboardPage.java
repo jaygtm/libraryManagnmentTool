@@ -35,8 +35,12 @@ public class DashboardPage implements ActionListener {
 			MainFrame.setSize(width, height);
 			MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			
+			URL fileUrl2 = DashboardPage.class.getResource("/images.png");
 			URL fileUrl = DashboardPage.class.getResource("/books_vintage_paper_cards_notebook_retro_74362_2560x1600.jpg");
-			if(fileUrl != null){
+			if(fileUrl != null && fileUrl2 != null){
+				ImageIcon icon = new ImageIcon(fileUrl2);
+				MainFrame.setIconImage(icon.getImage());
 				ImageIcon img = new ImageIcon(fileUrl);
 				MainFrame.setContentPane(new JLabel(img));
 			}
