@@ -19,7 +19,7 @@ public class ViewBalanceDAOImp implements ViewBalanceDAO {
 	@Override
 	public ViewBalanceModel getViewBalance(Integer studentId) {
 		Session seession = Factory.sessionfactory.openSession();
-		String query = "select customer_name,customer_balance AS opening_balance ,sum(txn_charge)AS charge,"
+		String query = "select c.customer_name,c.customer_balance ,sum(txn_charge)AS charge,"
 						+ " sum(txn_item_late_submit_charge)As late_charge ,(Select sum(amount)As deposit"
 						+ " from txn_amount_his where submited_by = c.customer_id and txn_type = 'D')AS deposit,"
 						+ " (Select sum(amount)As deposit from txn_amount_his where submited_by = c.customer_id "
