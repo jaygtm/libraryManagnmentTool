@@ -271,7 +271,7 @@ public class StudentList extends JPanel implements ActionListener {
 						}
 						studentDeatil.setStudentNameAndId(name, student_id, value+"");
 						Factory.getBodyPanal().add(studentDeatil);
-						studentDeatil.innerBodyPane = new IssueBookPage(student_id);
+						studentDeatil.innerBodyPane = new IssueBookPage(""+value);
 						 studentDeatil.add(studentDeatil.innerBodyPane);
 						Factory.refresh();
 						}
