@@ -19,10 +19,22 @@ public class Licence extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Create the dialog.
 	 */
+	
+	 
+		public static void main(String[] args) {
+			try {
+				Licence dialog = new Licence();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	public Licence(){
 
 		setBounds(100, 100, 573, 300);
@@ -49,13 +61,25 @@ public class Licence extends JDialog {
 		
 		JLabel lblLicenceKey = new JLabel("Licence Key  :-");
 		lblLicenceKey.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblLicenceKey.setBounds(10, 126, 121, 31);
+		lblLicenceKey.setBounds(10, 145, 121, 31);
 		contentPanel.add(lblLicenceKey);
 		
 		textField = new JTextField();
-		textField.setBounds(129, 133, 382, 20);
+		textField.setBounds(129, 145, 382, 20);
 		contentPanel.add(textField);
 		textField.setColumns(10);
+		
+			JLabel lblRequestId = new JLabel("Request ID:-");
+			lblRequestId.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+			lblRequestId.setBounds(10, 110, 121, 31);
+			contentPanel.add(lblRequestId);
+		
+			textField_1 = new JTextField();
+			textField_1.setBounds(129,110, 382, 20);
+			contentPanel.add(textField_1);
+			textField_1.setEditable(false);
+			textField_1.setColumns(10);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.activeCaption);
