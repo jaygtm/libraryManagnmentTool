@@ -68,7 +68,7 @@ public class Licence extends JDialog {
 			contentPanel.add(buttonPane);
 			buttonPane.setLayout(null);
 			{
-				JButton btnResendProductKey = new JButton("Resend Product Key");
+				JButton btnResendProductKey = new JButton("Resend Key");
 				btnResendProductKey.setBounds(10, 5, 129, 28);
 				btnResendProductKey.setBackground(Factory.saveBtnColor);
 				btnResendProductKey.setForeground(Factory.buttonTextColor);
