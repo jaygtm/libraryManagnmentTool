@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import common.service.DialogService;
 import common.service.Factory;
@@ -257,18 +258,25 @@ public class StudentList extends JPanel implements ActionListener {
 					} else {
 						int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
 						String name = table.getModel().getValueAt(row, 1).toString();
-						String mobile = table.getModel().getValueAt(row, 2).toString();
-						String email = table.getModel().getValueAt(row, 3).toString();
 						String student_id = table.getModel().getValueAt(row, 4).toString();
-						String Balence = table.getModel().getValueAt(row, 5).toString();
 						Factory.getBodyPanal().removeAll();
-						//Factory.getBodyPanal().add(new IssueBookPage());
 						StudentDetail studentDeatil  =  new StudentDetail();
+						for(int i=0;i<studentDeatil.butt.size();i++){
+							if(studentDeatil.butt.get(i).getActionCommand().trim()=="Issue Book"){
+								studentDeatil.butt.get(i).setBackground(Factory.onClickColor);
+							}else{
+								studentDeatil.butt.get(i).setBackground(UIManager.getColor("Button.background"));
+							}
+							
+						}
 						studentDeatil.setStudentNameAndId(name, student_id, value+"");
 						Factory.getBodyPanal().add(studentDeatil);
+						studentDeatil.innerBodyPane = new IssueBookPage(student_id);
+						 studentDeatil.add(studentDeatil.innerBodyPane);
+						Factory.refresh();
+						}
 						Factory.refresh();
 					}
-				}
 			});
 			break;
 		case "Search":

@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import common.service.Factory;
 import page.viewBalDialoag;
@@ -24,7 +27,8 @@ public class StudentDetail extends JPanel implements ActionListener  {
 	private JTextField textField_8;
 	private String studentName ;
 	private String studentId,studentIdpKey ;
-	private JPanel innerBodyPane;
+	public JPanel innerBodyPane;
+	public List<JButton> butt =new ArrayList();
 	
 	
 	public StudentDetail() {
@@ -96,12 +100,25 @@ public class StudentDetail extends JPanel implements ActionListener  {
 		btnViewBalance.setBounds(432, 45, 130, 28);
 		btnViewBalance.addActionListener(this);
 		add(btnViewBalance);
+		
+		butt.add(btnViewHistory);
+		butt.add(btnNewButton_7);
+		butt.add(btnViewBalance);
+		butt.add(btnNewButton_6);
 	
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand().trim();
 		System.out.println(""+action);
+		for(int i=0;i<butt.size();i++){
+			if(butt.get(i).getActionCommand().trim()==action){
+				butt.get(i).setBackground(Factory.onClickColor);
+			}else{
+				butt.get(i).setBackground(UIManager.getColor("Button.background"));
+			}
+			
+		}
 		JPanel self = this;
 		switch (action) {
 		case "View History" :EventQueue.invokeLater(new Runnable() {
