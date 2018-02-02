@@ -98,9 +98,12 @@ public class UserLoginDaoImpl implements UserLoginDao {
 		}
 		Session seession = Factory.sessionfactory.openSession();
 		seession.beginTransaction();
-		Criteria c = seession.createCriteria(UserLoginModel.class);
+		Criteria c = seession.createCriteria(UserLoginModel.class)
+					.createAlias("user.role", "role", Criteria.INNER_JOIN);
 		if(criteriaflag)
 			c.add(Restrictions.eq(columnName, value));
+		if(Factory.UserLoginModel.getUser().getRole().getRole_id()==1)
+			c.add(Restrictions.ne("role.role_id", 1));
 		list = c.list();
 		seession.close();
 		return list;
